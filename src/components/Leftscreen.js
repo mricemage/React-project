@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
 import './Leftscreen.css'
+import Scrollbar from './Scrollbar'
 
 class Leftscreen extends Component {
     render () {
@@ -9,7 +9,7 @@ class Leftscreen extends Component {
                 LeftScreenn
                 how many berries
                 are in the basket.
-                <br/>
+                <Scrollbar />
             </div>
         )
     }
