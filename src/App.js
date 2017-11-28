@@ -14,8 +14,8 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col xs={6} md={4}> <Leftscreen /></Col>
-            <Col xs={12} md={8}> <Rightscreen /></Col>
+            <Col md={6} md={4}> <Leftscreen /></Col>
+            <Col md={6} md={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
           </div>

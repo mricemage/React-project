@@ -1,28 +1,54 @@
 import React, { Component } from 'react'
-import ScrollArea from 'react-scrollbar'
-/*var ScrollArea = require('react-scrollbar')*/
+import { Scrollbars } from 'react-custom-scrollbars';
 
 class Scrollbar extends Component {
     render () {
         return (
-            <ScrollArea
-            speed={0.8}
-            className="area"
-            contentClassName="content"
-            horizontal={true}
-            >
-
-            <div>
-                Some long content. <br/>
-                Some long content. <br/>
-                Some long content. <br/>
-                Some long content. <br/>
-                Some long content. <br/>
-                Some long content. <br/>
-
-            </div>
-            
-          </ScrollArea>
+            <Scrollbars style={{ width: 330, height: 700 }}>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            <p>Some great content...</p>
+            <br/>
+            </Scrollbars>
+         
         )
     }
 }

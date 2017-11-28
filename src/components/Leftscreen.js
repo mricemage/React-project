@@ -6,9 +6,6 @@ class Leftscreen extends Component {
     render () {
         return (
             <div className= "content">
-                LeftScreenn
-                how many berries
-                are in the basket.
                 <Scrollbar />
             </div>
         )
