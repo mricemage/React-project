@@ -1,8 +1,7 @@
 
 body{
  background-color:  #252830 !important;
-
-
+height: 100% !important;
 }
 .colorbody{
   background-color: #252830;
@@ -10,6 +9,11 @@ body{
   padding: 0;
   height: 100%;
 }
+
+.container{
+  width: 95% !important;
+}
+
 /*
 .App {
   text-align: center;
