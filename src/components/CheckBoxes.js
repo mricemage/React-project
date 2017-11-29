@@ -39,12 +39,12 @@ class CheckBoxes extends Component {
 
                 <h5>TimeStamp</h5>
                 <ButtonGroup vertical>
-                <Button  onClick={() => this.onRadioBtnClick(1)} active={this.state.cSelected.includes(1)}>One</Button>
-                <Button  onClick={() => this.onRadioBtnClick(2)} active={this.state.cSelected.includes(2)}>Two</Button>
-                <Button  onClick={() => this.onRadioBtnClick(3)} active={this.state.cSelected.includes(3)}>Three</Button>
-                <Button  onClick={() => this.onRadioBtnClick(4)} active={this.state.cSelected.includes(4)}>Four</Button>
-                <Button  onClick={() => this.onRadioBtnClick(5)} active={this.state.cSelected.includes(5)}>Five</Button>
-                <Button  onClick={() => this.onRadioBtnClick(6)} active={this.state.cSelected.includes(6)}>Six</Button>
+                <Button  onClick={() => this.onRadioBtnClick(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick(3)} >Three</Button>
+                <Button  onClick={() => this.onRadioBtnClick(4)} >Four</Button>
+                <Button  onClick={() => this.onRadioBtnClick(5)} >Five</Button>
+                <Button  onClick={() => this.onRadioBtnClick(6)} >Six</Button>
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
             </div>
