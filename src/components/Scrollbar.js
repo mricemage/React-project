@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars';
+import DropdownMenus from './DropdownMenus'
 
 class Scrollbar extends Component {
     
@@ -13,48 +14,8 @@ class Scrollbar extends Component {
             autoHeightMax={1200}
             style={{ width: width2  }}
                             >
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
-            <p>Some great content...</p>
-            <br/>
+            <p><DropdownMenus/></p>
+
             </Scrollbars>
          
 
