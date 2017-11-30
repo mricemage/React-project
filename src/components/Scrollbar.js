@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars';
 import DropdownMenus from './DropdownMenus'
+import CheckBoxes from './CheckBoxes'
 
 class Scrollbar extends Component {
     
@@ -15,6 +16,112 @@ class Scrollbar extends Component {
             style={{ width: width2  }}
                             >
             <p><DropdownMenus/></p>
+            <p><CheckBoxes/></p>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+            adgadga
+            <br/>
+
 
             </Scrollbars>
          
