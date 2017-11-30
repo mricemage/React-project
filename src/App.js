@@ -17,15 +17,58 @@ class App extends Component {
       items: []
     };   
 
-    this.getData = this.getData.bind(this);
+    //this.getData = this.getData.bind(this);
+    //this.setData = this.setData.bind(this);
 
-    this.getData();
+    this.getRegionLevels();
+    this.setRegionLevels();
+    this.getRegion();
+    this.setRegion(2);
+    this.getScenarioCollection();
+    this.setScenarioCollection(4);
+    this.getScenarios();
   }
   
-  getData(){
+  getRegionLevels(){
     ForestIndicatorData.getRegionLevels().then(items => {
+      console.log("getData");
       console.log(items);
+      //console.log(items[1]);
+      //console.log(items[0][0]); //[] choose region  [] get name or id
       this.setState = ({items})
+    });
+  }
+
+  setRegionLevels(){
+    ForestIndicatorData.setRegionLevels(2);
+  }
+
+  getRegion(){
+    ForestIndicatorData.getRegion().then(items => {
+      console.log("getRegion");
+      console.log(items);
+    });
+  }
+
+  setRegion(id){
+    ForestIndicatorData.setRegion(id);
+  }
+
+  getScenarioCollection(){
+    ForestIndicatorData.getScenarioCollection().then(items => {
+      console.log("getScenarioCollection");
+      console.log(items);
+    });
+  }
+
+  setScenarioCollection(id){
+    ForestIndicatorData.setScenarioCollection(id);
+  }
+
+  getScenarios(){
+    ForestIndicatorData.getScenarios().then(items => {
+      console.log("getScenarioCollection");
+      console.log(items);
     });
   }
 
