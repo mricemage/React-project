@@ -37,7 +37,7 @@ class CheckBoxes extends Component {
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
 
-                <h5>TimeStamp</h5>
+                <h5>TimeLine</h5>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick(2)} >Two</Button>
