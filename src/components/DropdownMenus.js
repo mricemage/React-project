@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { localize } from 'react-localize-redux';
 import { getTranslate } from 'react-localize-redux'
-import { Translation } from './Translation'
+
 
 class DropdownMenus extends Component {
     constructor(props){
@@ -22,7 +22,7 @@ toggle() {
 
 
     render () {
-        const { translate, currentLanguage } = this.props;
+        const { translate } = this.props;
         return (
            <div>
                <label> Regional Level </label>
@@ -67,7 +67,5 @@ toggle() {
         )
     }
 }
-const mapStateToProps = state => ({
-    translate: getTranslate(state.locale)
-});
+
 export default localize(DropdownMenus, 'locale');

@@ -1,7 +1,8 @@
-import { initialize, addTranslation } from 'react-localize-redux';
+import { initialize, addTranslation, setActiveLanguage } from 'react-localize-redux';
 import { createStore, combineReducers } from 'redux';
 import { localeReducer } from 'react-localize-redux';
-import { setActiveLanguage } from 'react-localize-redux'
+
+
 
 const store = createStore(combineReducers({
     locale: localeReducer
@@ -13,47 +14,47 @@ store.dispatch(initialize(languages));
 
 
 const MainPageTranslation = {
-    ScenarioSelection:[
+    "ScenarioSelection":[
         "Scenario Selection",
         "Skenaarioiden valinta"
     ],
-    ForestryCenters:[
+    "ForestryCenters":[
         "Forestry Centers",
         "Aluetaso"
     ],
-    Area:[
+    "Area":[
         "Area",
         "Alue"
     ],
-    ScenarioCollection:[
+    "ScenarioCollection":[
         "Scenario Collection",
         "Skenaariokokoelma"
     ],
-    Time:[
+    "Time":[
         "Time",
         "Ajankohta"
     ],
-    IndicatorSelection:[
+    "IndicatorSelection":[
         "Indicator Selection",
         "Indikaattoreiden valinta"
     ],
-    ProductCollections:[
+    "ProductCollections":[
         "Product Collections",
         "Keruutuotteet"
     ],
-    Diversity:[
+    "Diversity":[
         "Diversity",
         "Monimuotoisuus"
     ],
-    Carbon:[
+    "Carbon":[
         "Carbon",
         "Hiili"
     ],
-    Other:[
+    "Other":[
         "Other",
         "Muut"
     ]
 };
 
 store.dispatch(addTranslation(MainPageTranslation));
-
+store.dispatch(setActiveLanguage('fi'));

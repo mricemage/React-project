@@ -7,24 +7,26 @@ import { Grid, Row, Col} from 'react-bootstrap'
 import { render } from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { createStore, combineReducers } from 'redux';
-import { localeReducer as locale } from 'react-localize-redux';
+import { localeReducer, initialize, addTranslation } from 'react-localize-redux';
 import { Provider } from 'react-redux'
+import Translation from './components/Translation'
 
 
 const store = createStore(combineReducers({
-  locale
+  locale: localeReducer
 }));
+
+
 
 //import 'bootstrap/dist/react-bootstrap.min.css'
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
+  
   render() {
-    return (
+  return (
       App = props => (
         <div>
-          <Provider store={ store } />
+          <Provider store= { store } >
+          </Provider>
           <Grid>
             <Row className="show-grid">
             <Col lg={12} lg={4}> <Leftscreen /></Col>
@@ -35,8 +37,8 @@ class App extends Component {
           </div>
         
       )
-  
     )
+    
   }
   }
 
