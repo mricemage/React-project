@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Button, ButtonGroup}from 'reactstrap';
+import LocalizedStrings from 'react-localization'
+
 class CheckBoxes extends Component {
     constructor (props) {
         super(props);
@@ -39,9 +41,39 @@ class CheckBoxes extends Component {
     }
 
     render () {
+        let strings = new LocalizedStrings ({
+            en: {
+                ScenarioSelection:"Scenario Collection",
+                ForestryCenters:"Forestry Centers",
+                Area:"Area",
+                ScenarioCollection:"Scenario Collection",
+                Scenario:"Scenario",
+                Period:"Time",
+                IndicatorSelection:"Indicator Selection",
+                WoodProduction:"Wood Production",
+                ProductCollections:"Product Collections",
+                Biodiversity:"Biodiversity",
+                Carbon:"Carbon",
+                Other:"Other"
+            },
+            fi: {
+                ScenarioSelection:"Skenarrioiden valinta",
+                ForestryCenters:"Aluetaso",
+                Area:"Alue",
+                ScenarioCollection:"Skenaariokokoelma",
+                Scenario:"Skenaariot",
+                Period:"Ajankohta",
+                IndicatorSelection:"Indikaattoreiden valinta",
+                WoodProduction:"Puuntuotanto",
+                ProductCollections:"Keruutuotteet",
+                Biodiversity:"Monimuotoisuus",
+                Carbon:"Hiili",
+                Other:"Muut"
+            }
+        });
         return (
             <div>
-            <p>Scenarios</p>
+            <p>{strings.Scenario}</p>
                 <ButtonGroup vertical>
                  <Button  onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}>One</Button>
                  <Button  onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}>Two</Button>
@@ -52,7 +84,7 @@ class CheckBoxes extends Component {
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
 
-                <p>TimeLine</p>
+                <p>{strings.Period}</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick(2)} >Two</Button>
@@ -63,8 +95,8 @@ class CheckBoxes extends Component {
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
 
-                <h5>Indicator Selections</h5>
-                <p>Wood Production</p>
+                <h5>{strings.IndicatorSelection}</h5>
+                <p>{strings.WoodProduction}</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick1(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick1(2)} >Two</Button>
@@ -74,7 +106,7 @@ class CheckBoxes extends Component {
                 <p>Selected: {JSON.stringify(this.state.tSelected)}</p>
                
 
-                <p>Biodiversity</p>
+                <p>{strings.Biodiversity}</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick2(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick2(2)} >Two</Button>
@@ -90,7 +122,7 @@ class CheckBoxes extends Component {
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.uSelected)}</p>
 
-                <p>Carbon</p>
+                <p>{strings.Carbon}</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick4(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick4(2)} >Two</Button>
@@ -98,7 +130,7 @@ class CheckBoxes extends Component {
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.iSelected)}</p>
 
-                <p>Others</p>
+                <p>{strings.Other}</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick5(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick5(2)} >Two</Button>

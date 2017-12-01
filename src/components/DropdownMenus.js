@@ -28,7 +28,7 @@ toggle() {
             ForestryCenters:"Forestry Centers",
             Area:"Area",
             ScenarioCollection:"Scenario Collection",
-            Time:"Time",
+            Period:"Time",
             IndicatorSelection:"Indicator Selection",
             ProductCollections:"Product Collections",
             Diversity:"Diversity",
@@ -40,7 +40,7 @@ toggle() {
             ForestryCenters:"Aluetaso",
             Area:"Alue",
             ScenarioCollection:"Skenaariokokoelma",
-            Time:"Ajankohta",
+            Period:"Ajankohta",
             IndicatorSelection:"Indikaattoreiden valinta",
             ProductCollections:"Keruutuotteet",
             Diversity:"Monimuotoisuus",
@@ -52,7 +52,7 @@ toggle() {
 
         return (
            <div>
-               <label> {strings.ScenarioSelection} </label>
+               <p> {strings.ScenarioSelection} </p>
                <br />
                <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
