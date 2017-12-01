@@ -22,11 +22,26 @@ class CheckBoxes extends Component {
     onRadioBtnClick(rSelected) {
         this.setState({ rSelected });
     }
+    onRadioBtnClick1(tSelected){
+        this.setState({ tSelected })
+    }
+    onRadioBtnClick2(ySelected){
+        this.setState({ ySelected })
+    }
+    onRadioBtnClick3(uSelected){
+        this.setState({ uSelected })
+    }
+    onRadioBtnClick4(iSelected){
+        this.setState({ iSelected })
+    }
+    onRadioBtnClick5(oSelected){
+        this.setState({ oSelected })
+    }
 
     render () {
         return (
             <div>
-            <h5>Scenarios</h5>
+            <p>Scenarios</p>
                 <ButtonGroup vertical>
                  <Button  onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}>One</Button>
                  <Button  onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}>Two</Button>
@@ -37,7 +52,7 @@ class CheckBoxes extends Component {
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
 
-                <h5>TimeLine</h5>
+                <p>TimeLine</p>
                 <ButtonGroup vertical>
                 <Button  onClick={() => this.onRadioBtnClick(1)} >One</Button>
                 <Button  onClick={() => this.onRadioBtnClick(2)} >Two</Button>
@@ -47,6 +62,49 @@ class CheckBoxes extends Component {
                 <Button  onClick={() => this.onRadioBtnClick(6)} >Six</Button>
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
+
+                <h5>Indicator Selections</h5>
+                <p>Wood Production</p>
+                <ButtonGroup vertical>
+                <Button  onClick={() => this.onRadioBtnClick1(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick1(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick1(3)} >Three</Button>
+                <Button  onClick={() => this.onRadioBtnClick1(4)} >Three</Button>
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.tSelected)}</p>
+               
+
+                <p>Biodiversity</p>
+                <ButtonGroup vertical>
+                <Button  onClick={() => this.onRadioBtnClick2(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick2(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick2(3)} >Three</Button>
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.ySelected)}</p>
+
+                <p>Natural products</p>
+                <ButtonGroup vertical>
+                <Button  onClick={() => this.onRadioBtnClick3(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick3(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick3(3)} >Three</Button>
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.uSelected)}</p>
+
+                <p>Carbon</p>
+                <ButtonGroup vertical>
+                <Button  onClick={() => this.onRadioBtnClick4(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick4(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick4(3)} >Three</Button>
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.iSelected)}</p>
+
+                <p>Others</p>
+                <ButtonGroup vertical>
+                <Button  onClick={() => this.onRadioBtnClick5(1)} >One</Button>
+                <Button  onClick={() => this.onRadioBtnClick5(2)} >Two</Button>
+                <Button  onClick={() => this.onRadioBtnClick5(3)} >Three</Button>
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
             </div>
         )
     }

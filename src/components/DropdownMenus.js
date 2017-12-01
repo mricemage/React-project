@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
+import LocalizedStrings from 'react-localization'
 
 class DropdownMenus extends Component {
     constructor(props){
@@ -10,6 +10,7 @@ class DropdownMenus extends Component {
         this.state = {
         dropdownOpen: false
         };
+    
 }
 
 toggle() {
@@ -19,13 +20,44 @@ toggle() {
   }
 
 
-    render () {
+
+ render () {
+    let strings = new LocalizedStrings ({
+        en: {
+            ScenarioSelection:"Scenario Collection",
+            ForestryCenters:"Forestry Centers",
+            Area:"Area",
+            ScenarioCollection:"Scenario Collection",
+            Time:"Time",
+            IndicatorSelection:"Indicator Selection",
+            ProductCollections:"Product Collections",
+            Diversity:"Diversity",
+            Carbon:"Carbon",
+            Other:"Other"
+        },
+        fi: {
+            ScenarioSelection:"Skenarrioiden valinta",
+            ForestryCenters:"Aluetaso",
+            Area:"Alue",
+            ScenarioCollection:"Skenaariokokoelma",
+            Time:"Ajankohta",
+            IndicatorSelection:"Indikaattoreiden valinta",
+            ProductCollections:"Keruutuotteet",
+            Diversity:"Monimuotoisuus",
+            Carbon:"Hiili",
+            Other:"Muut"
+        }
+    });
+
+
         return (
            <div>
-               <label> Regional Level </label>
+               <label> {strings.ScenarioSelection} </label>
+               <br />
+               <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
-                    Region Level
+                    {strings.ForestryCenters}
                 </DropdownToggle>
             <DropdownMenu>
             <DropdownItem header>Region Selection</DropdownItem>
@@ -35,7 +67,7 @@ toggle() {
             </DropdownMenu>
         </Dropdown>
 
-        <label> Region</label>
+        <label> {strings.Area}</label>
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
@@ -48,7 +80,7 @@ toggle() {
       </UncontrolledButtonDropdown> 
 
         <br/>
-      <label> Scenario collection</label>
+      <label> {strings.ScenarioCollection}</label>
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
@@ -64,5 +96,7 @@ toggle() {
         )
     }
 }
+
+
 
 export default DropdownMenus
