@@ -53,9 +53,11 @@ toggle() {
         return (
            <div>
                <label> {strings.ScenarioSelection} </label>
+               <br />
+               <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
-                    Region Level
+                    {strings.ForestryCenters}
                 </DropdownToggle>
             <DropdownMenu>
             <DropdownItem header>Region Selection</DropdownItem>
@@ -65,7 +67,7 @@ toggle() {
             </DropdownMenu>
         </Dropdown>
 
-        <label> Region</label>
+        <label> {strings.Area}</label>
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
@@ -78,7 +80,7 @@ toggle() {
       </UncontrolledButtonDropdown> 
 
         <br/>
-      <label> Scenario collection</label>
+      <label> {strings.ScenarioCollection}</label>
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
