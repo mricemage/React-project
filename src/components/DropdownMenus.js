@@ -6,11 +6,12 @@ class DropdownMenus extends Component {
     constructor(props){
         super(props);
     
-        this.toggle = this.toggle.bind(this);
+        
         this.state = {
         dropdownOpen: false
         };
     
+        this.toggle = this.toggle.bind(this);
 }
 
 toggle() {
@@ -19,6 +20,15 @@ toggle() {
     });
   }
 
+  createSelectItems() {
+    let items = [];         
+    for (let i = 0; i <= this.props.maxValue; i++) {             
+         items.push(<option key={i} value={i}>{i}</option>);   
+         //here I will be creating my options dynamically based on
+         //what props are currently passed to the parent component
+    }
+    return items;
+} 
 
 
  render () {
