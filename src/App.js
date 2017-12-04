@@ -7,6 +7,8 @@ import { Grid, Row, Col} from 'react-bootstrap'
 import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
+import DropdownMenus from './components/DropdownMenus'
+import Scrollbar from './components/Scrollbar'
 
 class App extends Component {
 
@@ -20,7 +22,7 @@ class App extends Component {
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
 
-    this.getRegionLevels();
+    this.componentDidMount();
     this.setRegionLevels();
     this.getRegion();
     this.setRegion(2);
@@ -29,13 +31,11 @@ class App extends Component {
     this.getScenarios();
   }
   
-  getRegionLevels(){
+    componentDidMount(){
     ForestIndicatorData.getRegionLevels().then(items => {
-      console.log("getData");
-      console.log(items);
       //console.log(items[1]);
       //console.log(items[0][0]); //[] choose region  [] get name or id
-      this.setState = ({items})
+      this.setState({items: items});
     });
   }
 
@@ -77,7 +77,7 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen /></Col>
+            <Col lg={12} lg={4}> <Leftscreen items = {this.state.items} /></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>

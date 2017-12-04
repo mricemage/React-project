@@ -31,6 +31,8 @@ function getRegionLevels(){
             //console.log(data);
             //resolve(data); //results.data[0].name
             resolve(results.data);
+            console.log(results);
+            
         })
         .catch(error => {
             console.log(error);
