@@ -8,7 +8,6 @@ import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
 import DropdownMenus from './components/DropdownMenus'
-import Scrollbar from './components/Scrollbar'
 
 class App extends Component {
 
@@ -75,7 +74,7 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen /> <Scrollbar itemData = {this.state.items}/></Col>
+            <Col lg={12} lg={4}> <Leftscreen itemData = {this.state.items} /></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
