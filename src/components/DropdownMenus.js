@@ -10,7 +10,8 @@ class DropdownMenus extends Component {
     
         this.toggle = this.toggle.bind(this);
         this.state = {
-        dropdownOpen: false
+        dropdownOpen: false,
+        items: []
         };
     
 }
@@ -52,7 +53,7 @@ toggle() {
         }
     });
 
-    const { items, name, order, id } = this.props;
+   
 
         return (
            <div>
@@ -67,7 +68,7 @@ toggle() {
         
         <DropdownMenu>
             <DropdownItem header>Region Selection</DropdownItem>
-            <DropdownItem>{ name }</DropdownItem>
+            <DropdownItem>a</DropdownItem>
             
             
             </DropdownMenu>

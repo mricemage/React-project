@@ -16,26 +16,23 @@ class App extends Component {
     super(props);
 
     this.state = {
+      views:"ForestIndicator",
       items: []
     };   
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
-
-    this.componentDidMount();
-    this.setRegionLevels();
-    this.getRegion();
-    this.setRegion(2);
-    this.getScenarioCollection();
-    this.setScenarioCollection(4);
-    this.getScenarios();
+  
+    
+   
   }
   
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels().then(items => {
+    ForestIndicatorData.getRegionLevels().then(result => {
       //console.log(items[1]);
       //console.log(items[0][0]); //[] choose region  [] get name or id
-      this.setState({items: items});
+      this.setState({items: result});
+      console.log(this.state.items);
     });
   }
 
@@ -47,6 +44,7 @@ class App extends Component {
     ForestIndicatorData.getRegion().then(items => {
       console.log("getRegion");
       console.log(items);
+      
     });
   }
 
@@ -77,13 +75,14 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen items = {this.state.items} /></Col>
+            <Col lg={12} lg={4}> <Leftscreen /> <Scrollbar itemData = {this.state.items}/></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
         </div>   
     );
   }
+
 }
 
 //
