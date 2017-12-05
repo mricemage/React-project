@@ -9,19 +9,29 @@ class DropdownMenus extends Component {
         super(props);
     
         this.toggle = this.toggle.bind(this);
+        this.select = this.select.bind(this);
+
         this.state = {
         dropdownOpen: false,
-        items: []
+        items: [],
+        value: "Home"
         };
     
 }
 
-toggle() {
+toggle(event) {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+        dropdownOpen: !this.state.dropdownOpen,
     });
-  }
+}
 
+  select(e){
+    this.setState({
+        dropdownOpen: !this.state.dropdownOpen,
+        value: e.currentTarget.textContent
+        
+    });
+}
 
 
 
@@ -60,16 +70,16 @@ toggle() {
                
                <label> {strings.ScenarioSelection} </label>
                <br />
-               <label> {strings.ForestryCenters} region level</label>
+               <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-                {strings.ForestryCenters}
+            {this.state.value}
             </DropdownToggle>
             <DropdownMenu>
                 {    
-                    this.props.regionalLevels.map(function(element) {
-                        return (<DropdownItem>{ element.name }</DropdownItem>);
-                    })
+                    this.props.regionalLevels.map(element => 
+                        <DropdownItem onClick = {this.select}> { element.name } </DropdownItem>)
+                    
                 }   
             </DropdownMenu>
         </Dropdown>
