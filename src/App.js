@@ -16,7 +16,7 @@ class App extends Component {
 
     this.state = {
       views:"ForestIndicator",
-      items: []
+      regionalLevels: []
     };   
 
     //this.getData = this.getData.bind(this);
@@ -30,8 +30,8 @@ class App extends Component {
     ForestIndicatorData.getRegionLevels().then(result => {
       //console.log(items[1]);
       //console.log(items[0][0]); //[] choose region  [] get name or id
-      this.setState({items: result});
-      console.log(this.state.items);
+      this.setState({regionalLevels: result});
+      console.log(this.state.regionalLevels);
     });
   }
 
@@ -74,7 +74,7 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen itemData = {this.state.items} /></Col>
+            <Col lg={12} lg={4}> <Leftscreen regionalLevels = {this.state.regionalLevels} /></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>

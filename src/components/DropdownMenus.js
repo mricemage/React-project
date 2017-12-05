@@ -52,7 +52,7 @@ toggle() {
             Other:"Muut"
         }
     });
-
+      
    
 
         return (
@@ -60,17 +60,17 @@ toggle() {
                
                <label> {strings.ScenarioSelection} </label>
                <br />
-               <label> {strings.ForestryCenters} </label>
+               <label> {strings.ForestryCenters} region level</label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret>
-                    {strings.ForestryCenters}
-                </DropdownToggle>
-        
-        <DropdownMenu>
-            <DropdownItem header>Region Selection</DropdownItem>
-            <DropdownItem>a</DropdownItem>
-            
-            
+            <DropdownToggle caret>
+                {strings.ForestryCenters}
+            </DropdownToggle>
+            <DropdownMenu>
+                {    
+                    this.props.regionalLevels.map(function(element) {
+                        return (<DropdownItem>{ element.name }</DropdownItem>);
+                    })
+                }   
             </DropdownMenu>
         </Dropdown>
 

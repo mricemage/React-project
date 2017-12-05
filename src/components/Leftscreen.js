@@ -13,8 +13,10 @@ class Leftscreen extends Component {
 
     render () {
         var width2 =Element.offsetWidth; // https://www.w3schools.com/jsref/prop_element_offsetwidth.asp Its getting the width of an element in pixels
-        const { itemData } = this.props;
-        console.log(itemData);
+
+        const regionalLevels = this.props.regionalLevels;
+        const a = 1;
+        console.log(regionalLevels);
         
         return (
             <div className= "content">
@@ -23,11 +25,10 @@ class Leftscreen extends Component {
                 autoHeightMin={500}
                 autoHeightMax={1200}
                 style={{ width: width2  }}
-                >
-                    <DropdownMenus />
-                    <CheckBoxes />
-            
-                </Scrollbars>  
+                >   
+            <DropdownMenus regionalLevels ={regionalLevels} />
+            <CheckBoxes />
+            </Scrollbars>  
             </div>
         )
     }

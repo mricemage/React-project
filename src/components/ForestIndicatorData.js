@@ -31,14 +31,8 @@ function getRegionLevels(){
             //console.log(data);
             //resolve(data); //results.data[0].name
 
-            const items = results.data.map(element =>{
-                element.description = element.description,
-                element.name = element.name,
-                element.id = element.id,
-                element.order = element.order;
-                return element;
-            })
-            resolve(items);
+            
+            resolve(results.data);
             
             
         })
