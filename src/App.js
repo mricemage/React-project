@@ -7,6 +7,8 @@ import { Grid, Row, Col} from 'react-bootstrap'
 import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
+import DropdownMenus from './components/DropdownMenus'
+import Scrollbar from './components/Scrollbar'
 
 class App extends Component {
 
@@ -14,28 +16,23 @@ class App extends Component {
     super(props);
 
     this.state = {
+      views:"ForestIndicator",
       items: []
     };   
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
-
-    this.getRegionLevels();
-    this.setRegionLevels();
-    this.getRegion();
-    this.setRegion(2);
-    this.getScenarioCollection();
-    this.setScenarioCollection(4);
-    this.getScenarios();
+  
+    
+   
   }
   
-  getRegionLevels(){
-    ForestIndicatorData.getRegionLevels().then(items => {
-      console.log("getData");
-      console.log(items);
+    componentDidMount(){
+    ForestIndicatorData.getRegionLevels().then(result => {
       //console.log(items[1]);
       //console.log(items[0][0]); //[] choose region  [] get name or id
-      this.setState = ({items})
+      this.setState({items: result});
+      console.log(this.state.items);
     });
   }
 
@@ -47,6 +44,7 @@ class App extends Component {
     ForestIndicatorData.getRegion().then(items => {
       console.log("getRegion");
       console.log(items);
+      
     });
   }
 
@@ -77,13 +75,14 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen /></Col>
+            <Col lg={12} lg={4}> <Leftscreen /> <Scrollbar itemData = {this.state.items}/></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
         </div>   
     );
   }
+
 }
 
 //

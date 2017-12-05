@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import LocalizedStrings from 'react-localization'
+import ForestIndicatorData from './ForestIndicatorData'
+
 
 class DropdownMenus extends Component {
     constructor(props){
@@ -8,7 +10,8 @@ class DropdownMenus extends Component {
     
         this.toggle = this.toggle.bind(this);
         this.state = {
-        dropdownOpen: false
+        dropdownOpen: false,
+        items: []
         };
     
 }
@@ -18,6 +21,7 @@ toggle() {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
 
 
 
@@ -49,21 +53,24 @@ toggle() {
         }
     });
 
+   
 
         return (
            <div>
-               <p> {strings.ScenarioSelection} </p>
+               
+               <label> {strings.ScenarioSelection} </label>
                <br />
                <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                     {strings.ForestryCenters}
                 </DropdownToggle>
-            <DropdownMenu>
+        
+        <DropdownMenu>
             <DropdownItem header>Region Selection</DropdownItem>
-            <DropdownItem>Action</DropdownItem>
-            <DropdownItem>Another Action</DropdownItem>
-            <DropdownItem>Another Action</DropdownItem>
+            <DropdownItem>a</DropdownItem>
+            
+            
             </DropdownMenu>
         </Dropdown>
 
@@ -91,7 +98,8 @@ toggle() {
           <DropdownItem>Another Action</DropdownItem>
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
-
+        
+       
         </div>
         )
     }
