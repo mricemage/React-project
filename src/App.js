@@ -21,13 +21,10 @@ class App extends Component {
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
-  
-    
-   
   }
   
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels().then(result => {
+    ForestIndicatorData.getRegionLevels("en").then(result => {
       //console.log(items[1]);
       //console.log(items[0][0]); //[] choose region  [] get name or id
       this.setState({regionalLevels: result});
