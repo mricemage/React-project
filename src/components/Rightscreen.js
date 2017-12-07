@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Rightscreen.css'
 import Header from './Header'
+import Graphs from './Graphs'
 
 class Rightscreen extends Component {
     render () {
@@ -8,6 +9,7 @@ class Rightscreen extends Component {
             <div className= 'content'>
                 <Header/>
                 RightScreenn
+                <Graphs/>
             </div>
         )
     }

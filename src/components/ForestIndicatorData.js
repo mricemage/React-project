@@ -84,8 +84,18 @@ function getScenarioCollection(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            console.log(results.data);
-            resolve(results.data);
+            var count = 0;
+            while(results.data[count]){
+                if(results.data[count].id == regionId){
+                    console.log(results.data[count].scenarioCollections);
+                    console.log(results.data[count]);
+                    resolve(results.data[count].scenarioCollections);
+                }
+                count++;
+            }
+            //console.log(results.data.);
+            //resolve(results.data);
+            reject(); //didn't find scenarioCollections
         })
         .catch(error => {
             console.log(error);

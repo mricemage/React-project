@@ -30,6 +30,11 @@ class App extends Component {
       this.setState({regionalLevels: result});
       console.log(this.state.regionalLevels);
     });
+    ForestIndicatorData.setRegionLevels(1);
+    ForestIndicatorData.setRegion(29);
+    ForestIndicatorData.getScenarioCollection().then(result => {
+      //console.log(this.state.regionalLevels);
+    });
   }
 
   setRegionLevels(){
