@@ -18,7 +18,8 @@ class App extends Component {
       views:"ForestIndicator",
       regionalLevels: [],
       regions: [],
-      scenarioCollection:[]
+      scenarioCollection:[],
+      scenarios:[]
     };   
 
     //this.getData = this.getData.bind(this);
@@ -27,6 +28,8 @@ class App extends Component {
     this.getRegion = this.getRegion.bind(this)
     this.setRegion = this.setRegion.bind(this)
     this.getScenarioCollection = this.getScenarioCollection.bind(this)
+    this.getScenarios = this.getScenarios.bind(this)
+    this.setScenarioCollection = this.setScenarioCollection.bind(this)
   }
   
     componentDidMount(){
@@ -57,7 +60,7 @@ class App extends Component {
   getScenarioCollection(){
     ForestIndicatorData.getScenarioCollection().then(result => {
       this.setState({scenarioCollection: result})
-      console.log(this.state.scenarioCollection)
+      console.log(this.state.scenarioCollection);
     });
   }
 
@@ -66,9 +69,8 @@ class App extends Component {
   }
 
   getScenarios(){
-    ForestIndicatorData.getScenarios().then(items => {
-      console.log("getScenarioCollection");
-      console.log(items);
+    ForestIndicatorData.getScenarios().then(result => {
+      this.setState({scenarios: result})
     });
   }
 
@@ -80,9 +82,13 @@ class App extends Component {
             <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels}
                                               regions = {this.state.regions}
                                               scenarioCollection = {this.state.scenarioCollection}
+                                              scenarios = {this.state.scenarios}
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
+                                              getScenarioCollection = {this.getScenarioCollection}
+                                              getScenarios = {this.getScenarios}
+                                              setScenarioCollection = {this.ScenarioCollection}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>

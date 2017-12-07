@@ -11,13 +11,14 @@ class DropdownMenus extends Component {
         this.toggle = this.toggle.bind(this);
         this.regionalLevels = this.regionalLevels.bind(this);
         this.regions = this.regions.bind(this);
+        this.scenarioCollection = this.scenarioCollection.bind(this);
 
         this.state = {
         dropdownOpen: false,
         items: [],
         regionalLevels: "Aluetaso",
         regions:"Select regions",
-        scenarioCollection:""
+        scenarioCollection:"Select scenario Collection"
         };
     
 }
@@ -46,6 +47,15 @@ regions(e){
     });
     this.props.setRegion(e.currentTarget.id);
     this.props.getScenarioCollection();
+}
+
+scenarioCollection(e){
+    this.setState({
+        scenarios: e.currentTarget.textContent
+    })
+    this.props.setScenarioCollection(e.currentTarget.id);
+    console.log(e.currentTarget.id)
+    this.props.getScenarios();
 }
 
 
@@ -117,11 +127,13 @@ regions(e){
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
-            Scenario collection
+           {this.state.scenarioCollection}
             </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+        {
+              this.props.scenarioCollection.map(element =>
+            <DropdownItem onClick= {this.scenarioCollection} id={element.id}>{ element.name }</DropdownItem>)
+          }
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
         
