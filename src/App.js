@@ -34,8 +34,8 @@ class App extends Component {
     });
   }
 
-  setRegionLevels(){
-    ForestIndicatorData.setRegionLevels(2);
+  setRegionLevels(id){
+    ForestIndicatorData.setRegionLevels(id);
   }
 
   getRegion(){
