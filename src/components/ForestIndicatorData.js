@@ -35,7 +35,6 @@ function getRegionLevels(language = "fi"){
             }*/
             //console.log(data);
             //resolve(data); //results.data[0].name
-
             
             resolve(results.data);
         })
@@ -52,7 +51,6 @@ function setRegionLevels(id){
 
 function getRegion(language = "fi"){
     return new Promise((resolve, reject) => {
-        //axios.get("http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions")
         var url = "http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions";
         axios({
             method: 'get',
@@ -73,10 +71,8 @@ function setRegion(id){
     regionId = id;
 }
 
-//not necessary at the moment because not sure where we are going to parse the data
 function getScenarioCollection(language = "fi"){
     return new Promise((resolve, reject) => {
-        //axios.get("http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions")
         var url = "http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions";
         axios({
             method: 'get',
@@ -84,8 +80,18 @@ function getScenarioCollection(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            console.log(results.data);
-            resolve(results.data);
+            var count = 0;
+            while(results.data[count]){
+                if(results.data[count].id === regionId){
+                    //console.log(results.data[count].scenarioCollections);
+                    //console.log(results.data[count]);
+                    resolve(results.data[count].scenarioCollections);
+                }
+                count++;
+            }
+            //console.log(results.data.);
+            //resolve(results.data);
+            reject(); //didn't find scenarioCollections
         })
         .catch(error => {
             console.log(error);
@@ -100,8 +106,6 @@ function setScenarioCollection(id){
 
 function getScenarios(language = "fi"){
     return new Promise((resolve, reject) => {
-        //axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-        //          "/region/"+regionId)
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
         axios({
