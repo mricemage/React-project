@@ -14,7 +14,7 @@ class DropdownMenus extends Component {
         this.state = {
         dropdownOpen: false,
         items: [],
-        value: "Home"
+        value: "Aluetaso"
         };
     
 }
@@ -29,8 +29,10 @@ toggle(event) {
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         value: e.currentTarget.textContent
-        
+       
     });
+    console.log(e.currentTarget.id);
+    
 }
 
 
@@ -77,9 +79,9 @@ toggle(event) {
             </DropdownToggle>
             <DropdownMenu>
                 {    
-                    this.props.regionalLevels.map(element => 
-                        <DropdownItem onClick = {this.select}> { element.name } </DropdownItem>)
-                    
+                    this.props.regionalLevels.map( element => 
+                        <DropdownItem onClick = {this.select} id={element.id}> { element.name } </DropdownItem>)
+                       
                 }   
             </DropdownMenu>
         </Dropdown>
