@@ -17,13 +17,16 @@ class App extends Component {
     this.state = {
       views:"ForestIndicator",
       regionalLevels: [],
-      regions: []
+      regions: [],
+      scenarioCollection:[]
     };   
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
     this.setRegionLevels = this.setRegionLevels.bind(this)
     this.getRegion = this.getRegion.bind(this)
+    this.setRegion = this.setRegion.bind(this)
+    this.getScenarioCollection = this.getScenarioCollection.bind(this)
   }
   
     componentDidMount(){
@@ -76,8 +79,11 @@ class App extends Component {
             <Row className="show-grid">
             <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels}
                                               regions = {this.state.regions}
+                                              scenarioCollection = {this.state.scenarioCollection}
                                               setRegionLevels = {this.setRegionLevels}
-                                              getRegion = {this.getRegion}/>
+                                              getRegion = {this.getRegion}
+                                              setRegion = {this.setRegion}
+                                              />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>

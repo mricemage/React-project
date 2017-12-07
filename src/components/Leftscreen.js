@@ -13,6 +13,7 @@ class Leftscreen extends Component {
 
         const regionalLevels = this.props.regionalLevels;
         const regions = this.props.regions;
+        const scenarioCollection = this.props.scenarioCollection;
         console.log(regionalLevels);
         
         return (
@@ -25,8 +26,11 @@ class Leftscreen extends Component {
                 >   
             <DropdownMenus regionalLevels ={regionalLevels} 
                            regions = {regions}
+                           scenarioCollection = {scenarioCollection}
                            setRegionLevels = {this.props.setRegionLevels}
-                           getRegion = {this.props.getRegion}/>
+                           getRegion = {this.props.getRegion}
+                           setRegion = {this.props.setRegion}
+                           />
             <CheckBoxes />
             </Scrollbars>  
             </div>

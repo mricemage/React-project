@@ -9,13 +9,14 @@ class DropdownMenus extends Component {
         super(props);
     
         this.toggle = this.toggle.bind(this);
-        this.select = this.select.bind(this);
+        this.regionalLevels = this.regionalLevels.bind(this);
 
         this.state = {
         dropdownOpen: false,
         items: [],
-        value: "Aluetaso",
-        regions:"Select regions"
+        regionalLevels: "Aluetaso",
+        regions:"Select regions",
+        scenarioCollection:""
         };
     
 }
@@ -26,10 +27,10 @@ toggle(event) {
     });
 }
 
-  select(e){
+regionalLevels(e){
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
-        value: e.currentTarget.textContent
+        regionalLevels: e.currentTarget.textContent
        
     });
     console.log(e.currentTarget.id);
@@ -37,6 +38,14 @@ toggle(event) {
     this.props.getRegion();
 }
 
+regions(e){
+    this.setState({
+       
+        regions: e.currentTarget.textContent
+    })
+    this.props.setRegion(e.currentTarget.id);
+    this.props.getScenarioCollection();
+}
 
 
  render () {
@@ -77,12 +86,12 @@ toggle(event) {
                <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-            {this.state.value}
+            {this.state.regionalLevels}
             </DropdownToggle>
             <DropdownMenu>
                 {    
                     this.props.regionalLevels.map( element => 
-                        <DropdownItem onClick = {this.select} id={element.id}> { element.name } </DropdownItem>)
+                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>)
                        
                 }   
             </DropdownMenu>
@@ -97,7 +106,7 @@ toggle(event) {
         <DropdownMenu>
           {
               this.props.regions.map(element =>
-            <DropdownItem>{ element.name }</DropdownItem>)
+            <DropdownItem onClick= {this.regions} id={element.id}>{ element.name }</DropdownItem>)
           }
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
