@@ -23,7 +23,8 @@ class Leftscreen extends Component {
                 style={{ width: width2  }}
                 >   
             <DropdownMenus regionalLevels ={regionalLevels} 
-                           setRegion = {this.props.setRegion}/>
+                           setRegionLevels = {this.props.setRegionLevels}
+                           getRegion = {this.props.getRegion}/>
             <CheckBoxes />
             </Scrollbars>  
             </div>

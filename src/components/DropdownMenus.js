@@ -32,8 +32,8 @@ toggle(event) {
        
     });
     console.log(e.currentTarget.id);
-    this.props.setRegion(e.currentTarget.id);
-    
+    this.props.setRegionLevels(e.currentTarget.id);
+    this.props.getRegion();
 }
 
 

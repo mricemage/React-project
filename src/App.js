@@ -21,7 +21,8 @@ class App extends Component {
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
-    this.setRegion = this.setRegion.bind(this)
+    this.setRegionLevels = this.setRegionLevels.bind(this)
+    this.getRegion = this.getRegion.bind(this)
   }
   
     componentDidMount(){
@@ -74,7 +75,9 @@ class App extends Component {
           <Grid>
             <Row className="show-grid">
             <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels} 
-                                              setRegion = {this.setRegion}/></Col>
+                                              setRegionLevels = {this.setRegionLevels}
+                                              getRegion = {this.getRegion}/>
+                                              </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
