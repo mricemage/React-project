@@ -107,6 +107,7 @@ function getScenarioCollection(){
             }
             resolve(data); //results.data[0].name*/
             resolve(results.data);
+
         })
         .catch(error => {
             console.log(error);

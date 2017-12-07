@@ -10,6 +10,7 @@ class DropdownMenus extends Component {
     
         this.toggle = this.toggle.bind(this);
         this.regionalLevels = this.regionalLevels.bind(this);
+        this.regions = this.regions.bind(this);
 
         this.state = {
         dropdownOpen: false,
@@ -42,7 +43,7 @@ regions(e){
     this.setState({
        
         regions: e.currentTarget.textContent
-    })
+    });
     this.props.setRegion(e.currentTarget.id);
     this.props.getScenarioCollection();
 }

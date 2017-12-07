@@ -14,7 +14,7 @@ class Leftscreen extends Component {
         const regionalLevels = this.props.regionalLevels;
         const regions = this.props.regions;
         const scenarioCollection = this.props.scenarioCollection;
-        console.log(regionalLevels);
+        
         
         return (
             <div className= "content">

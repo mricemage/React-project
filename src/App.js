@@ -55,9 +55,9 @@ class App extends Component {
   }
 
   getScenarioCollection(){
-    ForestIndicatorData.getScenarioCollection().then(items => {
-      console.log("getScenarioCollection");
-      console.log(items);
+    ForestIndicatorData.getScenarioCollection().then(result => {
+      this.setState({scenarioCollection: result})
+      console.log(this.state.scenarioCollection)
     });
   }
 
