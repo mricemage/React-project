@@ -12,6 +12,7 @@ class Leftscreen extends Component {
         var width2 =Element.offsetWidth; // https://www.w3schools.com/jsref/prop_element_offsetwidth.asp Its getting the width of an element in pixels
 
         const regionalLevels = this.props.regionalLevels;
+        const regions = this.props.regions;
         console.log(regionalLevels);
         
         return (
@@ -23,6 +24,7 @@ class Leftscreen extends Component {
                 style={{ width: width2  }}
                 >   
             <DropdownMenus regionalLevels ={regionalLevels} 
+                           regions = {regions}
                            setRegionLevels = {this.props.setRegionLevels}
                            getRegion = {this.props.getRegion}/>
             <CheckBoxes />

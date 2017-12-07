@@ -14,7 +14,8 @@ class DropdownMenus extends Component {
         this.state = {
         dropdownOpen: false,
         items: [],
-        value: "Aluetaso"
+        value: "Aluetaso",
+        regions:"Select regions"
         };
     
 }
@@ -91,11 +92,13 @@ toggle(event) {
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
-            Region
+            {this.state.regions}
             </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+          {
+              this.props.regions.map(element =>
+            <DropdownItem>{ element.name }</DropdownItem>)
+          }
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
 
