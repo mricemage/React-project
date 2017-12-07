@@ -22,7 +22,8 @@ class Leftscreen extends Component {
                 autoHeightMax={1200}
                 style={{ width: width2  }}
                 >   
-            <DropdownMenus regionalLevels ={regionalLevels} />
+            <DropdownMenus regionalLevels ={regionalLevels} 
+                           setRegion = {this.props.setRegion}/>
             <CheckBoxes />
             </Scrollbars>  
             </div>

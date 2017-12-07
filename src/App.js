@@ -21,9 +21,7 @@ class App extends Component {
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
-  
-    
-   
+    this.setRegion = this.setRegion.bind(this)
   }
   
     componentDidMount(){
@@ -48,6 +46,7 @@ class App extends Component {
   }
 
   setRegion(id){
+    console.log(id)
     ForestIndicatorData.setRegion(id);
   }
 
@@ -74,7 +73,8 @@ class App extends Component {
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen regionalLevels = {this.state.regionalLevels} /></Col>
+            <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels} 
+                                              setRegion = {this.setRegion}/></Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
