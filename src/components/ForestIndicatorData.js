@@ -82,7 +82,7 @@ function getScenarioCollection(language = "fi"){
         .then(results => {
             var count = 0;
             while(results.data[count]){
-                if(results.data[count].id === regionId){
+                if(results.data[count].id == regionId){
                     //console.log(results.data[count].scenarioCollections);
                     //console.log(results.data[count]);
                     resolve(results.data[count].scenarioCollections);
@@ -114,8 +114,48 @@ function getScenarios(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            console.log(results.data);
-            resolve(results.data);
+            //console.log(results.data[0].scenarios);
+            resolve(results.data[0].scenarios); //results.data.scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getTimePeriods(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0].timePeriods);
+            resolve(results.data[0].timePeriods); //results.data.scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getIndicatorCategories(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0].timePeriods);
+            resolve(results.data[0].indicatorCategories); //results.data.scenarios
         })
         .catch(error => {
             console.log(error);
@@ -125,4 +165,4 @@ function getScenarios(language = "fi"){
 }
 
 export default { getRegionLevels, setRegionLevels, getRegion, setRegion, getScenarioCollection, 
-                 setScenarioCollection, getScenarios } 
+                 setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories } 
