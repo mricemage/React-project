@@ -78,7 +78,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                  {
                     this.props.scenarios.map( element => 
-                        <Button  onClick={() => this.onCheckboxBtnClick(1)} id= {element.id} active={this.state.cSelected.includes(1)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onCheckboxBtnClick()} id= {element.id} active={this.state.cSelected.includes()}>{ element.description }</Button>)
                     }  
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
