@@ -9,20 +9,55 @@ class DropdownMenus extends Component {
         super(props);
     
         this.toggle = this.toggle.bind(this);
+        this.regionalLevels = this.regionalLevels.bind(this);
+        this.regions = this.regions.bind(this);
+        this.scenarioCollection = this.scenarioCollection.bind(this);
+
         this.state = {
         dropdownOpen: false,
-        items: []
+        items: [],
+        regionalLevels: "Aluetaso",
+        regions:"Select regions",
+        scenarioCollection:"Select scenario Collection"
         };
     
 }
 
-toggle() {
+toggle(event) {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+        dropdownOpen: !this.state.dropdownOpen,
     });
-  }
+}
 
+regionalLevels(e){
+    this.setState({
+        dropdownOpen: !this.state.dropdownOpen,
+        regionalLevels: e.currentTarget.textContent
+       
+    });
+    console.log(e.currentTarget.id);
+    this.props.setRegionLevels(e.currentTarget.id);
+    this.props.getRegion();
+}
 
+regions(e){
+    this.setState({
+       
+        regions: e.currentTarget.textContent
+    });
+    this.props.setRegion(e.currentTarget.id);
+    this.props.getScenarioCollection();
+}
+
+scenarioCollection(e){
+    this.setState({
+        scenarioCollection: e.currentTarget.textContent
+    })
+    this.props.setScenarioCollection(e.currentTarget.id);
+    console.log(e.currentTarget.id)
+    this.props.getScenarios();
+    this.props.getTimePeriods();
+}
 
 
  render () {
@@ -60,16 +95,16 @@ toggle() {
                
                <label> {strings.ScenarioSelection} </label>
                <br />
-               <label> {strings.ForestryCenters} region level</label>
+               <label> {strings.ForestryCenters} </label>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-                {strings.ForestryCenters}
+            {this.state.regionalLevels}
             </DropdownToggle>
             <DropdownMenu>
                 {    
-                    this.props.regionalLevels.map(function(element) {
-                        return (<DropdownItem>{ element.name }</DropdownItem>);
-                    })
+                    this.props.regionalLevels.map( element => 
+                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>)
+                       
                 }   
             </DropdownMenu>
         </Dropdown>
@@ -78,11 +113,13 @@ toggle() {
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
-            Region
+            {this.state.regions}
             </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+          {
+              this.props.regions.map(element =>
+            <DropdownItem onClick= {this.regions} id={element.id}>{ element.name }</DropdownItem>)
+          }
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
 
@@ -91,11 +128,13 @@ toggle() {
         <br/>
         <UncontrolledButtonDropdown>
             <DropdownToggle caret>
-            Scenario collection
+           {this.state.scenarioCollection}
             </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+        {
+              this.props.scenarioCollection.map(element =>
+            <DropdownItem onClick= {this.scenarioCollection} id={element.id}>{ element.name }</DropdownItem>)
+          }
         </DropdownMenu>
       </UncontrolledButtonDropdown> 
         
