@@ -60,6 +60,11 @@ scenarioCollection(e){
     this.props.getScenarios();
     this.props.getTimePeriods();
     this.props.getIndicatorCategories();
+    this.props.getWoodProduction();
+    this.props.getBiodiversity()
+    this.props.getNaturalProducts()
+    this.props.getCarbon();
+    this.props.getOthers();
 }
 
 

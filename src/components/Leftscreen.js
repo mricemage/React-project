@@ -17,6 +17,12 @@ class Leftscreen extends Component {
         const scenarios = this.props.scenarios;
         const timestamp = this.props.timestamp;
         const indicatorCategories = this.props.indicatorCategories;
+        const woodproduction = this.props.woodproduction;
+        const biodiversity = this.props.biodiversity;
+        const naturalproducts = this.props.naturalproducts;
+        const carbon = this.props.carbon;
+        const others = this.props.others;
+
 
         return (
             <div className= "content">
@@ -38,10 +44,20 @@ class Leftscreen extends Component {
                            setScenarioCollection = {this.props.setScenarioCollection}
                            getTimePeriods = {this.props.getTimePeriods}
                            getIndicatorCategories = {this.props.getIndicatorCategories}
+                           getWoodProduction = {this.props.getWoodProduction}
+                           getBiodiversity = {this.props.getBiodiversity}
+                           getNaturalProducts = {this.props.getNaturalProducts}
+                           getCarbon = {this.props.getCarbon}
+                           getOthers = {this.props.getOthers}
                            />
             <CheckBoxes scenarios = {scenarios}
                         timestamp = {timestamp}
                         indicatorCategories = {indicatorCategories}
+                        woodproduction = {woodproduction}
+                        biodiversity = {biodiversity}
+                        naturalproducts = {naturalproducts}
+                        carbon = {carbon}
+                        others = {others}
                         getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}
                         

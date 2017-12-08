@@ -4,6 +4,7 @@ var regionLevel = 0;
 var regionId = 0;
 var scenarioCollectionId = 0;
 var region = "";
+var data = "";
 
 function getRegionLevels(language = "fi"){
     return new Promise((resolve, reject) => {
@@ -46,6 +47,24 @@ function getRegionLevels(language = "fi"){
 function setRegionLevels(id){
     regionLevel = id;
 }
+/* mahdollisesti tulevaisuudessa
+function getRegionData(){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions";
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            resolve(results.data);
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}*/
 
 function getRegion(language = "fi"){
     return new Promise((resolve, reject) => {
@@ -162,5 +181,146 @@ function getIndicatorCategories(language = "fi"){
     });
 }
 
+function getWoodProduction(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0].timePeriods);
+            var count = 0;
+            while(results.data[0].indicatorCategories[count]){
+                if(results.data[0].indicatorCategories[count].name == "Puuntuotanto" || 
+                    results.data[0].indicatorCategories[count].name == "Wood production"){
+                    //console.log(results.data[count].scenarioCollections);
+                    //console.log(results.data[count]);
+                    resolve(results.data[0].indicatorCategories[count].indicators);
+                }
+                count++;
+            }
+
+            resolve("Wood production was not found"); //results.data.scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+//filter
+function getBiodiversity(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            var count = 0;
+            while(results.data[0].indicatorCategories[count]){
+                if(results.data[0].indicatorCategories[count].name == "Monimuotoisuus" || 
+                    results.data[0].indicatorCategories[count].name == "Biodiversity"){
+                    resolve(results.data[0].indicatorCategories[count].indicators);
+                }
+                count++;
+            }
+
+            resolve("Biodiversity was not found");
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getNaturalProducts(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            var count = 0;
+            while(results.data[0].indicatorCategories[count]){
+                if(results.data[0].indicatorCategories[count].name == "Keruutuotteet" || 
+                    results.data[0].indicatorCategories[count].name == "Natural products"){
+                    resolve(results.data[0].indicatorCategories[count].indicators);
+                }
+                count++;
+            }
+            resolve("Natural products was not found");
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getCarbon(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            var count = 0;
+            while(results.data[0].indicatorCategories[count]){
+                if(results.data[0].indicatorCategories[count].name == "Hiili" || 
+                    results.data[0].indicatorCategories[count].name == "Carbon"){
+                    resolve(results.data[0].indicatorCategories[count].indicators);
+                }
+                count++;
+            }
+            resolve("Carbon was not found");
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getOthers(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            var count = 0;
+            while(results.data[0].indicatorCategories[count]){
+                if(results.data[0].indicatorCategories[count].name == "Muut" || 
+                    results.data[0].indicatorCategories[count].name == "Others"){
+                    resolve(results.data[0].indicatorCategories[count].indicators);
+                }
+                count++;
+            }
+            resolve("Others was not found");
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
 export default { getRegionLevels, setRegionLevels, getRegion, setRegion, getScenarioCollection, 
-                 setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories } 
+                 setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories, 
+                 getWoodProduction, getBiodiversity, getNaturalProducts, getCarbon, getOthers } 
