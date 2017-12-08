@@ -22,10 +22,8 @@ function getRegionLevels(language = "fi"){
             while(results.data[count]){
                 count++;
             }
-
             //console.log(count);
             var data2 = {key1: 1, key2: 3, key3: [4, 2]};
-
             data2.key1
             var data = [[]];
             for (var i = 0; i < count; i++){
@@ -86,11 +84,10 @@ function getScenarioCollection(language = "fi"){
                     //console.log(results.data[count].scenarioCollections);
                     //console.log(results.data[count]);
                     resolve(results.data[count].scenarioCollections);
-                    
                 }
                 count++;
             }
-            
+            //console.log(results.data.);
             //resolve(results.data);
             reject(); //didn't find scenarioCollections
         })
@@ -115,8 +112,48 @@ function getScenarios(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            console.log(results.data);
-            resolve(results.data);
+            //console.log(results.data[0].scenarios);
+            resolve(results.data[0].scenarios); //results.data.scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getTimePeriods(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0].timePeriods);
+            resolve(results.data[0].timePeriods); //results.data.scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getIndicatorCategories(language = "fi"){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0].timePeriods);
+            resolve(results.data[0].indicatorCategories); //results.data.scenarios
         })
         .catch(error => {
             console.log(error);
@@ -126,4 +163,4 @@ function getScenarios(language = "fi"){
 }
 
 export default { getRegionLevels, setRegionLevels, getRegion, setRegion, getScenarioCollection, 
-                 setScenarioCollection, getScenarios } 
+                 setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories } 

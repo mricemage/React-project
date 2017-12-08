@@ -51,7 +51,7 @@ regions(e){
 
 scenarioCollection(e){
     this.setState({
-        scenarios: e.currentTarget.textContent
+        scenarioCollection: e.currentTarget.textContent
     })
     this.props.setScenarioCollection(e.currentTarget.id);
     console.log(e.currentTarget.id)

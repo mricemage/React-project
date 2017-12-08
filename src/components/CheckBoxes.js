@@ -5,6 +5,7 @@ import LocalizedStrings from 'react-localization'
 class CheckBoxes extends Component {
     constructor (props) {
         super(props);
+        //[0].Scenario//
     
         this.state = { cSelected: [] };
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
@@ -75,12 +76,10 @@ class CheckBoxes extends Component {
             <div>
             <p>{strings.Scenario}</p>
                 <ButtonGroup vertical>
-                 <Button  onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}>One</Button>
-                 <Button  onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}>Two</Button>
-                 <Button  onClick={() => this.onCheckboxBtnClick(3)} active={this.state.cSelected.includes(3)}>Three</Button>
-                 <Button  onClick={() => this.onCheckboxBtnClick(4)} active={this.state.cSelected.includes(4)}>Four</Button>
-                 <Button  onClick={() => this.onCheckboxBtnClick(5)} active={this.state.cSelected.includes(5)}>Five</Button>
-                 <Button  onClick={() => this.onCheckboxBtnClick(6)} active={this.state.cSelected.includes(6)}>Six</Button>
+                 {
+                    this.props.scenarios.map( element => 
+                        <Button  onClick={() => this.onCheckboxBtnClick(1)} id= {element.id} active={this.state.cSelected.includes(1)}>{ element.name }</Button>)
+                    }  
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
 

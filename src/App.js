@@ -71,6 +71,7 @@ class App extends Component {
   getScenarios(){
     ForestIndicatorData.getScenarios().then(result => {
       this.setState({scenarios: result})
+      console.log(this.state.scenarios)
     });
   }
 
@@ -88,7 +89,7 @@ class App extends Component {
                                               setRegion = {this.setRegion}
                                               getScenarioCollection = {this.getScenarioCollection}
                                               getScenarios = {this.getScenarios}
-                                              setScenarioCollection = {this.ScenarioCollection}
+                                              setScenarioCollection = {this.setScenarioCollection}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
