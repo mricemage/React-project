@@ -16,7 +16,8 @@ class Leftscreen extends Component {
         const scenarioCollection = this.props.scenarioCollection;
         const scenarios = this.props.scenarios;
         const timestamp = this.props.timestamp;
-        
+        const indicatorCategories = this.props.indicatorCategories;
+
         return (
             <div className= "content">
                 <Scrollbars
@@ -36,11 +37,15 @@ class Leftscreen extends Component {
                            getScenarios = {this.props.getScenarios}
                            setScenarioCollection = {this.props.setScenarioCollection}
                            getTimePeriods = {this.props.getTimePeriods}
+                           getIndicatorCategories = {this.props.getIndicatorCategories}
                            />
-            <CheckBoxes getScenarios = {this.props.getScenarios}
+            <CheckBoxes scenarios = {scenarios}
+                        timestamp = {timestamp}
+                        indicatorCategories = {indicatorCategories}
+                        getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}
-                        scenarios = {scenarios}
-                        timestamp = {timestamp}/>
+                        
+                        />
             </Scrollbars>  
             </div>
         )

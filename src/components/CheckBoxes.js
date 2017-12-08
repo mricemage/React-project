@@ -105,8 +105,13 @@ class CheckBoxes extends Component {
                 <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
                 
                 <h5>{strings.IndicatorSelection}</h5>
+
+                
                 {
-                this.props.timestamp.map( element => <div> <p>{element.id}</p> <ButtonGroup vertical> {this.props.timestamp.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.yearStart } - {element.yearEnd}</Button>)  }</ButtonGroup></div>)
+                this.props.indicatorCategories.map( element => <div> <p>{element.name}</p> <ButtonGroup vertical>
+                 {this.props.timestamp.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id}
+                  active ={this.state.rSelected.includes(element.id)}>{ element.yearStart } - {element.yearEnd}</Button>) 
+                  }</ButtonGroup></div>)
 
                 }
                 

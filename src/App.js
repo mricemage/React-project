@@ -20,7 +20,8 @@ class App extends Component {
       regions: [],
       scenarioCollection:[],
       scenarios:[],
-      timestamp:[]
+      timestamp:[],
+      indicatorCategories:[]
     };   
 
     //this.getData = this.getData.bind(this);
@@ -33,7 +34,7 @@ class App extends Component {
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
     this.getTimePeriods = this.getTimePeriods.bind(this)
-
+    this.getIndicatorCategories = this.getIndicatorCategories.bind(this)
   }
     
     componentDidMount(){
@@ -96,6 +97,13 @@ class App extends Component {
       console.log(this.state.timestamp)
   });
 }
+getIndicatorCategories(){
+  ForestIndicatorData.getTimePeriods().then(result => {
+    this.setState({indicatorCategories: result})
+    console.log(this.state.indicatorCategories)
+})
+}
+
   render() {
     return (
         <div>
@@ -106,6 +114,7 @@ class App extends Component {
                                               scenarioCollection = {this.state.scenarioCollection}
                                               scenarios = {this.state.scenarios}
                                               timestamp = {this.state.timestamp}
+                                              indicatorCategories = {this.state.indicatorCategories}
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
@@ -113,6 +122,7 @@ class App extends Component {
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
                                               getTimePeriods = {this.getTimePeriods}
+                                              getIndicatorCategories = {this.getIndicatorCategories}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>

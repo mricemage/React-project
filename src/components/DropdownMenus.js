@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import LocalizedStrings from 'react-localization'
-import ForestIndicatorData from './ForestIndicatorData'
 
 
 class DropdownMenus extends Component {
@@ -60,6 +59,7 @@ scenarioCollection(e){
     console.log(e.currentTarget.id)
     this.props.getScenarios();
     this.props.getTimePeriods();
+    this.props.getIndicatorCategories();
 }
 
 
