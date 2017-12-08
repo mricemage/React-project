@@ -26,19 +26,37 @@ class App extends Component {
     componentDidMount(){
     ForestIndicatorData.getRegionLevels("en").then(result => {
       this.setState({regionalLevels: result});
-      console.log(this.state.regionalLevels);
+      //console.log(this.state.regionalLevels);
     });
-    /*
+
+    //Test functions and will be removed in the future
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
     ForestIndicatorData.setScenarioCollection(6);
+    /*
     ForestIndicatorData.getScenarios().then(result =>{
-      console.log(result);
+      //console.log(result);
     });
     ForestIndicatorData.getTimePeriods().then(result =>{
-      console.log(result);
+      //console.log(result);
     });
     ForestIndicatorData.getIndicatorCategories().then(result =>{
+      console.log(result);
+    });*/
+    /*
+    ForestIndicatorData.getWoodProduction().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getBiodiversity().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getNaturalProducts().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getCarbon().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getOthers().then(result =>{
       console.log(result);
     });*/
   }
