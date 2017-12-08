@@ -23,10 +23,8 @@ function getRegionLevels(language = "fi"){
             while(results.data[count]){
                 count++;
             }
-
             //console.log(count);
             var data2 = {key1: 1, key2: 3, key3: [4, 2]};
-
             data2.key1
             var data = [[]];
             for (var i = 0; i < count; i++){

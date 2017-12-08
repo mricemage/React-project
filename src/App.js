@@ -16,11 +16,24 @@ class App extends Component {
 
     this.state = {
       views:"ForestIndicator",
-      regionalLevels: []
+      regionalLevels: [],
+      regions: [],
+      scenarioCollection:[],
+      scenarios:[],
+      timestamp:[]
     };   
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
+
+    this.setRegionLevels = this.setRegionLevels.bind(this)
+    this.getRegion = this.getRegion.bind(this)
+    this.setRegion = this.setRegion.bind(this)
+    this.getScenarioCollection = this.getScenarioCollection.bind(this)
+    this.getScenarios = this.getScenarios.bind(this)
+    this.setScenarioCollection = this.setScenarioCollection.bind(this)
+    this.getTimePeriods = this.getTimePeriods.bind(this)
+
   }
     
     componentDidMount(){
@@ -66,20 +79,21 @@ class App extends Component {
   }
 
   getRegion(){
-    ForestIndicatorData.getRegion().then(items => {
-      console.log("getRegion");
-      console.log(items);
+    ForestIndicatorData.getRegion().then(result => {
+      this.setState({regions: result})
+      console.log(this.state.regions);
     });
   }
 
   setRegion(id){
+    console.log(id)
     ForestIndicatorData.setRegion(id);
   }
 
   getScenarioCollection(){
-    ForestIndicatorData.getScenarioCollection().then(items => {
-      console.log("getScenarioCollection");
-      console.log(items);
+    ForestIndicatorData.getScenarioCollection().then(result => {
+      this.setState({scenarioCollection: result})
+      console.log(this.state.scenarioCollection);
     });
   }
 
@@ -88,18 +102,37 @@ class App extends Component {
   }
 
   getScenarios(){
-    ForestIndicatorData.getScenarios().then(items => {
-      console.log("getScenarioCollection");
-      console.log(items);
+    ForestIndicatorData.getScenarios().then(result => {
+      this.setState({scenarios: result})
+      console.log(this.state.scenarios)
     });
   }
 
+  getTimePeriods(){
+    ForestIndicatorData.getTimePeriods().then(result => {
+      this.setState({timestamp: result})
+      console.log(this.state.timestamp)
+  });
+}
   render() {
     return (
         <div>
           <Grid>
             <Row className="show-grid">
-            <Col lg={12} lg={4}> <Leftscreen regionalLevels = {this.state.regionalLevels} /></Col>
+            <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels}
+                                              regions = {this.state.regions}
+                                              scenarioCollection = {this.state.scenarioCollection}
+                                              scenarios = {this.state.scenarios}
+                                              timestamp = {this.state.timestamp}
+                                              setRegionLevels = {this.setRegionLevels}
+                                              getRegion = {this.getRegion}
+                                              setRegion = {this.setRegion}
+                                              getScenarioCollection = {this.getScenarioCollection}
+                                              getScenarios = {this.getScenarios}
+                                              setScenarioCollection = {this.setScenarioCollection}
+                                              getTimePeriods = {this.getTimePeriods}
+                                              />
+                                              </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
