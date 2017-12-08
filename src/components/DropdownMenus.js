@@ -56,6 +56,7 @@ scenarioCollection(e){
     this.props.setScenarioCollection(e.currentTarget.id);
     console.log(e.currentTarget.id)
     this.props.getScenarios();
+    this.props.getTimePeriods();
 }
 
 

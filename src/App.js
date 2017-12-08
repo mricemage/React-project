@@ -19,7 +19,8 @@ class App extends Component {
       regionalLevels: [],
       regions: [],
       scenarioCollection:[],
-      scenarios:[]
+      scenarios:[],
+      timestamp:[]
     };   
 
     //this.getData = this.getData.bind(this);
@@ -30,6 +31,7 @@ class App extends Component {
     this.getScenarioCollection = this.getScenarioCollection.bind(this)
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
+    this.getTimePeriods = this.getTimePeriods.bind(this)
   }
   
     componentDidMount(){
@@ -75,6 +77,12 @@ class App extends Component {
     });
   }
 
+  getTimePeriods(){
+    ForestIndicatorData.getTimePeriods().then(result => {
+      this.setState({timestamp: result})
+      console.log(this.state.timestamp)
+  });
+}
   render() {
     return (
         <div>
@@ -84,12 +92,14 @@ class App extends Component {
                                               regions = {this.state.regions}
                                               scenarioCollection = {this.state.scenarioCollection}
                                               scenarios = {this.state.scenarios}
+                                              timestamp = {this.state.timestamp}
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
                                               getScenarioCollection = {this.getScenarioCollection}
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
+                                              getTimePeriods = {this.getTimePeriods}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
