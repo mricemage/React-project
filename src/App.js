@@ -25,6 +25,7 @@ class App extends Component {
 
     //this.getData = this.getData.bind(this);
     //this.setData = this.setData.bind(this);
+
     this.setRegionLevels = this.setRegionLevels.bind(this)
     this.getRegion = this.getRegion.bind(this)
     this.setRegion = this.setRegion.bind(this)
@@ -32,15 +33,27 @@ class App extends Component {
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
     this.getTimePeriods = this.getTimePeriods.bind(this)
+
   }
-  
+    
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels().then(result => {
-      //console.log(items[1]);
-      //console.log(items[0][0]); //[] choose region  [] get name or id
+    ForestIndicatorData.getRegionLevels("en").then(result => {
       this.setState({regionalLevels: result});
       console.log(this.state.regionalLevels);
     });
+    /*
+    ForestIndicatorData.setRegionLevels(1);
+    ForestIndicatorData.setRegion(24);
+    ForestIndicatorData.setScenarioCollection(6);
+    ForestIndicatorData.getScenarios().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getTimePeriods().then(result =>{
+      console.log(result);
+    });
+    ForestIndicatorData.getIndicatorCategories().then(result =>{
+      console.log(result);
+    });*/
   }
 
   setRegionLevels(id){
@@ -108,8 +121,6 @@ class App extends Component {
         </div>   
     );
   }
-
 }
 
-//
 export default App;
