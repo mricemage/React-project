@@ -32,7 +32,9 @@ toggle(event) {
 regionalLevels(e){
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
-        regionalLevels: e.currentTarget.textContent
+        regionalLevels: e.currentTarget.textContent,
+        regions: "Select regions",
+        scenarioCollection:"Select scenario Collection"
        
     });
     console.log(e.currentTarget.id);
@@ -43,7 +45,8 @@ regionalLevels(e){
 regions(e){
     this.setState({
        
-        regions: e.currentTarget.textContent
+        regions: e.currentTarget.textContent,
+        scenarioCollection: 'Select scenario Collection'
     });
     this.props.setRegion(e.currentTarget.id);
     this.props.getScenarioCollection();
