@@ -46,6 +46,10 @@ class App extends Component {
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
     ForestIndicatorData.setScenarioCollection(6);
+    ForestIndicatorData.getGraphData(11, 125, 20).then(result =>{
+      console.log("huomenta");
+      console.log(result);
+    });
     /*
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
