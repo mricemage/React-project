@@ -43,27 +43,28 @@ class App extends Component {
     });
 
     //Test functions and will be removed in the future
+    /*
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
-    ForestIndicatorData.setScenarioCollection(6);
-    ForestIndicatorData.getGraphData(11, 125, 20).then(result =>{
-      console.log("huomenta");
-      console.log(result);
-    });
-    /*
+    ForestIndicatorData.setScenarioCollection(6); //6
+    
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
-    });
+    });*/
+    /*
     ForestIndicatorData.getTimePeriods().then(result =>{
-      //console.log(result);
+      console.log(result);
     });
     ForestIndicatorData.getIndicatorCategories().then(result =>{
       console.log(result);
-    });*/
-    /*
-    ForestIndicatorData.getWoodProduction().then(result =>{
-      console.log(result);
     });
+    
+    ForestIndicatorData.getWoodProduction().then(result =>{
+      console.log("getWoodProduction");
+      console.log(result); //result[0].name
+    });
+    
+    
     ForestIndicatorData.getBiodiversity().then(result =>{
       console.log(result);
     });
@@ -74,6 +75,13 @@ class App extends Component {
       console.log(result);
     });
     ForestIndicatorData.getOthers().then(result =>{
+      console.log(result);
+    });*/
+
+    //ForestIndicatorData.getGraphData(11, 125, 20).then(result =>{
+      /*
+      ForestIndicatorData.getGraphData(10, 125, 20).then(result =>{
+      console.log("huomenta");
       console.log(result);
     });*/
   }
