@@ -64,7 +64,7 @@ class CheckBoxes extends Component {
                 Period:"Time",
                 IndicatorSelection:"Indicator Selection",
                 WoodProduction:"Wood Production",
-                ProductCollections:"Product Collections",
+                ProductCollections:"Natural Products",
                 Biodiversity:"Biodiversity",
                 Carbon:"Carbon",
                 Other:"Other"
@@ -106,16 +106,53 @@ class CheckBoxes extends Component {
                 
                 <h5>{strings.IndicatorSelection}</h5>
 
-                
+                <p>{strings.WoodProduction}</p>
+                <ButtonGroup vertical>
                 {
-                this.props.indicatorCategories.map( element => <div> <p>{element.name}</p> <ButtonGroup vertical>
-                 {this.props.indicatorCategories[0].indicators.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id}
-                  active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>) 
-                  }</ButtonGroup></div>)
+                    this.props.woodproduction.map( element => 
+                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>)
+                } 
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
+              
+                <p>{strings.Biodiversity}</p>
+                <ButtonGroup vertical>
+                {
+                    this.props.biodiversity.map( element => 
+                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>)
+                } 
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
 
-                }
+                <p>{strings.ProductCollections}</p>
+                <ButtonGroup vertical>
+                {
+                    this.props.naturalproducts.map( element => 
+                         
+                    <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>)
+                } 
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
+
+                <p>{strings.Carbon}</p>
+                <ButtonGroup vertical>
+                {
+                    this.props.carbon.map( element => 
+                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>)
+                } 
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
+
+                <p>{strings.Other}</p>
+                <ButtonGroup vertical>
+                {
+                    this.props.others.map( element => 
+                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>)
+                } 
+                </ButtonGroup>
+                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>
                 
-
+                
 
             </div>
         )
@@ -129,4 +166,15 @@ class CheckBoxes extends Component {
                 <Button  onClick={() => this.onRadioBtnClick5(3)} >Three</Button>
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.oSelected)}</p>*/
+
+
+
+/*  {
+                this.props.indicatorCategories.map(( element, i) => <div> <p>{element.name}</p> <ButtonGroup vertical>
+                 {this.props.indicatorCategories[i].indicators.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id}
+                  active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>) 
+                  }</ButtonGroup></div>)
+                } 
+
+                */
 export default CheckBoxes
