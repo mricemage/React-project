@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import LocalizedStrings from 'react-localization'
-import ForestIndicatorData from './ForestIndicatorData'
 
 
 class DropdownMenus extends Component {
@@ -16,7 +15,7 @@ class DropdownMenus extends Component {
         this.state = {
         dropdownOpen: false,
         items: [],
-        regionalLevels: "Aluetaso",
+        regionalLevels: this.props.regionalLevels,
         regions:"Select regions",
         scenarioCollection:"Select scenario Collection"
         };
@@ -30,6 +29,7 @@ toggle(event) {
 }
 
 regionalLevels(e){
+    console.log(this.props.regionalLevels)
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         regionalLevels: e.currentTarget.textContent,
@@ -60,6 +60,12 @@ scenarioCollection(e){
     console.log(e.currentTarget.id)
     this.props.getScenarios();
     this.props.getTimePeriods();
+    this.props.getIndicatorCategories();
+    this.props.getWoodProduction();
+    this.props.getBiodiversity()
+    this.props.getNaturalProducts()
+    this.props.getCarbon();
+    this.props.getOthers();
 }
 
 

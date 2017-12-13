@@ -20,7 +20,14 @@ class App extends Component {
       regions: [],
       scenarioCollection:[],
       scenarios:[],
-      timestamp:[]
+      timestamp:[],
+      indicatorCategories:[],
+      woodproduction:[],
+      biodiversity:[],
+      naturalproducts:[],
+      carbon:[],
+      others:[],
+      graphData:[]
     };   
 
     //this.getData = this.getData.bind(this);
@@ -33,11 +40,17 @@ class App extends Component {
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
     this.getTimePeriods = this.getTimePeriods.bind(this)
-
+    this.getIndicatorCategories = this.getIndicatorCategories.bind(this)
+    this.getWoodProduction = this.getWoodProduction.bind(this)
+    this.getBiodiversity = this.getBiodiversity.bind(this)
+    this.getNaturalProducts = this.getNaturalProducts.bind(this)
+    this.getCarbon = this.getCarbon.bind(this)
+    this.getOthers = this.getOthers.bind(this)
+    this.getGraphData = this.getGraphData.bind(this)
   }
     
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels("en").then(result => {
+    ForestIndicatorData.getRegionLevels('fi').then(result => {
       this.setState({regionalLevels: result});
       //console.log(this.state.regionalLevels);
     });
@@ -126,6 +139,56 @@ class App extends Component {
       console.log(this.state.timestamp)
   });
 }
+getIndicatorCategories(){
+  ForestIndicatorData.getIndicatorCategories().then(result => {
+    this.setState({indicatorCategories: result})
+    console.log(this.state.indicatorCategories, "indicators")
+})
+}
+
+getWoodProduction(){
+  ForestIndicatorData.getWoodProduction().then(result => {
+    this.setState({woodproduction: result})
+    console.log(this.state.woodproduction, "wood")
+})
+}
+
+getBiodiversity(){
+  ForestIndicatorData.getBiodiversity().then(result => {
+    this.setState({biodiversity: result})
+    console.log(this.state.biodiversity, "bio")
+})
+}
+
+getNaturalProducts(){
+  ForestIndicatorData.getNaturalProducts().then(result => {
+    this.setState({naturalproducts: result})
+    console.log(this.state.naturalproducts, "natural")
+})
+}
+
+getCarbon(){
+  ForestIndicatorData.getCarbon().then(result => {
+    this.setState({carbon: result})
+    console.log(this.state.carbon, "carbon")
+})
+}
+
+getOthers(){
+  ForestIndicatorData.getOthers().then(result => {
+    this.setState({others: result})
+    console.log(this.state.others, "others")
+})
+}
+
+getGraphData(){
+  ForestIndicatorData.getGraphData().then(result => {
+    this.setState({graphData: result})
+    console.log(this.state.graphData, "graph data")
+  })
+}
+
+
   render() {
     return (
         <div>
@@ -136,6 +199,12 @@ class App extends Component {
                                               scenarioCollection = {this.state.scenarioCollection}
                                               scenarios = {this.state.scenarios}
                                               timestamp = {this.state.timestamp}
+                                              indicatorCategories = {this.state.indicatorCategories}
+                                              woodproduction = {this.state.woodproduction}
+                                              biodiversity = {this.state.biodiversity}
+                                              naturalproducts = {this.state.naturalproducts}
+                                              carbon = {this.state.carbon}
+                                              others = {this.state.others}
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
@@ -143,6 +212,12 @@ class App extends Component {
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
                                               getTimePeriods = {this.getTimePeriods}
+                                              getIndicatorCategories = {this.getIndicatorCategories}
+                                              getWoodProduction = {this.getWoodProduction}
+                                              getBiodiversity = {this.getBiodiversity}
+                                              getNaturalProducts = {this.getNaturalProducts}
+                                              getCarbon = {this.getCarbon}
+                                              getOthers = {this.getOthers}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
