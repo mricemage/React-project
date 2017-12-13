@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import LocalizedStrings from 'react-localization'
+import { Tooltip } from 'reactstrap'
 
 
 class DropdownMenus extends Component {
@@ -14,6 +15,7 @@ class DropdownMenus extends Component {
 
         this.state = {
         dropdownOpen: false,
+        tooptipOpen:false,
         items: [],
         regionalLevels: this.props.regionalLevels[0].name,
         regions:this.props.regions[0].name,
@@ -25,6 +27,7 @@ class DropdownMenus extends Component {
 toggle(event) {
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
+        tooltipOpen: !this.state.tooltipOpen
     });
 }
 
@@ -111,8 +114,9 @@ scenarioCollection(e){
             <DropdownMenu>
                 {    
                     this.props.regionalLevels.map( element => 
-                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>)
-                       
+                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>
+                        )
+                    
                 }   
             </DropdownMenu>
         </Dropdown>
