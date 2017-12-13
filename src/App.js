@@ -91,10 +91,11 @@ class App extends Component {
     });*/
     //Test functions and will be removed in the future
     /*
+    ForestIndicatorData.setLanguage("en");
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
     ForestIndicatorData.setScenarioCollection(6); //6
-    
+    /*
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
     });
@@ -123,7 +124,7 @@ class App extends Component {
     ForestIndicatorData.getOthers().then(result =>{
       console.log(result);
     });
-
+    
     ForestIndicatorData.getGraphData([10,11], [125,126,127], 20).then(result =>{
     console.log("huomenta");
     console.log(result);

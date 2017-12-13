@@ -1,12 +1,17 @@
 import axios from 'axios';
 
+var language = "fi";
 var regionLevel = 0;
 var regionId = 0;
 var scenarioCollectionId = 0;
 var regionData = [];
 var lastDataLanguage = "";
 
-function getRegionLevels(language = "fi"){
+function setLanguage(_language){
+    language = _language;
+}
+
+function getRegionLevels(){
     return new Promise((resolve, reject) => {
         //axios.get("http://melatupa.azurewebsites.net/regionLevels")
         axios({
@@ -50,7 +55,7 @@ function getRegionData(language = "fi"){
     });
 }*/
 
-function getRegion(language = "fi"){
+function getRegion(){
     return new Promise((resolve, reject) => {
         /*
         if (regionData === null || lastDataLanguage !== language){
@@ -86,7 +91,7 @@ function setRegion(id){
     regionId = id;
 }
 
-function getScenarioCollection(language = "fi"){
+function getScenarioCollection(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions";
         axios({
@@ -120,7 +125,7 @@ function setScenarioCollection(id){
     scenarioCollectionId = id;
 }
 
-function getScenarios(language = "fi"){
+function getScenarios(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -142,7 +147,7 @@ function getScenarios(language = "fi"){
     });
 }
 
-function getTimePeriods(language = "fi"){
+function getTimePeriods(){
     return new Promise((resolve, reject) => {
         /*
         if(regionData !== null || lastDataLanguage !== language){
@@ -169,7 +174,7 @@ function getTimePeriods(language = "fi"){
     });
 }
 
-function getIndicatorCategories(language = "fi"){
+function getIndicatorCategories(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -188,7 +193,7 @@ function getIndicatorCategories(language = "fi"){
     });
 }
 
-function getWoodProduction(language = "fi"){
+function getWoodProduction(){
     return new Promise((resolve, reject) => {
         /*
         console.log(regionData);
@@ -228,7 +233,7 @@ function getWoodProduction(language = "fi"){
     });
 }
 
-function getBiodiversity(language = "fi"){
+function getBiodiversity(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -256,7 +261,7 @@ function getBiodiversity(language = "fi"){
     });
 }
 
-function getNaturalProducts(language = "fi"){
+function getNaturalProducts(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -292,7 +297,7 @@ function getNaturalProducts(language = "fi"){
     });
 }
 
-function getCarbon(language = "fi"){
+function getCarbon(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -320,7 +325,7 @@ function getCarbon(language = "fi"){
     });
 }
 
-function getOthers(language = "fi"){
+function getOthers(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -348,7 +353,7 @@ function getOthers(language = "fi"){
     });
 }
 
-function getGraphData(scenarioId, indicatorId, timePeriodId, language = "fi"){
+function getGraphData(scenarioId, indicatorId, timePeriodId){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -388,4 +393,4 @@ function getGraphData(scenarioId, indicatorId, timePeriodId, language = "fi"){
 export default { getRegionLevels, setRegionLevels, getRegion, setRegion, getScenarioCollection, 
                  setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories,
                  getWoodProduction, getBiodiversity, getNaturalProducts, getCarbon, getOthers,
-                 getGraphData } 
+                 getGraphData, setLanguage } 
