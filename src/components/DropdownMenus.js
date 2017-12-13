@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { UncontrolledButtonDropdown, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import LocalizedStrings from 'react-localization'
-import ForestIndicatorData from './ForestIndicatorData'
+import { Tooltip } from 'reactstrap'
 
 
 class DropdownMenus extends Component {
@@ -15,10 +15,11 @@ class DropdownMenus extends Component {
 
         this.state = {
         dropdownOpen: false,
+        tooptipOpen:false,
         items: [],
-        regionalLevels: "Aluetaso",
-        regions:"Select regions",
-        scenarioCollection:"Select scenario Collection"
+        regionalLevels: this.props.regionalLevels[0].name,
+        regions:this.props.regions[0].name,
+        scenarioCollection:this.props.scenarioCollection[0].name
         };
     
 }
@@ -26,10 +27,12 @@ class DropdownMenus extends Component {
 toggle(event) {
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
+        tooltipOpen: !this.state.tooltipOpen
     });
 }
 
 regionalLevels(e){
+    console.log(this.props.regionalLevels)
     this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         regionalLevels: e.currentTarget.textContent,
@@ -60,8 +63,13 @@ scenarioCollection(e){
     console.log(e.currentTarget.id)
     this.props.getScenarios();
     this.props.getTimePeriods();
+    this.props.getIndicatorCategories();
+    this.props.getWoodProduction();
+    this.props.getBiodiversity()
+    this.props.getNaturalProducts()
+    this.props.getCarbon();
+    this.props.getOthers();
 }
-
 
  render () {
     let strings = new LocalizedStrings ({
@@ -106,8 +114,9 @@ scenarioCollection(e){
             <DropdownMenu>
                 {    
                     this.props.regionalLevels.map( element => 
-                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>)
-                       
+                        <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>
+                        )
+                    
                 }   
             </DropdownMenu>
         </Dropdown>
