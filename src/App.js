@@ -50,8 +50,8 @@ class App extends Component {
     
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
-    });*/
-    /*
+    });
+    
     ForestIndicatorData.getTimePeriods().then(result =>{
       console.log(result);
     });
@@ -64,7 +64,6 @@ class App extends Component {
       console.log(result); //result[0].name
     });
     
-    
     ForestIndicatorData.getBiodiversity().then(result =>{
       console.log(result);
     });
@@ -76,13 +75,11 @@ class App extends Component {
     });
     ForestIndicatorData.getOthers().then(result =>{
       console.log(result);
-    });*/
+    });
 
-    //ForestIndicatorData.getGraphData(11, 125, 20).then(result =>{
-      /*
-      ForestIndicatorData.getGraphData(10, 125, 20).then(result =>{
-      console.log("huomenta");
-      console.log(result);
+    ForestIndicatorData.getGraphData([10,11], [125,126,127], 20).then(result =>{
+    console.log("huomenta");
+    console.log(result);
     });*/
   }
 

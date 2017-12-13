@@ -358,24 +358,22 @@ function getGraphData(scenarioId, indicatorId, timePeriodId, language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            /*
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Muut" || 
-                    results.data[0].indicatorCategories[count].name == "Others"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
+            const parsedData = results.data[0].values.filter(e => e.timePeriodId === timePeriodId)
+            .filter(function (data){
+                for (var count = 0; count < scenarioId.length; count++){
+                    if(scenarioId[count] === data.scenarioId){
+                        return data;
+                    }
                 }
-                count++;
-            }*/
-            const parsedData = results.data[0].values.filter(function (i,n) {
-                //console.log(i);
-                if(i.scenarioId === scenarioId && i.indicatorId === indicatorId && 
-                i.timePeriodId === timePeriodId){
-                //if(scenarioId.includes(i.scenarioId) && indicatorId.includes(i.indicatorId) &&
-                //   i.timePeriodId === timePeriodId){
-                    return i;
+            }).filter(function (data){
+                for (var count = 0; count < indicatorId.length; count++){
+                    if(indicatorId[count] === data.indicatorId){
+                        //console.log(i);
+                        return data;
+                    }
                 }
-            }).map(function (o){
+            })
+            .map(function (o){
                 return o.value;
             });
             resolve(parsedData);
