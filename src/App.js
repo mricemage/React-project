@@ -26,7 +26,8 @@ class App extends Component {
       biodiversity:[],
       naturalproducts:[],
       carbon:[],
-      others:[]
+      others:[],
+      graphData:[]
     };   
 
     //this.getData = this.getData.bind(this);
@@ -45,10 +46,11 @@ class App extends Component {
     this.getNaturalProducts = this.getNaturalProducts.bind(this)
     this.getCarbon = this.getCarbon.bind(this)
     this.getOthers = this.getOthers.bind(this)
+    this.getGraphData = this.getGraphData.bind(this)
   }
     
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels("en").then(result => {
+    ForestIndicatorData.getRegionLevels('fi').then(result => {
       this.setState({regionalLevels: result});
       console.log(this.state.regionalLevels);
     });
@@ -147,6 +149,13 @@ getOthers(){
     this.setState({others: result})
     console.log(this.state.others, "others")
 })
+}
+
+getGraphData(){
+  ForestIndicatorData.getGraphData().then(result => {
+    this.setState({graphData: result})
+    console.log(this.state.graphData, "graph data")
+  })
 }
 
 

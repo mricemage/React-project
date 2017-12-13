@@ -31,7 +31,9 @@ class Leftscreen extends Component {
                 autoHeightMin={500}
                 autoHeightMax={1200}
                 style={{ width: width2  }}
+                color={props => <div {...props} className="scrollbar-color" />}
                 >   
+            
             <DropdownMenus regionalLevels ={regionalLevels} 
                            regions = {regions}
                            scenarioCollection = {scenarioCollection}
