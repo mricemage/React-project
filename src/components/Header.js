@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Row} from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 import './Header.css';
+import Feedback from './Feedback';
 
 
 class Header extends Component {
@@ -25,8 +26,9 @@ class Header extends Component {
                 <Row>
                     <h5>Metsämittari</h5>
                         <ButtonGroup className="righttop">
-                            <Button color="primary" onClick={() => this.onRadioBtnClick(1)} active={this.state.rSelected === 1}>Fi</Button>
-                            <Button color="primary" onClick={() => this.onRadioBtnClick(2)} active={this.state.rSelected === 2}>En</Button>
+                            <Button color="primary" onClick={() => this.onRadioBtnClick(1)} active={this.state.rSelected === 1}>Fi</Button> &nbsp;
+                            <Button color="primary" onClick={() => this.onRadioBtnClick(2)} active={this.state.rSelected === 2}>En</Button> &nbsp;
+                            <Feedback>Feedback</Feedback>
                         </ButtonGroup>
                 </Row>
 
