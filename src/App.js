@@ -27,7 +27,8 @@ class App extends Component {
       naturalproducts:[],
       carbon:[],
       others:[],
-      graphData:[]
+      graphData:[],
+      datafromAPI: false
     };   
 
     //this.getData = this.getData.bind(this);
@@ -52,9 +53,42 @@ class App extends Component {
     componentDidMount(){
     ForestIndicatorData.getRegionLevels('fi').then(result => {
       this.setState({regionalLevels: result});
-      //console.log(this.state.regionalLevels);
+      console.log(this.state.regionalLevels, ": RegionLevel");
+      console.log(this.state.regionalLevels[0].id ,": default RegionLevel")
+
+      ForestIndicatorData.setRegionLevels(this.state.regionalLevels[0].id)
+      ForestIndicatorData.getRegion().then(result => {
+        this.setState({regions: result});
+        console.log(this.state.regions, "Regions")
+        console.log(this.state.regions[0].id, "default Regions")
+
+        ForestIndicatorData.setRegion(this.state.regions[0].id)
+        ForestIndicatorData.getScenarioCollection().then(result => {
+          this.setState({scenarioCollection: result});
+          console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
+
+           ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+           ForestIndicatorData.getScenarios().then(result => {
+            this.setState({scenarios: result,
+                        datafromAPI: true});
+            console.log(this.state.scenarios, "Scenarios")
+            this.getTimePeriods();
+            this.getIndicatorCategories();
+            this.getWoodProduction();
+            this.getBiodiversity()
+            this.getNaturalProducts()
+            this.getCarbon();
+            this.getOthers();
+          });
+        });          
+      });
     });
 
+/*   ForestIndicatorData.setRegion(this.state.regionalLevels[0].id).then(result => {
+      this.setState({regions: result});
+      console.log(this.state.regions, "Ekanetappi")
+      //console.log(this.state.regionalLevels);
+    });*/
     //Test functions and will be removed in the future
     /*
     ForestIndicatorData.setRegionLevels(1);
@@ -192,6 +226,7 @@ getGraphData(){
   render() {
     return (
         <div>
+          {this.state.datafromAPI ?
           <Grid>
             <Row className="show-grid">
             <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels}
@@ -223,6 +258,7 @@ getGraphData(){
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
+          :"Still Loading"}
         </div>   
     );
   }

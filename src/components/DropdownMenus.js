@@ -15,9 +15,9 @@ class DropdownMenus extends Component {
         this.state = {
         dropdownOpen: false,
         items: [],
-        regionalLevels: this.props.regionalLevels,
-        regions:"Select regions",
-        scenarioCollection:"Select scenario Collection"
+        regionalLevels: this.props.regionalLevels[0].name,
+        regions:this.props.regions[0].name,
+        scenarioCollection:this.props.scenarioCollection[0].name
         };
     
 }
@@ -67,7 +67,6 @@ scenarioCollection(e){
     this.props.getCarbon();
     this.props.getOthers();
 }
-
 
  render () {
     let strings = new LocalizedStrings ({
