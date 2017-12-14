@@ -22,16 +22,15 @@ class DropdownMenus extends Component {
         dropdownOpen: false,
         tooptipOpen:false,
         items: [],
-<<<<<<< HEAD
         regionalLevels: "Aluetaso",
         regions:"Select regions",
         scenarioCollection:"Select scenario Collection",
         // languagebtn: ''
-=======
+
         regionalLevels: this.props.regionalLevels[0].name,
         regions:this.props.regions[0].name,
         scenarioCollection:this.props.scenarioCollection[0].name
->>>>>>> bf62f4748df1e4dc2d6b9e0cc7e276691bb5b794
+
         };
     
 }
