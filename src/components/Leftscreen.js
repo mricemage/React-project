@@ -12,24 +12,30 @@ class Leftscreen extends Component {
         super(props);
         this.state={
             languagebtn: ''
+           
+            
         };
         // this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
         
        
     }
 
-    onRadioBtnClick(rSelected) {
+    onRadioBtnClick(rSelected, counter) {
         alert(rSelected);
         console.log(typeof(rSelected));
         // this.setState({languagebtn: rSelected});
         this.setState({languagebtn: rSelected}, function() {
             console.log(this.state.languagebtn);
+            this.props.LanguageChange(this.state.languagebtn);
         });
-        this.props.LanguageChange(this.state.languagebtn);
         
+        
+            
+        
+       
 
         
-      }
+    }
 
 
     render () {
@@ -55,8 +61,8 @@ class Leftscreen extends Component {
              <Row>
                     <h5>Metsämittari</h5>
                         <ButtonGroup className="righttop">
-                            <Button color="primary" onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
-                            <Button color="primary" onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('fi', 1)} active={this.state.rSelected === 1}>Fi</Button>
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('en', 1)} active={this.state.rSelected === 2}>En</Button>
                          
                         </ButtonGroup>
                 </Row>
