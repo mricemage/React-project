@@ -84,11 +84,13 @@ scenarioCollection(e){
 }
 
 checklanguage() {
-    this.setState = ({
-        regionalLevels: this.props.regionalLevels[0].name,
-        regions:this.props.regions[0].name,
-        scenarioCollection:this.props.scenarioCollection[0].name
-    });
+    if(this.state.regionalLevels !== this.props.regionalLevels[0].name){
+        this.setState ({
+            regionalLevels: this.props.regionalLevels[0].name,
+            regions:this.props.regions[0].name,
+            scenarioCollection:this.props.scenarioCollection[0].name
+        });
+    }
 }
 
 // _onSetLanguageToItalian() {
@@ -152,7 +154,6 @@ checklanguage() {
 
     strings.setLanguage(languagebtn);
 
-
     // console.log(this.state.languagebtn, "DropdownMenus");
 
     // function changeLanguage(languagebtn) {
@@ -195,8 +196,9 @@ checklanguage() {
                 {    
                     this.props.regionalLevels.map( element => 
                         <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>
-                        )
-                    
+                        
+                    )
+                        
                 }   
             </DropdownMenu>
         </Dropdown>
@@ -231,7 +233,7 @@ checklanguage() {
       </UncontrolledButtonDropdown> 
         
        
-       {this.checklanguage}
+      {this.checklanguage()}
         </div>
         )
     }
