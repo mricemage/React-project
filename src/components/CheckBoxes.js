@@ -5,8 +5,7 @@ import LocalizedStrings from 'react-localization'
 class CheckBoxes extends Component {
     constructor (props) {
         super(props);
-  
-    
+        
         this.state = { cSelected: [],
                        rSelected: [],
                        woodproduction: [],
