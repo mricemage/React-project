@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Button, ButtonGroup}from 'reactstrap';
 import LocalizedStrings from 'react-localization'
+import {Tooltip, OverlayTrigger } from 'react-bootstrap'
 
 class CheckBoxes extends Component {
     constructor (props) {
@@ -50,6 +51,7 @@ class CheckBoxes extends Component {
         }
         if (this.state.woodproduction.length <= 5){
         this.setState({ woodproduction: [...this.state.woodproduction] });
+
         }
       }
     
@@ -157,9 +159,14 @@ class CheckBoxes extends Component {
             <div>
             <p>{strings.Scenario}</p>
                 <ButtonGroup vertical>
-                 {
+                {
                     this.props.scenarios.map( element => 
-                        <Button  onClick={() => this.onCheckboxBtnClick(element.id)} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>)
+                      <div>
+                        <OverlayTrigger placement="right" overlay={<Tooltip id={element.id}><strong>{element.description}</strong></Tooltip>}>
+                        <Button  onClick={() => this.onCheckboxBtnClick(element.id)} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>
+                        </OverlayTrigger>
+                      
+                      </div>)
                     }  
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
