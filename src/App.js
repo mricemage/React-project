@@ -23,7 +23,16 @@ class App extends Component {
       scenarioCollection:[],
       scenarios:[],
       timestamp:[],
-      languagebtn: ''
+      languagebtn: '',
+      indicatorCategories:[],
+      woodproduction:[],
+      biodiversity:[],
+      naturalproducts:[],
+      carbon:[],
+      others:[],
+      graphData:[],
+      datafromAPI: false
+
     };   
 
     //this.getData = this.getData.bind(this);
@@ -38,6 +47,16 @@ class App extends Component {
     this.getTimePeriods = this.getTimePeriods.bind(this)
     // this.changeLanguage = this.changeLanguage.bind(this)
 
+
+    this.getIndicatorCategories = this.getIndicatorCategories.bind(this)
+    this.getWoodProduction = this.getWoodProduction.bind(this)
+    this.getBiodiversity = this.getBiodiversity.bind(this)
+    this.getNaturalProducts = this.getNaturalProducts.bind(this)
+    this.getCarbon = this.getCarbon.bind(this)
+    this.getOthers = this.getOthers.bind(this)
+    this.getGraphData = this.getGraphData.bind(this)
+    this.setLanguage = this.setLanguage.bind(this)
+    this.LanguageChange = this.LanguageChange.bind(this)
   }
   // changeLanguage(){
   //   this.setState({languagebtn: rSelected}, function() {
@@ -46,33 +65,67 @@ class App extends Component {
   // }  
 
     componentDidMount(){
-    ForestIndicatorData.getRegionLevels("en").then(result => {
+    ForestIndicatorData.getRegionLevels('fi').then(result => {
       this.setState({regionalLevels: result});
-      //console.log(this.state.regionalLevels);
+      console.log(this.state.regionalLevels, ": RegionLevel");
+      console.log(this.state.regionalLevels[0].id ,": default RegionLevel")
+
+      ForestIndicatorData.setRegionLevels(this.state.regionalLevels[0].id)
+      ForestIndicatorData.getRegion().then(result => {
+        this.setState({regions: result});
+        console.log(this.state.regions, "Regions")
+        console.log(this.state.regions[0].id, "default Regions")
+
+        ForestIndicatorData.setRegion(this.state.regions[0].id)
+        ForestIndicatorData.getScenarioCollection().then(result => {
+          this.setState({scenarioCollection: result});
+          console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
+
+           ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+           ForestIndicatorData.getScenarios().then(result => {
+            this.setState({scenarios: result,
+                        datafromAPI: true});
+            console.log(this.state.scenarios, "Scenarios")
+            this.getTimePeriods();
+            this.getIndicatorCategories();
+            this.getWoodProduction();
+            this.getBiodiversity()
+            this.getNaturalProducts()
+            this.getCarbon();
+            this.getOthers();
+          });
+        });          
+      });
     });
 
+/*   ForestIndicatorData.setRegion(this.state.regionalLevels[0].id).then(result => {
+      this.setState({regions: result});
+      console.log(this.state.regions, "Ekanetappi")
+      //console.log(this.state.regionalLevels);
+    });*/
     //Test functions and will be removed in the future
+    /*
+    ForestIndicatorData.setLanguage("en");
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
-    ForestIndicatorData.setScenarioCollection(6);
-    ForestIndicatorData.getGraphData(11, 125, 20).then(result =>{
-      console.log("huomenta");
-      console.log(result);
-    });
+    ForestIndicatorData.setScenarioCollection(6); //6
     /*
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
     });
+    
     ForestIndicatorData.getTimePeriods().then(result =>{
-      //console.log(result);
+      console.log(result);
     });
     ForestIndicatorData.getIndicatorCategories().then(result =>{
       console.log(result);
-    });*/
-    /*
-    ForestIndicatorData.getWoodProduction().then(result =>{
-      console.log(result);
     });
+    
+    ForestIndicatorData.getWoodProduction().then(result =>{
+      console.log("getWoodProduction");
+      console.log(result); //result[0].name
+    });
+    
     ForestIndicatorData.getBiodiversity().then(result =>{
       console.log(result);
     });
@@ -84,6 +137,11 @@ class App extends Component {
     });
     ForestIndicatorData.getOthers().then(result =>{
       console.log(result);
+    });
+    
+    ForestIndicatorData.getGraphData([10,11], [125,126,127], 20).then(result =>{
+    console.log("huomenta");
+    console.log(result);
     });*/
   }
 
@@ -128,14 +186,98 @@ class App extends Component {
     });
   }
 
- 
-      
+getIndicatorCategories(){
+  ForestIndicatorData.getIndicatorCategories().then(result => {
+    this.setState({indicatorCategories: result})
+    console.log(this.state.indicatorCategories, "indicators")
+})
+}
 
-  
+getWoodProduction(){
+  ForestIndicatorData.getWoodProduction().then(result => {
+    this.setState({woodproduction: result})
+    console.log(this.state.woodproduction, "wood")
+})
+}
 
+getBiodiversity(){
+  ForestIndicatorData.getBiodiversity().then(result => {
+    this.setState({biodiversity: result})
+    console.log(this.state.biodiversity, "bio")
+})
+}
+
+getNaturalProducts(){
+  ForestIndicatorData.getNaturalProducts().then(result => {
+    this.setState({naturalproducts: result})
+    console.log(this.state.naturalproducts, "natural")
+})
+}
+
+getCarbon(){
+  ForestIndicatorData.getCarbon().then(result => {
+    this.setState({carbon: result})
+    console.log(this.state.carbon, "carbon")
+})
+}
+
+getOthers(){
+  ForestIndicatorData.getOthers().then(result => {
+    this.setState({others: result})
+    console.log(this.state.others, "others")
+})
+}
+
+getGraphData(){
+  ForestIndicatorData.getGraphData().then(result => {
+    this.setState({graphData: result})
+    console.log(this.state.graphData, "graph data")
+  })
+}
+
+setLanguage(language){
+ForestIndicatorData.setLanguage(language);
+}
+
+LanguageChange(language){
+    this.setLanguage(language)
+    ForestIndicatorData.getRegionLevels().then(result => {
+    this.setState({regionalLevels: result});
+    console.log(this.state.regionalLevels, ": RegionLevel");
+    console.log(this.state.regionalLevels[0].id ,": default RegionLevel")
+
+    ForestIndicatorData.setRegionLevels(this.state.regionalLevels[0].id)
+    ForestIndicatorData.getRegion().then(result => {
+      this.setState({regions: result});
+      console.log(this.state.regions, "Regions")
+      console.log(this.state.regions[0].id, "default Regions")
+
+      ForestIndicatorData.setRegion(this.state.regions[0].id)
+      ForestIndicatorData.getScenarioCollection().then(result => {
+        this.setState({scenarioCollection: result});
+        console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
+
+        ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+        ForestIndicatorData.getScenarios().then(result => {
+          this.setState({scenarios: result,
+                      datafromAPI: true});
+          console.log(this.state.scenarios, "Scenarios")
+          this.getTimePeriods();
+          this.getIndicatorCategories();
+          this.getWoodProduction();
+          this.getBiodiversity();
+          this.getNaturalProducts();
+          this.getCarbon();
+          this.getOthers();
+        });
+      });          
+    });
+  });
+}
   render() {
     return (
         <div>
+          {this.state.datafromAPI ?
           <Grid>
             <Row className="show-grid">
             <Col lg={12} lg={4}> <Leftscreen  regionalLevels = {this.state.regionalLevels}
@@ -143,6 +285,12 @@ class App extends Component {
                                               scenarioCollection = {this.state.scenarioCollection}
                                               scenarios = {this.state.scenarios}
                                               timestamp = {this.state.timestamp}
+                                              indicatorCategories = {this.state.indicatorCategories}
+                                              woodproduction = {this.state.woodproduction}
+                                              biodiversity = {this.state.biodiversity}
+                                              naturalproducts = {this.state.naturalproducts}
+                                              carbon = {this.state.carbon}
+                                              others = {this.state.others}
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
@@ -151,12 +299,19 @@ class App extends Component {
                                               setScenarioCollection = {this.setScenarioCollection}
                                               getTimePeriods = {this.getTimePeriods}
                                               languagebtn = {this.state.languagebtn}
-                                              
+                                              getIndicatorCategories = {this.getIndicatorCategories}
+                                              getWoodProduction = {this.getWoodProduction}
+                                              getBiodiversity = {this.getBiodiversity}
+                                              getNaturalProducts = {this.getNaturalProducts}
+                                              getCarbon = {this.getCarbon}
+                                              getOthers = {this.getOthers}
+                                              LanguageChange = {this.LanguageChange}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
             </Row>
           </Grid>
+          :"Still Loading"}
         </div>   
     );
   }

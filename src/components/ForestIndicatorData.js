@@ -1,12 +1,17 @@
 import axios from 'axios';
 
+var language = "fi";
 var regionLevel = 0;
 var regionId = 0;
 var scenarioCollectionId = 0;
 var regionData = [];
 var lastDataLanguage = "";
 
-function getRegionLevels(language = "fi"){
+function setLanguage(_language){
+    language = _language;
+}
+
+function getRegionLevels(){
     return new Promise((resolve, reject) => {
         //axios.get("http://melatupa.azurewebsites.net/regionLevels")
         axios({
@@ -15,14 +20,6 @@ function getRegionLevels(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            //console.log(results);
-            
-            //this solution works with ie7 & 8
-            /*
-            var count = 0;
-            while(results.data[count]){
-                count++;
-            }*/ 
             resolve(results.data);
         })
         .catch(error => {
@@ -58,7 +55,7 @@ function getRegionData(language = "fi"){
     });
 }*/
 
-function getRegion(language = "fi"){
+function getRegion(){
     return new Promise((resolve, reject) => {
         /*
         if (regionData === null || lastDataLanguage !== language){
@@ -94,7 +91,7 @@ function setRegion(id){
     regionId = id;
 }
 
-function getScenarioCollection(language = "fi"){
+function getScenarioCollection(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/regionLevels/"+regionLevel+"/regions";
         axios({
@@ -128,7 +125,7 @@ function setScenarioCollection(id){
     scenarioCollectionId = id;
 }
 
-function getScenarios(language = "fi"){
+function getScenarios(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -139,6 +136,8 @@ function getScenarios(language = "fi"){
         })
         .then(results => {
             //console.log(results.data[0].scenarios);
+            regionData = results.data[0];
+            lastDataLanguage = language;
             resolve(results.data[0].scenarios); //results.data.scenarios
         })
         .catch(error => {
@@ -148,10 +147,16 @@ function getScenarios(language = "fi"){
     });
 }
 
-function getTimePeriods(language = "fi"){
+function getTimePeriods(){
     return new Promise((resolve, reject) => {
+        /*
+        if(regionData !== null || lastDataLanguage !== language){
+            console.log("ei haettu netistä uudestaan dataa");
+            resolve(regionData.timePeriods);
+        }
+        else{*/
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
+        "/region/"+regionId;
         axios({
             method: 'get',
             url: url,
@@ -165,10 +170,11 @@ function getTimePeriods(language = "fi"){
             console.log(error);
             reject();
         })
+        //}
     });
 }
 
-function getIndicatorCategories(language = "fi"){
+function getIndicatorCategories(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -178,8 +184,7 @@ function getIndicatorCategories(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            //console.log(results.data[0].timePeriods);
-            resolve(results.data[0].indicatorCategories); //results.data.scenarios
+            resolve(results.data[0].indicatorCategories);
         })
         .catch(error => {
             console.log(error);
@@ -188,38 +193,47 @@ function getIndicatorCategories(language = "fi"){
     });
 }
 
-function getWoodProduction(language = "fi"){
+function getWoodProduction(){
     return new Promise((resolve, reject) => {
+        /*
+        console.log(regionData);
+        console.log(regionData.length);
+        console.log(lastDataLanguage);
+        console.log(language);
+        //((regionData && regionData.lenght > 0) || lastDataLanguage === language)
+        if(regionData.lenght > 0 && lastDataLanguage === language){
+            console.log("ei haettu netistä uudestaan dataa");
+            resolve(regionData);
+        }
+        else{*/
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
+        "/region/"+regionId;
         axios({
             method: 'get',
             url: url,
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            //console.log(results.data[0].timePeriods);
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Puuntuotanto" || 
-                    results.data[0].indicatorCategories[count].name == "Wood production"){
-                    //console.log(results.data[count].scenarioCollections);
-                    //console.log(results.data[count]);
-                    resolve(results.data[0].indicatorCategories[count].indicators);
-                }
-                count++;
-            }
-
-            resolve("Wood production was not found"); //results.data.scenarios
+            if(results.data[0]){
+                regionData = results.data[0];
+                results.data[0].indicatorCategories.forEach(element => {
+                    if(element.name == "Puuntuotanto" || 
+                        element.name == "Wood production"){
+                        resolve(element.indicators);
+                    }
+                });
+            } 
+            resolve([{name: "Wood production was not found"}]);
         })
         .catch(error => {
             console.log(error);
             reject();
         })
+        //}
     });
 }
-//filter
-function getBiodiversity(language = "fi"){
+
+function getBiodiversity(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -229,43 +243,16 @@ function getBiodiversity(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Monimuotoisuus" || 
-                    results.data[0].indicatorCategories[count].name == "Biodiversity"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
-                }
-                count++;
-            }
-
-            resolve("Biodiversity was not found");
-        })
-        .catch(error => {
-            console.log(error);
-            reject();
-        })
-    });
-}
-
-function getNaturalProducts(language = "fi"){
-    return new Promise((resolve, reject) => {
-        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
-        axios({
-            method: 'get',
-            url: url,
-            headers: {'Accept-Language': language}
-        })
-        .then(results => {
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Keruutuotteet" || 
-                    results.data[0].indicatorCategories[count].name == "Natural products"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
-                }
-                count++;
-            }
-            resolve("Natural products was not found");
+            if(results.data[0]){
+                regionData = results.data[0];
+                results.data[0].indicatorCategories.forEach(element => {
+                    if(element.name == "Monimuotoisuus" || 
+                       element.name == "Biodiversity"){
+                        resolve(element.indicators);
+                    }
+                });
+            } 
+            resolve([{name: "Biodiversity was not found"}]);
         })
         .catch(error => {
             console.log(error);
@@ -274,7 +261,7 @@ function getNaturalProducts(language = "fi"){
     });
 }
 
-function getCarbon(language = "fi"){
+function getNaturalProducts(){
     return new Promise((resolve, reject) => {
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
@@ -284,77 +271,114 @@ function getCarbon(language = "fi"){
             headers: {'Accept-Language': language}
         })
         .then(results => {
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Hiili" || 
-                    results.data[0].indicatorCategories[count].name == "Carbon"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
-                }
-                count++;
-            }
-            resolve("Carbon was not found");
-        })
-        .catch(error => {
-            console.log(error);
-            reject();
-        })
-    });
-}
-
-function getOthers(language = "fi"){
-    return new Promise((resolve, reject) => {
-        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
-        axios({
-            method: 'get',
-            url: url,
-            headers: {'Accept-Language': language}
-        })
-        .then(results => {
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Muut" || 
-                    results.data[0].indicatorCategories[count].name == "Others"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
-                }
-                count++;
-            }
-            resolve("Others was not found");
-        })
-        .catch(error => {
-            console.log(error);
-            reject();
-        })
-    });
-}
-
-function getGraphData(scenarioId, indicatorId, timePeriodId, language = "fi"){
-    return new Promise((resolve, reject) => {
-        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
-        axios({
-            method: 'get',
-            url: url,
-            headers: {'Accept-Language': language}
-        })
-        .then(results => {
+            if(results.data[0]){
+                regionData = results.data[0];
+                results.data[0].indicatorCategories.forEach(element => {
+                    if(element.name == "Keruutuotteet" || 
+                       element.name == "Natural products"){
+                        resolve(element.indicators);
+                    }
+                });
+            } 
+            resolve([{name: "Natural products was not found"}]);
             /*
-            var count = 0;
-            while(results.data[0].indicatorCategories[count]){
-                if(results.data[0].indicatorCategories[count].name == "Muut" || 
-                    results.data[0].indicatorCategories[count].name == "Others"){
-                    resolve(results.data[0].indicatorCategories[count].indicators);
+            results.data.forEach(element => {
+                if(element.indicatorCategories[count].name == "Keruutuotteet" || 
+                element.indicatorCategories[count].name == "Natural products"){
+                    resolve(element.indicatorCategories[count].indicators);
                 }
-                count++;
-            }*/
-            const parsedData = results.data[0].values.filter(function (i,n) {
-                //console.log(i);
-                if(i.scenarioId === scenarioId && i.indicatorId === indicatorId && 
-                   i.timePeriodId === timePeriodId){
-                    console.log(i);
-                    return i;
+            });
+            resolve(["Natural products was not found"]);*/
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getCarbon(){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            if(results.data[0]){
+                regionData = results.data[0];
+                results.data[0].indicatorCategories.forEach(element => {
+                    if(element.name == "Hiili" || 
+                       element.name == "Carbon"){
+                        resolve(element.indicators);
+                    }
+                });
+            } 
+            resolve([{name: "Carbon was not found"}]);
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getOthers(){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            if(results.data[0]){
+                regionData = results.data[0];
+                results.data[0].indicatorCategories.forEach(element => {
+                    if(element.name == "Muut" || 
+                       element.name == "Others"){
+                        resolve(element.indicators);
+                    }
+                });
+            } 
+            resolve([{name: "Others was not found"}]);
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
+function getGraphData(scenarioId, indicatorId, timePeriodId){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+                  "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            const parsedData = results.data[0].values.filter(e => e.timePeriodId === timePeriodId)
+            .filter(function (data){
+                for (var count = 0; count < scenarioId.length; count++){
+                    if(scenarioId[count] === data.scenarioId){
+                        return data;
+                    }
                 }
-            }).map(function (o){
+            }).filter(function (data){
+                for (var count = 0; count < indicatorId.length; count++){
+                    if(indicatorId[count] === data.indicatorId){
+                        //console.log(i);
+                        return data;
+                    }
+                }
+            })
+            .map(function (o){
                 return o.value;
             });
             resolve(parsedData);
@@ -369,4 +393,4 @@ function getGraphData(scenarioId, indicatorId, timePeriodId, language = "fi"){
 export default { getRegionLevels, setRegionLevels, getRegion, setRegion, getScenarioCollection, 
                  setScenarioCollection, getScenarios, getTimePeriods, getIndicatorCategories,
                  getWoodProduction, getBiodiversity, getNaturalProducts, getCarbon, getOthers,
-                 getGraphData } 
+                 getGraphData, setLanguage } 
