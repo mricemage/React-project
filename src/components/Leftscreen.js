@@ -3,7 +3,6 @@ import './Leftscreen.css'
 import DropdownMenus from './DropdownMenus'
 import CheckBoxes from './CheckBoxes'
 import { Scrollbars } from 'react-custom-scrollbars';
-
 import {Row} from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
@@ -12,22 +11,19 @@ class Leftscreen extends Component {
     constructor(props){
         super(props);
         this.state={
-            languagebtn: ''
+            languagebtn: 'fi' 
         };
-        // this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
-        
-       
     }
 
     onRadioBtnClick(rSelected) {
-        alert(rSelected);
+        // alert(rSelected);
         console.log(typeof(rSelected));
         // this.setState({languagebtn: rSelected});
         this.setState({languagebtn: rSelected}, function() {
             console.log(this.state.languagebtn);
-        });
-        
-      }
+            this.props.LanguageChange(this.state.languagebtn);
+        }); 
+    }
 
 
     render () {
@@ -38,9 +34,6 @@ class Leftscreen extends Component {
         const scenarioCollection = this.props.scenarioCollection;
         const scenarios = this.props.scenarios;
         const timestamp = this.props.timestamp;
-
-        // const languagebtn = this.props.languagebtn;
-
         const indicatorCategories = this.props.indicatorCategories;
         const woodproduction = this.props.woodproduction;
         const biodiversity = this.props.biodiversity;
@@ -96,6 +89,7 @@ class Leftscreen extends Component {
                         others = {others}
                         getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}
+                        languagebtn = { this.state.languagebtn }
                         
                         />
             </Scrollbars>  
