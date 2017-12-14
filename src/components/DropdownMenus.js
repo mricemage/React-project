@@ -14,7 +14,7 @@ class DropdownMenus extends Component {
         this.regionalLevels = this.regionalLevels.bind(this);
         this.regions = this.regions.bind(this);
         this.scenarioCollection = this.scenarioCollection.bind(this);
-        this.checklanguage = this.checklanguage.bind(this);
+        //this.checklanguage = this.checklanguage.bind(this);
 
         this.state = {
         dropdownOpen: false,
@@ -31,6 +31,17 @@ class DropdownMenus extends Component {
         };
     
 }
+
+componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.regionalLevels[0].name !== this.props.regionalLevels[0].name) {
+      this.setState ({
+        regionalLevels: this.props.regionalLevels[0].name,
+        regions:this.props.regions[0].name,
+        scenarioCollection:this.props.scenarioCollection[0].name
+      });
+    }
+  }
 
 toggle(event) {
     this.setState({
@@ -79,8 +90,9 @@ scenarioCollection(e){
     this.props.getOthers();
 }
 
-checklanguage() {
-    if(this.state.regionalLevels !== this.props.regionalLevels[0].name){
+/*checklanguage() {
+    //(this.props.regionalLevelsDataFromParent.find(this.isSelectedRegionalLevel)!==this.state.regionallevelSelected)
+    if(this.props.regionalLevels.find(this.regionlevelSelect) !== this.state.regionalLevels){
         this.setState ({
             regionalLevels: this.props.regionalLevels[0].name,
             regions:this.props.regions[0].name,
@@ -88,6 +100,13 @@ checklanguage() {
         });
     }
 }
+
+
+
+regionlevelSelect = (regionalLevels) =>{
+     return regionalLevels.name === this.state.regionalLevels;
+}*/
+
 
  render () {
   
@@ -205,7 +224,7 @@ checklanguage() {
       </UncontrolledButtonDropdown> 
         
        
-      {this.checklanguage()}
+      
         </div>
         )
     }
