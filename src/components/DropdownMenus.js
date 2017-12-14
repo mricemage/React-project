@@ -4,6 +4,8 @@ import LocalizedStrings from 'react-localization'
 import ForestIndicatorData from './ForestIndicatorData'
 
 
+
+
 class DropdownMenus extends Component {
     constructor(props){
         super(props);
@@ -12,13 +14,17 @@ class DropdownMenus extends Component {
         this.regionalLevels = this.regionalLevels.bind(this);
         this.regions = this.regions.bind(this);
         this.scenarioCollection = this.scenarioCollection.bind(this);
+        // this.languagechanger = this.languagechanger.bind(this);
+        // this.changeLanguage = this.changeLanguage.bind(this);
+       
 
         this.state = {
         dropdownOpen: false,
         items: [],
         regionalLevels: "Aluetaso",
         regions:"Select regions",
-        scenarioCollection:"Select scenario Collection"
+        scenarioCollection:"Select scenario Collection",
+        // languagebtn: ''
         };
     
 }
@@ -63,7 +69,43 @@ scenarioCollection(e){
 }
 
 
+
+
+// _onSetLanguageToItalian() {
+//     strings.setLanguage(this.state.languagebtn);
+//     this.setState({});
+//   }
+
+// changeLanguage(){
+//     alert("Hello world");
+
+    
+
+    //    this.setState({languagebtn: rSelected});
+        //     this.setState({});
+        
+        // let language = this.props.onRadioBtnClick();
+      
+      
+
+// onRadioBtnClick(number) {
+    
+// if (number === 1 ) {
+
+//     strings.setLanguage('fi');
+//     this.setState({});
+// }
+// }
+
+
+
+
+
+
  render () {
+  
+   const languagebtn = this.props.languagebtn;
+
     let strings = new LocalizedStrings ({
         en: {
             ScenarioSelection:"Scenario Collection",
@@ -90,11 +132,40 @@ scenarioCollection(e){
             Other:"Muut"
         }
     });
+
+    strings.setLanguage(languagebtn);
+
+
+    // console.log(this.state.languagebtn, "DropdownMenus");
+
+    // function changeLanguage(languagebtn) {
+    //     alert("Hello", languagebtn);
+    //     strings.setLanguage(languagebtn);
+    //     console.log(this.state.languagebtn, "DropdownMenus");
+
+    //     this.props.onRadioBtnClick();
+    //     // this.setState({languagebtn }, function() {
+            
+    //     // });
+        
+    // }
+
+   
+
+
+
+//    strings.setLanguage(this.state.languagebtn);
+
+//    console.log(this.state.languagebtn);
+    
+    
+   
       
    
 
         return (
            <div>
+               
                
                <label> {strings.ScenarioSelection} </label>
                <br />

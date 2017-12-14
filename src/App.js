@@ -8,6 +8,8 @@ import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
 import DropdownMenus from './components/DropdownMenus'
+import Header from './components/Header'
+
 
 class App extends Component {
 
@@ -20,7 +22,8 @@ class App extends Component {
       regions: [],
       scenarioCollection:[],
       scenarios:[],
-      timestamp:[]
+      timestamp:[],
+      languagebtn: ''
     };   
 
     //this.getData = this.getData.bind(this);
@@ -33,9 +36,15 @@ class App extends Component {
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
     this.getTimePeriods = this.getTimePeriods.bind(this)
+    // this.changeLanguage = this.changeLanguage.bind(this)
 
   }
-    
+  // changeLanguage(){
+  //   this.setState({languagebtn: rSelected}, function() {
+  //     console.log(this.state.languagebtn);
+  // });
+  // }  
+
     componentDidMount(){
     ForestIndicatorData.getRegionLevels("en").then(result => {
       this.setState({regionalLevels: result});
@@ -116,8 +125,14 @@ class App extends Component {
     ForestIndicatorData.getTimePeriods().then(result => {
       this.setState({timestamp: result})
       console.log(this.state.timestamp)
-  });
-}
+    });
+  }
+
+ 
+      
+
+  
+
   render() {
     return (
         <div>
@@ -135,6 +150,8 @@ class App extends Component {
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
                                               getTimePeriods = {this.getTimePeriods}
+                                              languagebtn = {this.state.languagebtn}
+                                              
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>

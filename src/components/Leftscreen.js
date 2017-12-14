@@ -4,8 +4,30 @@ import DropdownMenus from './DropdownMenus'
 import CheckBoxes from './CheckBoxes'
 import { Scrollbars } from 'react-custom-scrollbars';
 
+import {Row} from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
+
 class Leftscreen extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            languagebtn: ''
+        };
+        // this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        
+       
+    }
+
+    onRadioBtnClick(rSelected) {
+        alert(rSelected);
+        console.log(typeof(rSelected));
+        // this.setState({languagebtn: rSelected});
+        this.setState({languagebtn: rSelected}, function() {
+            console.log(this.state.languagebtn);
+        });
+        
+      }
 
 
     render () {
@@ -16,9 +38,20 @@ class Leftscreen extends Component {
         const scenarioCollection = this.props.scenarioCollection;
         const scenarios = this.props.scenarios;
         const timestamp = this.props.timestamp;
+
+        // const languagebtn = this.props.languagebtn;
         
         return (
             <div className= "content">
+             <Row>
+                    <h5>Metsämittari</h5>
+                        <ButtonGroup className="righttop">
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
+                         
+                        </ButtonGroup>
+                </Row>
+
                 <Scrollbars
                 autoHeight
                 autoHeightMin={500}
@@ -36,6 +69,9 @@ class Leftscreen extends Component {
                            getScenarios = {this.props.getScenarios}
                            setScenarioCollection = {this.props.setScenarioCollection}
                            getTimePeriods = {this.props.getTimePeriods}
+                           languagebtn = { this.state.languagebtn }
+                           
+                         
                            />
             <CheckBoxes getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}

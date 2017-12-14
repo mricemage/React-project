@@ -84,6 +84,9 @@ class CheckBoxes extends Component {
                 Other:"Muut"
             }
         });
+
+        strings.setLanguage('en');
+
         return (
             <div>
             <p>{strings.Scenario}</p>
