@@ -3,8 +3,11 @@ import axios from 'axios';
 var language = "fi";
 var regionLevel = 0;
 var regionId = 0;
+var lastRegiodId = 0;
 var scenarioCollectionId = 0;
+var lastScenarioCollectionId = 0;
 var regionData = [];
+var scenarioData = [];
 var lastDataLanguage = "";
 
 function setLanguage(_language){
@@ -125,8 +128,57 @@ function setScenarioCollection(id){
     scenarioCollectionId = id;
 }
 
+function getScenarioData(){
+    return new Promise((resolve, reject) => {
+        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
+        "/region/"+regionId;
+        axios({
+            method: 'get',
+            url: url,
+            headers: {'Accept-Language': language}
+        })
+        .then(results => {
+            //console.log(results.data[0]);
+            scenarioData = results.data[0];
+            //console.log("scenariodData length: " + Object.keys(scenarioData).length); //scenarioData.length
+            //console.log(results.data[0].length);
+            //console.log(scenarioData);
+            lastDataLanguage = language;
+            lastRegiodId = regionId;
+            lastScenarioCollectionId = scenarioCollectionId;
+            //console.log(results.data[0]);
+            //return results.data[0]; //
+            resolve(results.data[0]); //results.data[0].scenarios
+        })
+        .catch(error => {
+            console.log(error);
+            reject();
+        })
+    });
+}
+
 function getScenarios(){
     return new Promise((resolve, reject) => {
+        if(Object.keys(scenarioData).length > 0 && lastDataLanguage == language && 
+           scenarioCollectionId == lastScenarioCollectionId && regionId == lastRegiodId){
+            console.log("ei haettu netistä uudestaan dataa");
+            resolve(scenarioData.scenarios);
+        }
+        else{
+            var data = Promise.resolve(getScenarioData());
+            data.then(function(value){
+                //console.log(value.scenarios);
+                resolve(value.scenarios); //testi.scenarios
+            });
+        }
+        
+        /*
+        var testi = getScenarioData().then(function(){
+            console.log(testi);
+            resolve(testi); //testi.scenarios
+        });*/
+        //reject();
+        /*
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
         axios({
@@ -143,18 +195,25 @@ function getScenarios(){
         .catch(error => {
             console.log(error);
             reject();
-        })
+        })*/
     });
 }
 
 function getTimePeriods(){
     return new Promise((resolve, reject) => {
-        /*
-        if(regionData !== null || lastDataLanguage !== language){
-            console.log("ei haettu netistä uudestaan dataa");
-            resolve(regionData.timePeriods);
+        if(Object.keys(scenarioData).length > 0 && lastDataLanguage === language && 
+           scenarioCollectionId === lastScenarioCollectionId && regionId === lastRegiodId){
+            console.log("ei haettu netistä uudestaan dataa 2");
+            resolve(scenarioData.timePeriods);
+        }       
+        else{
+            var data = Promise.resolve(getScenarioData());
+            data.then(function(value){
+                //console.log(value.timePeriods);
+                resolve(value.timePeriods); //testi.scenarios
+            });
         }
-        else{*/
+            /*
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
         "/region/"+regionId;
         axios({
@@ -170,12 +229,26 @@ function getTimePeriods(){
             console.log(error);
             reject();
         })
-        //}
+        //}*/
     });
 }
 
 function getIndicatorCategories(){
     return new Promise((resolve, reject) => {
+        if(Object.keys(scenarioData).length > 0 && lastDataLanguage === language && 
+           scenarioCollectionId === lastScenarioCollectionId && regionId === lastRegiodId){
+            console.log("ei haettu netistä uudestaan dataa 3");
+            resolve(scenarioData.indicatorCategories);
+        }       
+        else{
+            var data = Promise.resolve(getScenarioData());
+            data.then(function(value){
+                //console.log(value.timePeriods);
+                resolve(value.indicatorCategories); //testi.scenarios
+            });
+        }
+
+        /*
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
                   "/region/"+regionId;
         axios({
@@ -189,23 +262,30 @@ function getIndicatorCategories(){
         .catch(error => {
             console.log(error);
             reject();
-        })
+        })*/
     });
+}
+
+function parseScenarioData(){
+    
 }
 
 function getWoodProduction(){
     return new Promise((resolve, reject) => {
-        /*
-        console.log(regionData);
-        console.log(regionData.length);
-        console.log(lastDataLanguage);
-        console.log(language);
-        //((regionData && regionData.lenght > 0) || lastDataLanguage === language)
-        if(regionData.lenght > 0 && lastDataLanguage === language){
-            console.log("ei haettu netistä uudestaan dataa");
-            resolve(regionData);
+        if(Object.keys(scenarioData).length > 0 && lastDataLanguage === language && 
+           scenarioCollectionId === lastScenarioCollectionId && regionId === lastRegiodId){
+            console.log("ei haettu netistä uudestaan dataa 4");
+            resolve(scenarioData.indicatorCategories);
+        }       
+        else{
+            var data = Promise.resolve(getScenarioData());
+            data.then(function(value){
+                //console.log(value.timePeriods);
+                resolve(value.indicatorCategories); //testi.scenarios
+            });
         }
-        else{*/
+    });
+        /*
         var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
         "/region/"+regionId;
         axios({
@@ -229,8 +309,7 @@ function getWoodProduction(){
             console.log(error);
             reject();
         })
-        //}
-    });
+        //}*/
 }
 
 function getBiodiversity(){

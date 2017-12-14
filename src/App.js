@@ -68,6 +68,7 @@ class App extends Component {
           console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
 
            ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+           
            ForestIndicatorData.getScenarios().then(result => {
             this.setState({scenarios: result,
                         datafromAPI: true});
@@ -91,15 +92,16 @@ class App extends Component {
     });*/
     //Test functions and will be removed in the future
     /*
-    ForestIndicatorData.setLanguage("en");
+    ForestIndicatorData.setLanguage("fi");
     ForestIndicatorData.setRegionLevels(1);
     ForestIndicatorData.setRegion(24);
     ForestIndicatorData.setScenarioCollection(6); //6
-    /*
-    ForestIndicatorData.getScenarios().then(result =>{
-      //console.log(result);
-    });
     
+    ForestIndicatorData.getScenarios().then(result =>{
+      console.log("getScenarios");
+      console.log(result);
+    });*/
+    /*
     ForestIndicatorData.getTimePeriods().then(result =>{
       console.log(result);
     });
