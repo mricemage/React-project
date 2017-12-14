@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 const ReactHighCharts = require('react-highcharts')
 
 class Graphs extends Component {
+
+    
+
     render () {
 
         const config = {chart: {
@@ -58,9 +61,11 @@ class Graphs extends Component {
     };
 
         return (
-            <div className="graph">
+            
+            <div className="graph" id="graph">
                 <ReactHighCharts config = {config}></ReactHighCharts>
             </div>
+
         )
     }
 }
