@@ -15,9 +15,6 @@ class DropdownMenus extends Component {
         this.regions = this.regions.bind(this);
         this.scenarioCollection = this.scenarioCollection.bind(this);
         this.checklanguage = this.checklanguage.bind(this);
-        // this.languagechanger = this.languagechanger.bind(this);
-        // this.changeLanguage = this.changeLanguage.bind(this);
-       
 
         this.state = {
         dropdownOpen: false,
@@ -26,7 +23,6 @@ class DropdownMenus extends Component {
         regionalLevels: "Aluetaso",
         regions:"Select regions",
         scenarioCollection:"Select scenario Collection",
-        // languagebtn: ''
 
         regionalLevels: this.props.regionalLevels[0].name,
         regions:this.props.regions[0].name,
@@ -91,34 +87,6 @@ checklanguage() {
     });
 }
 
-// _onSetLanguageToItalian() {
-//     strings.setLanguage(this.state.languagebtn);
-//     this.setState({});
-//   }
-
-// changeLanguage(){
-//     alert("Hello world");
-
-    
-
-    //    this.setState({languagebtn: rSelected});
-        //     this.setState({});
-        
-        // let language = this.props.onRadioBtnClick();
-      
-      
-
-// onRadioBtnClick(number) {
-    
-// if (number === 1 ) {
-
-//     strings.setLanguage('fi');
-//     this.setState({});
-// }
-// }
-
-
-
  render () {
   
    const languagebtn = this.props.languagebtn;
@@ -150,35 +118,7 @@ checklanguage() {
         }
     });
 
-    strings.setLanguage(languagebtn);
-
-
-    // console.log(this.state.languagebtn, "DropdownMenus");
-
-    // function changeLanguage(languagebtn) {
-    //     alert("Hello", languagebtn);
-    //     strings.setLanguage(languagebtn);
-    //     console.log(this.state.languagebtn, "DropdownMenus");
-
-    //     this.props.onRadioBtnClick();
-    //     // this.setState({languagebtn }, function() {
-            
-    //     // });
-        
-    // }
-
-   
-
-
-
-//    strings.setLanguage(this.state.languagebtn);
-
-//    console.log(this.state.languagebtn);
-    
-    
-   
-      
-   
+    strings.setLanguage(languagebtn);   
 
         return (
            <div>
