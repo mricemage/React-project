@@ -14,6 +14,7 @@ class DropdownMenus extends Component {
         this.regionalLevels = this.regionalLevels.bind(this);
         this.regions = this.regions.bind(this);
         this.scenarioCollection = this.scenarioCollection.bind(this);
+        this.checklanguage = this.checklanguage.bind(this);
         // this.languagechanger = this.languagechanger.bind(this);
         // this.changeLanguage = this.changeLanguage.bind(this);
        
@@ -82,6 +83,13 @@ scenarioCollection(e){
     this.props.getOthers();
 }
 
+checklanguage() {
+    this.setState = ({
+        regionalLevels: this.props.regionalLevels[0].name,
+        regions:this.props.regions[0].name,
+        scenarioCollection:this.props.scenarioCollection[0].name
+    });
+}
 
 // _onSetLanguageToItalian() {
 //     strings.setLanguage(this.state.languagebtn);
@@ -223,6 +231,7 @@ scenarioCollection(e){
       </UncontrolledButtonDropdown> 
         
        
+       {this.checklanguage}
         </div>
         )
     }

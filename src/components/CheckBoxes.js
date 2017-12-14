@@ -119,6 +119,8 @@ class CheckBoxes extends Component {
     }
 
     render () {
+      const languagebtn = this.props.languagebtn;
+
         let strings = new LocalizedStrings ({
             en: {
                 ScenarioSelection:"Scenario Collection",
@@ -150,7 +152,7 @@ class CheckBoxes extends Component {
             }
         });
 
-        strings.setLanguage('en');
+        strings.setLanguage(languagebtn);
 
         return (
             <div>
