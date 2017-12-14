@@ -48,6 +48,8 @@ class App extends Component {
     this.getCarbon = this.getCarbon.bind(this)
     this.getOthers = this.getOthers.bind(this)
     this.getGraphData = this.getGraphData.bind(this)
+    this.setLanguage = this.setLanguage.bind(this)
+    this.LanguageChange = this.LanguageChange.bind(this)
   }
     
     componentDidMount(){
@@ -220,7 +222,45 @@ getGraphData(){
   })
 }
 
+setLanguage(language){
+ForestIndicatorData.setLanguage(language);
+}
 
+LanguageChange(language){
+    this.setLanguage(language)
+    ForestIndicatorData.getRegionLevels().then(result => {
+    this.setState({regionalLevels: result});
+    console.log(this.state.regionalLevels, ": RegionLevel");
+    console.log(this.state.regionalLevels[0].id ,": default RegionLevel")
+
+    ForestIndicatorData.setRegionLevels(this.state.regionalLevels[0].id)
+    ForestIndicatorData.getRegion().then(result => {
+      this.setState({regions: result});
+      console.log(this.state.regions, "Regions")
+      console.log(this.state.regions[0].id, "default Regions")
+
+      ForestIndicatorData.setRegion(this.state.regions[0].id)
+      ForestIndicatorData.getScenarioCollection().then(result => {
+        this.setState({scenarioCollection: result});
+        console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
+
+        ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+        ForestIndicatorData.getScenarios().then(result => {
+          this.setState({scenarios: result,
+                      datafromAPI: true});
+          console.log(this.state.scenarios, "Scenarios")
+          this.getTimePeriods();
+          this.getIndicatorCategories();
+          this.getWoodProduction();
+          this.getBiodiversity();
+          this.getNaturalProducts();
+          this.getCarbon();
+          this.getOthers();
+        });
+      });          
+    });
+  });
+}
   render() {
     return (
         <div>
@@ -251,6 +291,7 @@ getGraphData(){
                                               getNaturalProducts = {this.getNaturalProducts}
                                               getCarbon = {this.getCarbon}
                                               getOthers = {this.getOthers}
+                                              LanguageChange = {this.LanguageChange}
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen /></Col>
