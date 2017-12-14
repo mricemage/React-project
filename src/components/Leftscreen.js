@@ -3,9 +3,27 @@ import './Leftscreen.css'
 import DropdownMenus from './DropdownMenus'
 import CheckBoxes from './CheckBoxes'
 import { Scrollbars } from 'react-custom-scrollbars';
+import {Row} from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
 class Leftscreen extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            languagebtn: 'fi' 
+        };
+    }
+
+    onRadioBtnClick(rSelected) {
+        // alert(rSelected);
+        console.log(typeof(rSelected));
+        // this.setState({languagebtn: rSelected});
+        this.setState({languagebtn: rSelected}, function() {
+            console.log(this.state.languagebtn);
+            this.props.LanguageChange(this.state.languagebtn);
+        }); 
+    }
 
 
     render () {
@@ -23,9 +41,17 @@ class Leftscreen extends Component {
         const carbon = this.props.carbon;
         const others = this.props.others;
 
-
         return (
             <div className= "content">
+             <Row>
+                    <h5>Metsämittari</h5>
+                        <ButtonGroup className="righttop">
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
+                            <Button color="primary" onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
+                         
+                        </ButtonGroup>
+                </Row>
+
                 <Scrollbars
                 autoHeight
                 autoHeightMin={500}
@@ -45,6 +71,7 @@ class Leftscreen extends Component {
                            getScenarios = {this.props.getScenarios}
                            setScenarioCollection = {this.props.setScenarioCollection}
                            getTimePeriods = {this.props.getTimePeriods}
+                           languagebtn = { this.state.languagebtn }
                            getIndicatorCategories = {this.props.getIndicatorCategories}
                            getWoodProduction = {this.props.getWoodProduction}
                            getBiodiversity = {this.props.getBiodiversity}
@@ -62,6 +89,7 @@ class Leftscreen extends Component {
                         others = {others}
                         getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}
+                        languagebtn = { this.state.languagebtn }
                         
                         />
             </Scrollbars>  

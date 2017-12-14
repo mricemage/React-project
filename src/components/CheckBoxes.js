@@ -5,8 +5,7 @@ import LocalizedStrings from 'react-localization'
 class CheckBoxes extends Component {
     constructor (props) {
         super(props);
-  
-    
+        
         this.state = { cSelected: [],
                        rSelected: [],
                        woodproduction: [],
@@ -119,6 +118,8 @@ class CheckBoxes extends Component {
     }
 
     render () {
+      const languagebtn = this.props.languagebtn;
+
         let strings = new LocalizedStrings ({
             en: {
                 ScenarioSelection:"Scenario Collection",
@@ -149,6 +150,9 @@ class CheckBoxes extends Component {
                 Other:"Muut"
             }
         });
+
+        strings.setLanguage(languagebtn);
+
         return (
             <div>
             <p>{strings.Scenario}</p>

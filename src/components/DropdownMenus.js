@@ -4,6 +4,8 @@ import LocalizedStrings from 'react-localization'
 import { Tooltip } from 'reactstrap'
 
 
+
+
 class DropdownMenus extends Component {
     constructor(props){
         super(props);
@@ -12,17 +14,34 @@ class DropdownMenus extends Component {
         this.regionalLevels = this.regionalLevels.bind(this);
         this.regions = this.regions.bind(this);
         this.scenarioCollection = this.scenarioCollection.bind(this);
+        //this.checklanguage = this.checklanguage.bind(this);
 
         this.state = {
         dropdownOpen: false,
         tooptipOpen:false,
         items: [],
+        regionalLevels: "Aluetaso",
+        regions:"Select regions",
+        scenarioCollection:"Select scenario Collection",
+
         regionalLevels: this.props.regionalLevels[0].name,
         regions:this.props.regions[0].name,
         scenarioCollection:this.props.scenarioCollection[0].name
+
         };
     
 }
+
+componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.regionalLevels[0].name !== this.props.regionalLevels[0].name) {
+      this.setState ({
+        regionalLevels: this.props.regionalLevels[0].name,
+        regions:this.props.regions[0].name,
+        scenarioCollection:this.props.scenarioCollection[0].name
+      });
+    }
+  }
 
 toggle(event) {
     this.setState({
@@ -71,7 +90,28 @@ scenarioCollection(e){
     this.props.getOthers();
 }
 
+/*checklanguage() {
+    //(this.props.regionalLevelsDataFromParent.find(this.isSelectedRegionalLevel)!==this.state.regionallevelSelected)
+    if(this.props.regionalLevels.find(this.regionlevelSelect) !== this.state.regionalLevels){
+        this.setState ({
+            regionalLevels: this.props.regionalLevels[0].name,
+            regions:this.props.regions[0].name,
+            scenarioCollection:this.props.scenarioCollection[0].name
+        });
+    }
+}
+
+
+
+regionlevelSelect = (regionalLevels) =>{
+     return regionalLevels.name === this.state.regionalLevels;
+}*/
+
+
  render () {
+  
+   const languagebtn = this.props.languagebtn;
+
     let strings = new LocalizedStrings ({
         en: {
             ScenarioSelection:"Scenario Collection",
@@ -98,11 +138,43 @@ scenarioCollection(e){
             Other:"Muut"
         }
     });
+
+
+    strings.setLanguage(languagebtn);
+
+    // console.log(this.state.languagebtn, "DropdownMenus");
+
+    // function changeLanguage(languagebtn) {
+    //     alert("Hello", languagebtn);
+    //     strings.setLanguage(languagebtn);
+    //     console.log(this.state.languagebtn, "DropdownMenus");
+
+    //     this.props.onRadioBtnClick();
+    //     // this.setState({languagebtn }, function() {
+            
+    //     // });
+        
+    // }
+
+   
+
+
+
+//    strings.setLanguage(this.state.languagebtn);
+
+//    console.log(this.state.languagebtn);
+    
+    
+   
       
    
 
+    strings.setLanguage(languagebtn);   
+
+
         return (
            <div>
+               
                
                <label> {strings.ScenarioSelection} </label>
                <br />
@@ -115,8 +187,9 @@ scenarioCollection(e){
                 {    
                     this.props.regionalLevels.map( element => 
                         <DropdownItem onClick = {this.regionalLevels} id={element.id}> { element.name } </DropdownItem>
-                        )
-                    
+                        
+                    )
+                        
                 }   
             </DropdownMenu>
         </Dropdown>
@@ -151,6 +224,7 @@ scenarioCollection(e){
       </UncontrolledButtonDropdown> 
         
        
+      
         </div>
         )
     }
