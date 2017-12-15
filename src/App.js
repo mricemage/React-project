@@ -122,6 +122,7 @@ class App extends Component {
     ForestIndicatorData.getScenarios().then(result =>{
       //console.log(result);
     });
+<<<<<<< HEAD
     
     ForestIndicatorData.getTimePeriods().then(result =>{
       console.log(result);
@@ -152,6 +153,12 @@ class App extends Component {
     console.log("huomenta");
     console.log(result);
     });*/
+    ForestIndicatorData.setRegionLevels(1);
+    ForestIndicatorData.setRegion(29);
+    ForestIndicatorData.getScenarioCollection().then(result => {
+      //console.log(this.state.regionalLevels);
+    });
+
   }
 
   setRegionLevels(id){

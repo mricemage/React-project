@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import './Rightscreen.css'
 import Header from './Header'
 import Graph from './Graphs'
@@ -21,6 +21,8 @@ class Rightscreen extends Component {
     }
     
 
+
+
     printDocument() {
         var prtContent = document.getElementById("graph");
         var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
@@ -31,29 +33,36 @@ class Rightscreen extends Component {
         WinPrint.close();
       }
 
+
       toggleNewItemInputs(number)
       { 
         this.setState({ graphnumber: number });
       }
 
     
+
     render () {
         const graphData = this.props.graphData;
+        const nameofIndicator = this.props.nameofIndicator;
+        console.log(nameofIndicator, "RightScreenName")
 
         let content;
         
         if(this.state.graphnumber === 1)
         {
             content = (<Graph graphData = {graphData}
-                getGraphData = {this.props.getGraphData}/>);
+                getGraphData = {this.props.getGraphData}
+                nameofIndicator = {nameofIndicator}/>);
         } 
         if (this.state.graphnumber === 2) {
             content = (<GraphTwo graphData = {graphData}
-                getGraphData = {this.props.getGraphData}/>);
+                getGraphData = {this.props.getGraphData}
+                nameofIndicator = {nameofIndicator}/>);
         }
         if (this.state.graphnumber === 3) {
             content = (<GraphBar graphData = {graphData}
-                getGraphData = {this.props.getGraphData}/>);
+                getGraphData = {this.props.getGraphData}
+                nameofIndicator = {nameofIndicator}/>);
         }
         if (this.state.graphnumber === 4) {
             content = (<table>
@@ -77,8 +86,7 @@ class Rightscreen extends Component {
         
 
         
-        const nameofIndicator = this.props.nameofIndicator;
-        console.log(nameofIndicator, "RightScreenName")
+     
 
         return (
             <div className= 'content'>
@@ -90,7 +98,6 @@ class Rightscreen extends Component {
                        getGraphData = {this.props.getGraphData}/>
 
                 <Graph graphData = {graphData}
-<<<<<<< HEAD
                        getGraphData = {this.props.getGraphData}/>
                        
                 <Graph graphData = {graphData}
@@ -113,8 +120,14 @@ class Rightscreen extends Component {
                 </Row>
 
                        {/* getGraphData = {this.props.getGraphData} */}
-                       nameofIndicator = {nameofIndicator}/>
+                       {/* nameofIndicator = {nameofIndicator}/> */}
 
+
+
+
+                
+                {/* RightScreenn */}
+                
 
 
             </div>
