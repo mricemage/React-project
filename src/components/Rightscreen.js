@@ -73,6 +73,9 @@ class Rightscreen extends Component {
         //         </div>);
         // }
 
+
+        
+
         
         const nameofIndicator = this.props.nameofIndicator;
         console.log(nameofIndicator, "RightScreenName")
@@ -87,6 +90,7 @@ class Rightscreen extends Component {
                        getGraphData = {this.props.getGraphData}/>
 
                 <Graph graphData = {graphData}
+<<<<<<< HEAD
                        getGraphData = {this.props.getGraphData}/>
                        
                 <Graph graphData = {graphData}
@@ -110,6 +114,7 @@ class Rightscreen extends Component {
 
                        {/* getGraphData = {this.props.getGraphData} */}
                        nameofIndicator = {nameofIndicator}/>
+
 
 
             </div>

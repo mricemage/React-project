@@ -3,10 +3,10 @@ const ReactHighCharts = require('react-highcharts')
     
 
 class Graphs extends Component {
+    
 
     render() {
-
-         let processedGraphData = this.props.graphData;       
+         let processedGraphData = this.props.graphData;
          let nameofIndicator = this.props.nameofIndicator;
          console.log(nameofIndicator, "NameOfIndicator , Graphs")
          
