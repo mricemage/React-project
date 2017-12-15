@@ -59,16 +59,11 @@ class CheckBoxes extends Component {
         } else {
           this.state.woodproduction.splice(index, 1);
         }
-<<<<<<< HEAD
-        if (this.state.woodproduction.length <= 5){
-        this.setState({ woodproduction: [...this.state.woodproduction] });
 
-=======
         if (this.state.woodproduction.length <= 15){
         this.setState({ indicator: [...this.state.woodproduction] }, function () {
         this.props.setindicatorId(this.state.indicator);
         })
->>>>>>> refs/remotes/origin/master
         }
       }
     
@@ -95,7 +90,7 @@ class CheckBoxes extends Component {
         }
         if (this.state.woodproduction.length <= 15){
           this.setState({ indicator: [...this.state.woodproduction] }, function () {
-          this.props.setindicatorId(this.state.indicator);
+          this.props.setindicatorId(this.state.indicator, );
           })
           }
         }
@@ -114,7 +109,7 @@ class CheckBoxes extends Component {
           }
         }
 
-      onOther(selected) {
+      onOther(selected, name) {
         const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
           this.state.woodproduction.push(selected);
@@ -123,7 +118,7 @@ class CheckBoxes extends Component {
         }
         if (this.state.woodproduction.length <= 15){
           this.setState({ indicator: [...this.state.woodproduction] }, function () {
-          this.props.setindicatorId(this.state.indicator);
+          this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
@@ -190,7 +185,6 @@ class CheckBoxes extends Component {
                         <OverlayTrigger placement="right" overlay={<Tooltip id={element.id}><strong>{element.description}</strong></Tooltip>}>
                         <Button  onClick={() => this.onCheckboxBtnClick(element.id)} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>
                         </OverlayTrigger>
-                      
                       </div>)
                     }  
 
@@ -249,7 +243,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.others.map( element => 
-                        <Button  onClick={() => this.onOther(element.id)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Other)}</p>

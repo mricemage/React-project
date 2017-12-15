@@ -11,12 +11,14 @@ class Rightscreen extends Component {
 
 
         const graphData = this.props.graphData;
-
+        const nameofIndicator = this.props.nameofIndicator;
+        console.log(nameofIndicator, "RightScreenName")
         return (
             <div className= 'content'>
                 <Header/> <br /> <br />
                 <Graph graphData = {graphData}
-                       getGraphData = {this.props.getGraphData}/>
+                       getGraphData = {this.props.getGraphData}
+                       nameofIndicator = {nameofIndicator}/>
 
             </div>
         )

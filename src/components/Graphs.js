@@ -3,11 +3,26 @@ const ReactHighCharts = require('react-highcharts')
 
 
 class Graphs extends Component {
+    
 
 
     render() {
          let processedGraphData = this.props.graphData;
-        
+         let nameofIndicator = this.props.nameofIndicator;
+         console.log(nameofIndicator, "NameOfIndicator , Graphs")
+         
+         var dataForGraphs = [];
+         for(var i=0; i<processedGraphData.length; i++)
+         {
+         {
+             dataForGraphs.push({
+                 name: nameofIndicator[i],
+                 y: processedGraphData[i]
+             });
+             console.log(dataForGraphs, "GraphModule-data")
+         }
+        }
+
 
         const config = {
             chart: {
@@ -36,9 +51,9 @@ class Graphs extends Component {
                 }
             },
             series: [{
-                name: 'Brands',
+                name: "",
                 colorByPoint: true,
-                data: processedGraphData
+                data: dataForGraphs
             }]
         };
  
