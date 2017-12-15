@@ -45,7 +45,6 @@ class Leftscreen extends Component {
         return (
             <div className= "content">
              <Row>
-                    <h5>Metsämittari</h5>
                         <ButtonGroup className="righttop">
                             <Button color="primary" onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
                             <Button color="primary" onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
@@ -56,7 +55,7 @@ class Leftscreen extends Component {
                 <Scrollbars
                 autoHeight
                 autoHeightMin={500}
-                autoHeightMax={1200}
+                autoHeightMax={700}
                 style={{ width: width2  }}
                 color={props => <div {...props} className="scrollbar-color" />}
                 >   
