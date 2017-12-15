@@ -1,12 +1,22 @@
 import React, {Component} from 'react'
+import {Table} from 'reactstrap';
 const ReactHighCharts = require('react-highcharts')
 
 
 
-class Graphs extends Component {
+class GraphTwo extends Component {
+
+   
+   
+
 
     render() {
-         let processedGraphData = this.props.graphData;       
+         let processedGraphData = this.props.graphData;
+
+         const data = { data: processedGraphData
+
+         }
+        
 
         const config = {
             chart: {
@@ -16,7 +26,7 @@ class Graphs extends Component {
                 type: 'pie'
             },
             title: {
-                text: 'Result'
+                text: 'Result 2'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -46,8 +56,8 @@ class Graphs extends Component {
         <div id="graph">
             <ReactHighCharts config = {config}></ReactHighCharts>
            
-           
-           
+           <div id="tableplace">
+           </div>
 
         </div>
       
@@ -57,4 +67,4 @@ class Graphs extends Component {
 }
 
 
-export default Graphs;
+export default GraphTwo;
