@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
 import DropdownMenus from './components/DropdownMenus'
 
+
 class App extends Component {
 
   constructor(props){
@@ -28,7 +29,10 @@ class App extends Component {
       carbon:[],
       others:[],
       graphData:[],
-      datafromAPI: false
+      datafromAPI: false,
+      scenarioId:[],
+      indicatorId:[],
+      timePeriodId: 0
     };   
 
     //this.getData = this.getData.bind(this);
@@ -48,6 +52,9 @@ class App extends Component {
     this.getCarbon = this.getCarbon.bind(this)
     this.getOthers = this.getOthers.bind(this)
     this.getGraphData = this.getGraphData.bind(this)
+    this.setscenarioId = this.setscenarioId.bind(this)
+    this.settimePeriodId = this.settimePeriodId.bind(this)
+    this.setindicatorId = this.setindicatorId.bind(this)
   }
     
     componentDidMount(){
@@ -213,10 +220,31 @@ getOthers(){
 })
 }
 
+setscenarioId(cSelected){
+  this.setState({scenarioId: cSelected}, function () {
+    console.log(this.state.scenarioId, "scenarioId"); 
+  })
+}
+   
+settimePeriodId(rSelected){
+  var testData = rSelected[0];
+  this.setState({timePeriodId: testData}, function () {
+    console.log(this.state.timePeriodId, "timePeriodId")
+  })
+}
+
+setindicatorId(indicatorId){
+  this.setState({indicatorId: indicatorId}, function() {
+    console.log(this.state.indicatorId, "indicatorId");
+    this.getGraphData();
+  })
+}
+
 getGraphData(){
-  ForestIndicatorData.getGraphData().then(result => {
+  ForestIndicatorData.getGraphData(this.state.scenarioId, this.state.indicatorId, this.state.timePeriodId).then(result => {
     this.setState({graphData: result})
     console.log(this.state.graphData, "graph data")
+    
   })
 }
 
@@ -241,6 +269,9 @@ getGraphData(){
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
+                                              setscenarioId = {this.setscenarioId} //Set scenarioId function to work with charts
+                                              settimePeriodId = {this.settimePeriodId} //Set timePeriodId function to work with charts
+                                              setindicatorId = {this.setindicatorId} //setindicatorId
                                               getScenarioCollection = {this.getScenarioCollection}
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
@@ -253,7 +284,8 @@ getGraphData(){
                                               getOthers = {this.getOthers}
                                               />
                                               </Col>
-            <Col lg={12} lg={8}> <Rightscreen /></Col>
+            <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
+                                              getGraphData = {this.getGraphData} /></Col>
             </Row>
           </Grid>
           :"Still Loading"}

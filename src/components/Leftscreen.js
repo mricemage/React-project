@@ -5,9 +5,7 @@ import CheckBoxes from './CheckBoxes'
 import { Scrollbars } from 'react-custom-scrollbars';
 
 class Leftscreen extends Component {
-
-
-
+   
     render () {
         var width2 =Element.offsetWidth; // https://www.w3schools.com/jsref/prop_element_offsetwidth.asp Its getting the width of an element in pixels
 
@@ -22,7 +20,8 @@ class Leftscreen extends Component {
         const naturalproducts = this.props.naturalproducts;
         const carbon = this.props.carbon;
         const others = this.props.others;
-
+        
+        
 
         return (
             <div className= "content">
@@ -60,6 +59,9 @@ class Leftscreen extends Component {
                         naturalproducts = {naturalproducts}
                         carbon = {carbon}
                         others = {others}
+                        setscenarioId = {this.props.setscenarioId} //Set scenarioId for the charts
+                        settimePeriodId = {this.props.settimePeriodId} //Set timePeriodId for the charts
+                        setindicatorId = {this.props.setindicatorId}
                         getScenarios = {this.props.getScenarios}
                         getTimePeriods = {this.props.getTimePeriods}
                         
