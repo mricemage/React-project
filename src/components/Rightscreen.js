@@ -3,8 +3,12 @@ import './Rightscreen.css'
 import Header from './Header'
 import Graph from './Graphs'
 
+
 class Rightscreen extends Component {
+
+    
     render () {
+
 
         const graphData = this.props.graphData;
 
@@ -13,6 +17,7 @@ class Rightscreen extends Component {
                 <Header/> <br /> <br />
                 <Graph graphData = {graphData}
                        getGraphData = {this.props.getGraphData}/>
+
             </div>
         )
     }
