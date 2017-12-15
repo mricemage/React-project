@@ -74,6 +74,8 @@ class Rightscreen extends Component {
         // }
 
         
+        const nameofIndicator = this.props.nameofIndicator;
+        console.log(nameofIndicator, "RightScreenName")
 
         return (
             <div className= 'content'>
@@ -105,6 +107,10 @@ class Rightscreen extends Component {
                             <Button color="primary"  onClick={() => this.printDocument()}><i class="fa fa-print" aria-hidden="true"></i></Button>
                         </ButtonGroup>
                 </Row>
+
+                       {/* getGraphData = {this.props.getGraphData} */}
+                       nameofIndicator = {nameofIndicator}/>
+
 
             </div>
         )

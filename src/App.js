@@ -35,6 +35,7 @@ class App extends Component {
       datafromAPI: false,
       scenarioId:[],
       indicatorId:[],
+      nameofIndicator:[],
       timePeriodId: 0
 
     };   
@@ -249,9 +250,12 @@ settimePeriodId(rSelected){
   })
 }
 
-setindicatorId(indicatorId){
+setindicatorId(indicatorId, name){
+  this.state.nameofIndicator.push(name)
   this.setState({indicatorId: indicatorId}, function() {
+
     console.log(this.state.indicatorId, "indicatorId");
+    console.log(this.state.nameofIndicator, ":indicatorName")
     this.getGraphData();
   })
 }
@@ -260,7 +264,7 @@ getGraphData(){
   ForestIndicatorData.getGraphData(this.state.scenarioId, this.state.indicatorId, this.state.timePeriodId).then(result => {
     this.setState({graphData: result})
     console.log(this.state.graphData, "graph data")
-    
+    console.log(this.state.nameofIndicator, "indicatorNamepart2")
   })
 }
 
@@ -341,7 +345,8 @@ LanguageChange(language){
                                               />
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
-                                              getGraphData = {this.getGraphData} /></Col>
+                                              getGraphData = {this.getGraphData} 
+                                              nameofIndicator = {this.state.nameofIndicator}/></Col>
             </Row>
           </Grid>
           :"Still Loading"}
