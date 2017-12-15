@@ -11,6 +11,7 @@ import DropdownMenus from './components/DropdownMenus'
 import Header from './components/Header'
 
 
+
 class App extends Component {
 
   constructor(props){
@@ -31,7 +32,10 @@ class App extends Component {
       carbon:[],
       others:[],
       graphData:[],
-      datafromAPI: false
+      datafromAPI: false,
+      scenarioId:[],
+      indicatorId:[],
+      timePeriodId: 0
 
     };   
 
@@ -55,8 +59,12 @@ class App extends Component {
     this.getCarbon = this.getCarbon.bind(this)
     this.getOthers = this.getOthers.bind(this)
     this.getGraphData = this.getGraphData.bind(this)
+    this.setscenarioId = this.setscenarioId.bind(this)
+    this.settimePeriodId = this.settimePeriodId.bind(this)
+    this.setindicatorId = this.setindicatorId.bind(this)
     this.setLanguage = this.setLanguage.bind(this)
     this.LanguageChange = this.LanguageChange.bind(this)
+
   }
   // changeLanguage(){
   //   this.setState({languagebtn: rSelected}, function() {
@@ -228,10 +236,31 @@ getOthers(){
 })
 }
 
+setscenarioId(cSelected){
+  this.setState({scenarioId: cSelected}, function () {
+    console.log(this.state.scenarioId, "scenarioId"); 
+  })
+}
+   
+settimePeriodId(rSelected){
+  var testData = rSelected[0];
+  this.setState({timePeriodId: testData}, function () {
+    console.log(this.state.timePeriodId, "timePeriodId")
+  })
+}
+
+setindicatorId(indicatorId){
+  this.setState({indicatorId: indicatorId}, function() {
+    console.log(this.state.indicatorId, "indicatorId");
+    this.getGraphData();
+  })
+}
+
 getGraphData(){
-  ForestIndicatorData.getGraphData().then(result => {
+  ForestIndicatorData.getGraphData(this.state.scenarioId, this.state.indicatorId, this.state.timePeriodId).then(result => {
     this.setState({graphData: result})
     console.log(this.state.graphData, "graph data")
+    
   })
 }
 
@@ -294,6 +323,9 @@ LanguageChange(language){
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
+                                              setscenarioId = {this.setscenarioId} //Set scenarioId function to work with charts
+                                              settimePeriodId = {this.settimePeriodId} //Set timePeriodId function to work with charts
+                                              setindicatorId = {this.setindicatorId} //setindicatorId
                                               getScenarioCollection = {this.getScenarioCollection}
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
@@ -308,7 +340,8 @@ LanguageChange(language){
                                               LanguageChange = {this.LanguageChange}
                                               />
                                               </Col>
-            <Col lg={12} lg={8}> <Rightscreen /></Col>
+            <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
+                                              getGraphData = {this.getGraphData} /></Col>
             </Row>
           </Grid>
           :"Still Loading"}
