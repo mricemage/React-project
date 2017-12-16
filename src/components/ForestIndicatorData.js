@@ -340,7 +340,6 @@ function parseGraphData(unParsedData, scenarioId, indicatorId, timePeriodId){
 
 function getGraphData(scenarioId, indicatorId, timePeriodId){
     return new Promise((resolve, reject) => {
-        /*
         if(isDataUpToDate()){
             var parsedData = parseGraphData(scenarioData.values, scenarioId, indicatorId, timePeriodId);
             parsedData.then(function(value){
@@ -353,49 +352,15 @@ function getGraphData(scenarioId, indicatorId, timePeriodId){
         else{
             var data = Promise.resolve(getScenarioData());
             data.then(function(value){
-                var parsedData = parseScenarioData(value, "Muut", "Others");
+                var parsedData = parseGraphData(scenarioData.values, scenarioId, indicatorId, timePeriodId);
                 parsedData.then(function(value){
-                    if(value != "no data" && value)
+                    if(value !== "" && value)
                         resolve(value);
                     else
-                        reject();
+                        reject();  
                 });
             });
-        }*/
-
-        
-        var url = "http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId+ 
-                  "/region/"+regionId;
-        axios({
-            method: 'get',
-            url: url,
-            headers: {'Accept-Language': language}
-        })
-        .then(results => {
-            const parsedData = results.data[0].values.filter(e => e.timePeriodId === timePeriodId)
-            .filter(function (data){
-                for (var count = 0; count < scenarioId.length; count++){
-                    if(scenarioId[count] === data.scenarioId){
-                        return data;
-                    }
-                }
-            }).filter(function (data){
-                for (var count = 0; count < indicatorId.length; count++){
-                    if(indicatorId[count] === data.indicatorId){
-                        //console.log(data);
-                        return data;
-                    }
-                }
-            })
-            .map(function (o){
-                return o.value;
-            });
-            resolve(parsedData);
-        })
-        .catch(error => {
-            console.log(error);
-            reject();
-        })
+        }
     });
 }
 
