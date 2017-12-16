@@ -126,11 +126,11 @@ class App extends Component {
     ForestIndicatorData.getOthers().then(result =>{
       console.log(result);
     });
-    
+    */
     ForestIndicatorData.getGraphData([10,11], [125,126,127], 20).then(result =>{
     console.log("huomenta");
     console.log(result);
-    });*/
+    });
   }
 
   setRegionLevels(id){
