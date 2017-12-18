@@ -8,6 +8,7 @@ class CheckBoxes extends Component {
         
         this.state = { cSelected: [],
                        rSelected: [],
+                       indicatorspressed:[],
                        woodproduction: [],
                        Biodiversity: [],
                        ProductCollections: [],
@@ -52,71 +53,71 @@ class CheckBoxes extends Component {
       }
 
       onWoodProduction(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
 
-        if (this.state.woodproduction.length <= 15){
-        this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+        this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
         this.props.setindicatorId(this.state.indicator, name);
         })
         }
       }
     
       onBiodiversity(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
 
       onProductCollections(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
       
       onCarbon(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
 
       onOther(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
@@ -201,16 +202,16 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.woodproduction.map( element => 
-                        <Button  onClick={() => this.onWoodProduction(element.id, element.name)} id= {element.id} active ={this.state.woodproduction.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onWoodProduction(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.woodproduction)}</p>
+                <p>Selected: {JSON.stringify(this.state.indicatorspressed)}</p>
               
                 <p>{strings.Biodiversity}</p>
                 <ButtonGroup vertical>
                 {
                     this.props.biodiversity.map( element => 
-                        <Button  onClick={() => this.onBiodiversity(element.id, element.name)} id= {element.id} active ={this.state.Biodiversity.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onBiodiversity(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Biodiversity)}</p>
@@ -220,7 +221,7 @@ class CheckBoxes extends Component {
                 {
                     this.props.naturalproducts.map( element => 
                          
-                    <Button  onClick={() => this.onProductCollections(element.id, element.name)} id= {element.id} active ={this.state.ProductCollections.includes(element.id)}>{ element.name }</Button>)
+                    <Button  onClick={() => this.onProductCollections(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.ProductCollections)}</p>
@@ -229,7 +230,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.carbon.map( element => 
-                        <Button  onClick={() => this.onCarbon(element.id, element.name)} id= {element.id} active ={this.state.Carbon.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onCarbon(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Carbon)}</p>
@@ -238,7 +239,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.others.map( element => 
-                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Other)}</p>
