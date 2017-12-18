@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {Row} from 'reactstrap';
-import { Button, ButtonGroup } from 'reactstrap';
+import { ButtonGroup } from 'reactstrap';
 import './Header.css';
-import LocalizedStrings from 'react-localization'
-import DropdownMenus from './DropdownMenus'
 import Feedback from './Feedback';
 
 

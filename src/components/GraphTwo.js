@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Table} from 'reactstrap';
+//import {Table} from 'reactstrap';
 const ReactHighCharts = require('react-highcharts')
 
 
@@ -13,9 +13,7 @@ class GraphTwo extends Component {
     render() {
          let processedGraphData = this.props.graphData;
 
-         const data = { data: processedGraphData
-
-         }
+         const data = { data: processedGraphData }
         
 
         const config = {

@@ -7,7 +7,7 @@ class CheckBoxes extends Component {
         super(props);
         
         this.state = { cSelected: [],
-                       rSelected: [],
+                       timeperiod: [],
                        indicatorspressed:[],
                        woodproduction: [],
                        Biodiversity: [],
@@ -40,16 +40,13 @@ class CheckBoxes extends Component {
       }
     
       onRadioBtnClick(selected) {
-        const index = this.state.rSelected.indexOf(selected);
-        if (index < 0) {
-          this.state.rSelected.push(selected);
-        } else {
-          this.state.rSelected.splice(index, 1);
-        }
-        if (this.state.rSelected.length <= 1){
-        this.setState({ rSelected: [...this.state.rSelected] });
-        this.props.settimePeriodId(this.state.rSelected);
-        }
+        console.log(selected, "TimePeriod Pressed")
+        this.setState({ timeperiod: selected }, function (){
+          console.log(this.state.timeperiod,"TimePeriod Pressed part 2")
+          this.props.settimePeriodId(this.state.timeperiod);
+        });
+        
+        
       }
 
       onWoodProduction(selected, name) {
@@ -191,10 +188,10 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.timestamp.map( element => 
-                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.yearStart } - {element.yearEnd}</Button>)
+                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.timeperiod === element.id}>{ element.yearStart } - {element.yearEnd}</Button>)
                 } 
                 </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
+                <p>Selected: {JSON.stringify(this.state.timeperiod)}</p>
                 
                 <h5>{strings.IndicatorSelection}</h5>
 
@@ -251,22 +248,4 @@ class CheckBoxes extends Component {
     }
 }
 
-/*                <p>{strings.Other}</p>
-                <ButtonGroup vertical>
-                <Button  onClick={() => this.onRadioBtnClick5(1)} >One</Button>
-                <Button  onClick={() => this.onRadioBtnClick5(2)} >Two</Button>
-                <Button  onClick={() => this.onRadioBtnClick5(3)} >Three</Button>
-                </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>*/
-
-
-
-/*  {
-                this.props.indicatorCategories.map(( element, i) => <div> <p>{element.name}</p> <ButtonGroup vertical>
-                 {this.props.indicatorCategories[i].indicators.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id}
-                  active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>) 
-                  }</ButtonGroup></div>)
-                } 
-
-                */
 export default CheckBoxes
