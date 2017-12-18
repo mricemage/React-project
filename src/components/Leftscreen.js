@@ -36,7 +36,6 @@ class Leftscreen extends Component {
             console.log(this.state.languagebtn);
             this.props.LanguageChange(this.state.languagebtn);
             localStorage.setItem('setLanguage', this.state.languagebtn);
-            
         }); 
         window.location.reload();
     }
