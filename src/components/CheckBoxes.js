@@ -7,7 +7,8 @@ class CheckBoxes extends Component {
         super(props);
         
         this.state = { cSelected: [],
-                       rSelected: [],
+                       timeperiod: [],
+                       indicatorspressed:[],
                        woodproduction: [],
                        Biodiversity: [],
                        ProductCollections: [],
@@ -15,7 +16,7 @@ class CheckBoxes extends Component {
                        Other: [],
                        indicator: [] };
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
-        this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        this.onTimeperiodPressed = this.onTimeperiodPressed.bind(this);
         this.onWoodProduction = this.onWoodProduction.bind(this);
         this.onBiodiversity = this.onBiodiversity.bind(this);
         this.onProductCollections = this.onProductCollections.bind(this);
@@ -39,85 +40,82 @@ class CheckBoxes extends Component {
         
       }
     
-      onRadioBtnClick(selected) {
-        const index = this.state.rSelected.indexOf(selected);
-        if (index < 0) {
-          this.state.rSelected.push(selected);
-        } else {
-          this.state.rSelected.splice(index, 1);
-        }
-        if (this.state.rSelected.length <= 1){
-        this.setState({ rSelected: [...this.state.rSelected] });
-        this.props.settimePeriodId(this.state.rSelected);
-        }
+      onTimeperiodPressed(selected) {
+        console.log(selected, "TimePeriod Pressed")
+        this.setState({ timeperiod: selected }, function (){
+          console.log(this.state.timeperiod,"TimePeriod Pressed part 2")
+          this.props.settimePeriodId(this.state.timeperiod);
+        });
+        
+        
       }
 
       onWoodProduction(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
 
-        if (this.state.woodproduction.length <= 15){
-        this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+        this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
         this.props.setindicatorId(this.state.indicator, name);
         })
         }
       }
     
       onBiodiversity(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
 
       onProductCollections(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
       
       onCarbon(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
         }
 
       onOther(selected, name) {
-        const index = this.state.woodproduction.indexOf(selected);
+        const index = this.state.indicatorspressed.indexOf(selected);
         if (index < 0) {
-          this.state.woodproduction.push(selected);
+          this.state.indicatorspressed.push(selected);
         } else {
-          this.state.woodproduction.splice(index, 1);
+          this.state.indicatorspressed.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 15){
-          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        if (this.state.indicatorspressed.length <= 15){
+          this.setState({ indicator: [...this.state.indicatorspressed] }, function () {
           this.props.setindicatorId(this.state.indicator, name);
           })
           }
@@ -191,10 +189,10 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.timestamp.map( element => 
-                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.rSelected.includes(element.id)}>{ element.yearStart } - {element.yearEnd}</Button>)
+                        <Button  onClick={() => this.onTimeperiodPressed(element.id)} id= {element.id} active ={this.state.timeperiod === element.id}>{ element.yearStart } - {element.yearEnd}</Button>)
                 } 
                 </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.rSelected)}</p>
+                <p>Selected: {JSON.stringify(this.state.timeperiod)}</p>
                 
                 <h5>{strings.IndicatorSelection}</h5>
 
@@ -202,16 +200,16 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.woodproduction.map( element => 
-                        <Button  onClick={() => this.onWoodProduction(element.id, element.name)} id= {element.id} active ={this.state.woodproduction.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onWoodProduction(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.woodproduction)}</p>
+                <p>Selected: {JSON.stringify(this.state.indicatorspressed)}</p>
               
                 <p>{strings.Biodiversity}</p>
                 <ButtonGroup vertical>
                 {
                     this.props.biodiversity.map( element => 
-                        <Button  onClick={() => this.onBiodiversity(element.id, element.name)} id= {element.id} active ={this.state.Biodiversity.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onBiodiversity(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Biodiversity)}</p>
@@ -221,7 +219,7 @@ class CheckBoxes extends Component {
                 {
                     this.props.naturalproducts.map( element => 
                          
-                    <Button  onClick={() => this.onProductCollections(element.id, element.name)} id= {element.id} active ={this.state.ProductCollections.includes(element.id)}>{ element.name }</Button>)
+                    <Button  onClick={() => this.onProductCollections(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.ProductCollections)}</p>
@@ -230,7 +228,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.carbon.map( element => 
-                        <Button  onClick={() => this.onCarbon(element.id, element.name)} id= {element.id} active ={this.state.Carbon.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onCarbon(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Carbon)}</p>
@@ -239,7 +237,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.others.map( element => 
-                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.indicatorspressed.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Other)}</p>
@@ -251,22 +249,4 @@ class CheckBoxes extends Component {
     }
 }
 
-/*                <p>{strings.Other}</p>
-                <ButtonGroup vertical>
-                <Button  onClick={() => this.onRadioBtnClick5(1)} >One</Button>
-                <Button  onClick={() => this.onRadioBtnClick5(2)} >Two</Button>
-                <Button  onClick={() => this.onRadioBtnClick5(3)} >Three</Button>
-                </ButtonGroup>
-                <p>Selected: {JSON.stringify(this.state.oSelected)}</p>*/
-
-
-
-/*  {
-                this.props.indicatorCategories.map(( element, i) => <div> <p>{element.name}</p> <ButtonGroup vertical>
-                 {this.props.indicatorCategories[i].indicators.map(element => <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id}
-                  active ={this.state.rSelected.includes(element.id)}>{ element.name }</Button>) 
-                  }</ButtonGroup></div>)
-                } 
-
-                */
 export default CheckBoxes

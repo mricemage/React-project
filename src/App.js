@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Leftscreen from './components/Leftscreen'
 import Rightscreen from './components/Rightscreen'
 import { Grid, Row, Col} from 'react-bootstrap'
-import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
-import DropdownMenus from './components/DropdownMenus'
-import Header from './components/Header'
 
 
 
@@ -260,7 +256,7 @@ setscenarioId(cSelected, name){
 }
    
 settimePeriodId(rSelected){
-  var testData = rSelected[0];
+  var testData = rSelected;
   this.setState({timePeriodId: testData}, function () {
     console.log(this.state.timePeriodId, "timePeriodId")
   })

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import './Rightscreen.css'
 import Header from './Header'
 import Graph from './Graphs'
@@ -108,10 +108,6 @@ class Rightscreen extends Component {
 
 
                 <Row >
-
-
-                    
-                    <h5></h5>
                         <ButtonGroup className="justified">
                             <Button color="primary" onClick={() => this.toggleNewItemInputs(1) }><i class="fa fa-pie-chart" aria-hidden="true"></i></Button>
                             <Button color="primary" onClick={() => this.toggleNewItemInputs(2) }><i class="fa fa-pie-chart" aria-hidden="true"></i><i class="fa fa-pie-chart" aria-hidden="true"></i></Button>
