@@ -1,26 +1,22 @@
 import React, {Component} from 'react'
+import {Table} from 'reactstrap';
 const ReactHighCharts = require('react-highcharts')
-    
 
-class Graphs extends Component {
-    
+
+
+class GraphTwo extends Component {
+
+   
+   
+
 
     render() {
          let processedGraphData = this.props.graphData;
-         let nameofIndicator = this.props.nameofIndicator;
-         console.log(nameofIndicator, "NameOfIndicator , Graphs")
-         
-         var dataForGraphs = [];
-         for(var i=0; i<processedGraphData.length; i++)
-         {
-         {
-             dataForGraphs.push({
-                 name: nameofIndicator[i],
-                 y: processedGraphData[i]
-             });
-             console.log(dataForGraphs, "GraphModule-data")
+
+         const data = { data: processedGraphData
+
          }
-        }
+        
 
         const config = {
             chart: {
@@ -30,7 +26,7 @@ class Graphs extends Component {
                 type: 'pie'
             },
             title: {
-                text: 'Result'
+                text: 'Result 2'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -49,9 +45,9 @@ class Graphs extends Component {
                 }
             },
             series: [{
-                name: "",
+                name: 'Brands',
                 colorByPoint: true,
-                data: dataForGraphs
+                data: processedGraphData
             }]
         };
  
@@ -60,8 +56,8 @@ class Graphs extends Component {
         <div id="graph">
             <ReactHighCharts config = {config}></ReactHighCharts>
            
-           
-           
+           <div id="tableplace">
+           </div>
 
         </div>
       
@@ -71,5 +67,4 @@ class Graphs extends Component {
 }
 
 
-export default Graphs;
-
+export default GraphTwo;

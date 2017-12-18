@@ -103,8 +103,13 @@ function getScenarioCollection(){
             var count = 0;
             while(results.data[count]){
                 if(results.data[count].id == regionId){
+
                     //console.log(results.data[count].scenarioCollections);
                     //console.log(results.data[count]);
+
+                    console.log(results.data[count].scenarioCollections);
+                    console.log(results.data[count]);
+
                     resolve(results.data[count].scenarioCollections);
                 }
                 count++;
