@@ -8,6 +8,9 @@ import { render} from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ForestIndicatorData from './components/ForestIndicatorData'
 import DropdownMenus from './components/DropdownMenus'
+import Header from './components/Header'
+
+
 
 class App extends Component {
 
@@ -21,6 +24,7 @@ class App extends Component {
       scenarioCollection:[],
       scenarios:[],
       timestamp:[],
+      languagebtn: '',
       indicatorCategories:[],
       woodproduction:[],
       biodiversity:[],
@@ -28,7 +32,12 @@ class App extends Component {
       carbon:[],
       others:[],
       graphData:[],
-      datafromAPI: false
+      datafromAPI: false,
+      scenarioId:[],
+      indicatorId:[],
+      nameofIndicator:[],
+      timePeriodId: 0
+
     };   
 
     //this.getData = this.getData.bind(this);
@@ -41,6 +50,9 @@ class App extends Component {
     this.getScenarios = this.getScenarios.bind(this)
     this.setScenarioCollection = this.setScenarioCollection.bind(this)
     this.getTimePeriods = this.getTimePeriods.bind(this)
+    // this.changeLanguage = this.changeLanguage.bind(this)
+
+
     this.getIndicatorCategories = this.getIndicatorCategories.bind(this)
     this.getWoodProduction = this.getWoodProduction.bind(this)
     this.getBiodiversity = this.getBiodiversity.bind(this)
@@ -48,8 +60,19 @@ class App extends Component {
     this.getCarbon = this.getCarbon.bind(this)
     this.getOthers = this.getOthers.bind(this)
     this.getGraphData = this.getGraphData.bind(this)
+    this.setscenarioId = this.setscenarioId.bind(this)
+    this.settimePeriodId = this.settimePeriodId.bind(this)
+    this.setindicatorId = this.setindicatorId.bind(this)
+    this.setLanguage = this.setLanguage.bind(this)
+    this.LanguageChange = this.LanguageChange.bind(this)
+
   }
-    
+  // changeLanguage(){
+  //   this.setState({languagebtn: rSelected}, function() {
+  //     console.log(this.state.languagebtn);
+  // });
+  // }  
+
     componentDidMount(){
     ForestIndicatorData.getRegionLevels('fi').then(result => {
       this.setState({regionalLevels: result});
@@ -135,6 +158,12 @@ class App extends Component {
     console.log("huomenta");
     console.log(result);
     });*/
+    ForestIndicatorData.setRegionLevels(1);
+    ForestIndicatorData.setRegion(29);
+    ForestIndicatorData.getScenarioCollection().then(result => {
+      //console.log(this.state.regionalLevels);
+    });
+
   }
 
   setRegionLevels(id){
@@ -175,8 +204,9 @@ class App extends Component {
     ForestIndicatorData.getTimePeriods().then(result => {
       this.setState({timestamp: result})
       console.log(this.state.timestamp)
-  });
-}
+    });
+  }
+
 getIndicatorCategories(){
   ForestIndicatorData.getIndicatorCategories().then(result => {
     this.setState({indicatorCategories: result})
@@ -219,14 +249,76 @@ getOthers(){
 })
 }
 
-getGraphData(){
-  ForestIndicatorData.getGraphData().then(result => {
-    this.setState({graphData: result})
-    console.log(this.state.graphData, "graph data")
+setscenarioId(cSelected){
+  this.setState({scenarioId: cSelected}, function () {
+    console.log(this.state.scenarioId, "scenarioId"); 
+  })
+}
+   
+settimePeriodId(rSelected){
+  var testData = rSelected[0];
+  this.setState({timePeriodId: testData}, function () {
+    console.log(this.state.timePeriodId, "timePeriodId")
   })
 }
 
+setindicatorId(indicatorId, name){
+  this.state.nameofIndicator.push(name)
+  this.setState({indicatorId: indicatorId}, function() {
 
+    console.log(this.state.indicatorId, "indicatorId");
+    console.log(this.state.nameofIndicator, ":indicatorName")
+    this.getGraphData();
+  })
+}
+
+getGraphData(){
+  ForestIndicatorData.getGraphData(this.state.scenarioId, this.state.indicatorId, this.state.timePeriodId).then(result => {
+    this.setState({graphData: result})
+    console.log(this.state.graphData, "graph data")
+    console.log(this.state.nameofIndicator, "indicatorNamepart2")
+  })
+}
+
+setLanguage(language){
+ForestIndicatorData.setLanguage(language);
+}
+
+LanguageChange(language){
+    this.setLanguage(language)
+    ForestIndicatorData.getRegionLevels().then(result => {
+    this.setState({regionalLevels: result});
+    console.log(this.state.regionalLevels, ": RegionLevel");
+    console.log(this.state.regionalLevels[0].id ,": default RegionLevel")
+
+    ForestIndicatorData.setRegionLevels(this.state.regionalLevels[0].id)
+    ForestIndicatorData.getRegion().then(result => {
+      this.setState({regions: result});
+      console.log(this.state.regions, "Regions")
+      console.log(this.state.regions[0].id, "default Regions")
+
+      ForestIndicatorData.setRegion(this.state.regions[0].id)
+      ForestIndicatorData.getScenarioCollection().then(result => {
+        this.setState({scenarioCollection: result});
+        console.log(this.state.scenarioCollection[0].id, "default ScenarioCollection")
+
+        ForestIndicatorData.setScenarioCollection(this.state.scenarioCollection[0].id)
+        ForestIndicatorData.getScenarios().then(result => {
+          this.setState({scenarios: result,
+                      datafromAPI: true});
+          console.log(this.state.scenarios, "Scenarios")
+          this.getTimePeriods();
+          this.getIndicatorCategories();
+          this.getWoodProduction();
+          this.getBiodiversity();
+          this.getNaturalProducts();
+          this.getCarbon();
+          this.getOthers();
+        });
+      });          
+    });
+  });
+}
   render() {
     return (
         <div>
@@ -247,19 +339,26 @@ getGraphData(){
                                               setRegionLevels = {this.setRegionLevels}
                                               getRegion = {this.getRegion}
                                               setRegion = {this.setRegion}
+                                              setscenarioId = {this.setscenarioId} //Set scenarioId function to work with charts
+                                              settimePeriodId = {this.settimePeriodId} //Set timePeriodId function to work with charts
+                                              setindicatorId = {this.setindicatorId} //setindicatorId
                                               getScenarioCollection = {this.getScenarioCollection}
                                               getScenarios = {this.getScenarios}
                                               setScenarioCollection = {this.setScenarioCollection}
                                               getTimePeriods = {this.getTimePeriods}
+                                              languagebtn = {this.state.languagebtn}
                                               getIndicatorCategories = {this.getIndicatorCategories}
                                               getWoodProduction = {this.getWoodProduction}
                                               getBiodiversity = {this.getBiodiversity}
                                               getNaturalProducts = {this.getNaturalProducts}
                                               getCarbon = {this.getCarbon}
                                               getOthers = {this.getOthers}
+                                              LanguageChange = {this.LanguageChange}
                                               />
                                               </Col>
-            <Col lg={12} lg={8}> <Rightscreen /></Col>
+            <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
+                                              getGraphData = {this.getGraphData} 
+                                              nameofIndicator = {this.state.nameofIndicator}/></Col>
             </Row>
           </Grid>
           :"Still Loading"}

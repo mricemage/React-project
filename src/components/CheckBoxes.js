@@ -5,17 +5,23 @@ import LocalizedStrings from 'react-localization'
 class CheckBoxes extends Component {
     constructor (props) {
         super(props);
-  
-    
+        
         this.state = { cSelected: [],
                        rSelected: [],
                        woodproduction: [],
                        Biodiversity: [],
                        ProductCollections: [],
                        Carbon: [],
-                       Other: [] };
+                       Other: [],
+                       indicator: [] };
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
         this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        this.onWoodProduction = this.onWoodProduction.bind(this);
+        this.onBiodiversity = this.onBiodiversity.bind(this);
+        this.onProductCollections = this.onProductCollections.bind(this);
+        this.onCarbon = this.onCarbon.bind(this);
+        this.onOther = this.onOther.bind(this);
+        
       }
 
       onCheckboxBtnClick(selected) {
@@ -27,7 +33,9 @@ class CheckBoxes extends Component {
         }
         if (this.state.cSelected.length <= 5){
         this.setState({ cSelected: [...this.state.cSelected] });
+        this.props.setscenarioId(this.state.cSelected); // Not "selected"
         }
+        
       }
     
       onRadioBtnClick(selected) {
@@ -39,68 +47,80 @@ class CheckBoxes extends Component {
         }
         if (this.state.rSelected.length <= 1){
         this.setState({ rSelected: [...this.state.rSelected] });
+        this.props.settimePeriodId(this.state.rSelected);
         }
       }
 
-      onWoodProduction(selected) {
+      onWoodProduction(selected, name) {
         const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
           this.state.woodproduction.push(selected);
         } else {
           this.state.woodproduction.splice(index, 1);
         }
-        if (this.state.woodproduction.length <= 5){
-        this.setState({ woodproduction: [...this.state.woodproduction] });
+
+        if (this.state.woodproduction.length <= 15){
+        this.setState({ indicator: [...this.state.woodproduction] }, function () {
+        this.props.setindicatorId(this.state.indicator, name);
+        })
         }
       }
     
-      onBiodiversity(selected) {
-        const index = this.state.Biodiversity.indexOf(selected);
+      onBiodiversity(selected, name) {
+        const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
-          this.state.Biodiversity.push(selected);
+          this.state.woodproduction.push(selected);
         } else {
-          this.state.Biodiversity.splice(index, 1);
+          this.state.woodproduction.splice(index, 1);
         }
-        if (this.state.Biodiversity.length <= 5){
-        this.setState({ Biodiversity: [...this.state.Biodiversity] });
+        if (this.state.woodproduction.length <= 15){
+          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+          this.props.setindicatorId(this.state.indicator, name);
+          })
+          }
         }
-      }
 
-      onProductCollections(selected) {
-        const index = this.state.ProductCollections.indexOf(selected);
+      onProductCollections(selected, name) {
+        const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
-          this.state.ProductCollections.push(selected);
+          this.state.woodproduction.push(selected);
         } else {
-          this.state.ProductCollections.splice(index, 1);
+          this.state.woodproduction.splice(index, 1);
         }
-        if (this.state.ProductCollections.length <= 5){
-        this.setState({ ProductCollections: [...this.state.ProductCollections] });
+        if (this.state.woodproduction.length <= 15){
+          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+          this.props.setindicatorId(this.state.indicator, name);
+          })
+          }
         }
-      }
       
-      onCarbon(selected) {
-        const index = this.state.Carbon.indexOf(selected);
+      onCarbon(selected, name) {
+        const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
-          this.state.Carbon.push(selected);
+          this.state.woodproduction.push(selected);
         } else {
-          this.state.Carbon.splice(index, 1);
+          this.state.woodproduction.splice(index, 1);
         }
-        if (this.state.Carbon.length <= 5){
-        this.setState({ Carbon: [...this.state.Carbon] });
+        if (this.state.woodproduction.length <= 15){
+          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+          this.props.setindicatorId(this.state.indicator, name);
+          })
+          }
         }
-      }
 
-      onOther(selected) {
-        const index = this.state.Other.indexOf(selected);
+      onOther(selected, name) {
+        const index = this.state.woodproduction.indexOf(selected);
         if (index < 0) {
-          this.state.Other.push(selected);
+          this.state.woodproduction.push(selected);
         } else {
-          this.state.Other.splice(index, 1);
+          this.state.woodproduction.splice(index, 1);
         }
-        if (this.state.Other.length <= 5){
-        this.setState({ Other: [...this.state.Other] });
+        if (this.state.woodproduction.length <= 15){
+          this.setState({ indicator: [...this.state.woodproduction] }, function () {
+          this.props.setindicatorId(this.state.indicator, name);
+          })
+          }
         }
-      }
 
     onRadioBtnClick1(tSelected){
         this.setState({ tSelected })
@@ -119,6 +139,8 @@ class CheckBoxes extends Component {
     }
 
     render () {
+      const languagebtn = this.props.languagebtn;
+
         let strings = new LocalizedStrings ({
             en: {
                 ScenarioSelection:"Scenario Collection",
@@ -149,14 +171,18 @@ class CheckBoxes extends Component {
                 Other:"Muut"
             }
         });
+
+        strings.setLanguage(languagebtn);
+
         return (
             <div>
             <p>{strings.Scenario}</p>
                 <ButtonGroup vertical>
-                 {
-                    this.props.scenarios.map( element => 
-                        <Button  onClick={() => this.onCheckboxBtnClick(element.id)} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>)
+                {
+                    this.props.scenarios.map( (element, i) => 
+                        <Button  onClick={() => this.onCheckboxBtnClick(element.id)} key={i} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>)
                     }  
+
                  </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.cSelected)}</p> 
 
@@ -175,7 +201,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.woodproduction.map( element => 
-                        <Button  onClick={() => this.onWoodProduction(element.id)} id= {element.id} active ={this.state.woodproduction.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onWoodProduction(element.id, element.name)} id= {element.id} active ={this.state.woodproduction.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.woodproduction)}</p>
@@ -184,7 +210,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.biodiversity.map( element => 
-                        <Button  onClick={() => this.onBiodiversity(element.id)} id= {element.id} active ={this.state.Biodiversity.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onBiodiversity(element.id, element.name)} id= {element.id} active ={this.state.Biodiversity.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Biodiversity)}</p>
@@ -194,7 +220,7 @@ class CheckBoxes extends Component {
                 {
                     this.props.naturalproducts.map( element => 
                          
-                    <Button  onClick={() => this.onProductCollections(element.id)} id= {element.id} active ={this.state.ProductCollections.includes(element.id)}>{ element.name }</Button>)
+                    <Button  onClick={() => this.onProductCollections(element.id, element.name)} id= {element.id} active ={this.state.ProductCollections.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.ProductCollections)}</p>
@@ -203,7 +229,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.carbon.map( element => 
-                        <Button  onClick={() => this.onCarbon(element.id)} id= {element.id} active ={this.state.Carbon.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onCarbon(element.id, element.name)} id= {element.id} active ={this.state.Carbon.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Carbon)}</p>
@@ -212,7 +238,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.others.map( element => 
-                        <Button  onClick={() => this.onOther(element.id)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onOther(element.id, element.name)} id= {element.id} active ={this.state.Other.includes(element.id)}>{ element.name }</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.Other)}</p>
