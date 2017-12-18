@@ -53,7 +53,8 @@ class Rightscreen extends Component {
         {
             content = (<Graph graphData = {graphData}
                 getGraphData = {this.props.getGraphData}
-                nameofIndicator = {nameofIndicator}/>);
+                nameofIndicator = {nameofIndicator}
+                nameofScenario = {nameofScenario}/>);
         } 
         if (this.state.graphnumber === 2) {
             content = (<GraphTwo graphData = {graphData}
@@ -70,7 +71,7 @@ class Rightscreen extends Component {
             content = (<table>
                         <tr> 
                             <td><Table graphData={graphData}
-                                    getGraphData = {this.props.getGraphData}/>
+                                        getGraphData = {this.props.getGraphData}/>
                             </td>
                         </tr>
                         </table>);

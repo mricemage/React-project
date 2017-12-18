@@ -33,6 +33,7 @@ class App extends Component {
       indicatorId:[],
       nameofIndicator:[],
       nameofScenario:[],
+      timeSelected:[],
       timePeriodId: 0
 
     };   
@@ -255,10 +256,13 @@ setscenarioId(cSelected, name){
   })
 }
    
-settimePeriodId(rSelected){
+settimePeriodId(rSelected, name){
   var testData = rSelected;
+  this.state.timeSelected.push(name)
   this.setState({timePeriodId: testData}, function () {
     console.log(this.state.timePeriodId, "timePeriodId")
+    console.log(this.state.timeSelected, "Time selected")
+
   })
 }
 

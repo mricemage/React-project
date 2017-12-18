@@ -10,17 +10,19 @@ class Graphs extends Component {
          let nameofIndicator = this.props.nameofIndicator;
          let nameofScenario = this.props.nameofScenario;
          console.log(nameofIndicator, "NameOfIndicator , Graphs")
+         console.log(nameofScenario)
          
          var dataForGraphs = [];
          for(var i=0; i<processedGraphData.length; i++)
          {
          {
              dataForGraphs.push({
-                 title: nameofScenario,
+                 title: nameofScenario[0],
                  name: nameofIndicator[i],
                  y: processedGraphData[i]
              });
              console.log(dataForGraphs, "GraphModule-data")
+
          }
         }
 
@@ -32,7 +34,7 @@ class Graphs extends Component {
                 type: 'pie'
             },
             title: {
-                text: ''
+                text: nameofScenario[0]
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -51,7 +53,7 @@ class Graphs extends Component {
                 }
             },
             series: [{
-                name: "",
+                name: "Percentage",
                 colorByPoint: true,
                 data: dataForGraphs
             }]
