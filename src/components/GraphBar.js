@@ -53,7 +53,7 @@ class GraphBar extends Component {
                 }
             },
             series: [{
-                name: 'Tokyo',
+                name: 'Result',
                 data: processedGraphData
         
             

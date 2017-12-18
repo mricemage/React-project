@@ -32,6 +32,8 @@ class App extends Component {
       scenarioId:[],
       indicatorId:[],
       nameofIndicator:[],
+      nameofScenario:[],
+      timeSelected:[],
       timePeriodId: 0
 
     };   
@@ -245,16 +247,22 @@ getOthers(){
 })
 }
 
-setscenarioId(cSelected){
+setscenarioId(cSelected, name){
+  
+  this.state.nameofScenario.push(name)
   this.setState({scenarioId: cSelected}, function () {
-    console.log(this.state.scenarioId, "scenarioId"); 
+    console.log(this.state.scenarioId, "scenarioId");
+    console.log(this.state.nameofScenario, "Scenario name")
   })
 }
    
-settimePeriodId(rSelected){
+settimePeriodId(rSelected, name){
   var testData = rSelected;
+  this.state.timeSelected.push(name)
   this.setState({timePeriodId: testData}, function () {
     console.log(this.state.timePeriodId, "timePeriodId")
+    console.log(this.state.timeSelected, "Time selected")
+
   })
 }
 
@@ -354,7 +362,8 @@ LanguageChange(language){
                                               </Col>
             <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
                                               getGraphData = {this.getGraphData} 
-                                              nameofIndicator = {this.state.nameofIndicator}/></Col>
+                                              nameofIndicator = {this.state.nameofIndicator}
+                                              nameofScenario = {this.state.nameofScenario}/></Col>
             </Row>
           </Grid>
           :"Still Loading"}
