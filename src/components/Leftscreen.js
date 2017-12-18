@@ -55,7 +55,7 @@ class Leftscreen extends Component {
                 <Scrollbars
                 autoHeight
                 autoHeightMin={500}
-                autoHeightMax={700}
+                autoHeightMax={900}
                 style={{ width: width2  }}
                 color={props => <div {...props} className="scrollbar-color" />}
                 >   
