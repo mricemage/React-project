@@ -35,11 +35,53 @@ class Leftscreen extends Component {
         this.setState({languagebtn: rSelected}, function() {
             console.log(this.state.languagebtn);
             this.props.LanguageChange(this.state.languagebtn);
-         
+            localStorage.setItem('setLanguage', this.state.languagebtn);
         }); 
-       
+        window.location.reload();
     }
 
+    componentDidMount(){
+        let theSetLanguage = localStorage.getItem('setLanguage');
+        
+        console.log("the set language:", theSetLanguage);
+        if (localStorage.getItem("setLanguage") === null) {
+            theSetLanguage = 'fi';
+            this.setState({languagebtn: theSetLanguage,
+                color_blackEn: true,
+                color_blackFi: false
+            }, function() {
+                console.log(this.state.languagebtn);
+                this.props.LanguageChange(this.state.languagebtn);   
+            }); 
+        }
+
+        if (localStorage.getItem("setLanguage") != null) {
+            // alert(theSetLanguage);
+            if (localStorage.getItem("setLanguage") === "en"){
+                this.setState({languagebtn: theSetLanguage,
+                    color_blackEn: false,
+                    color_blackFi: true
+                }, function() {
+                    console.log(this.state.languagebtn);
+                    this.props.LanguageChange(this.state.languagebtn);   
+                }); 
+            }
+            
+            if (localStorage.getItem("setLanguage") === "fi"){
+                this.setState({languagebtn: theSetLanguage,
+                    color_blackEn: true,
+                    color_blackFi: false
+                }, function() {
+                    console.log(this.state.languagebtn);
+                    this.props.LanguageChange(this.state.languagebtn);
+                    
+                }); 
+
+            }
+           
+        }
+        
+    }
 
 
     render () {
