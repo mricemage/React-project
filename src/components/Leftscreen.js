@@ -27,6 +27,7 @@ class Leftscreen extends Component {
     }
 
     onRadioBtnClick(rSelected) {  
+        
         this.changeColor();
         // alert(rSelected);
         console.log(typeof(rSelected));
@@ -34,7 +35,9 @@ class Leftscreen extends Component {
         this.setState({languagebtn: rSelected}, function() {
             console.log(this.state.languagebtn);
             this.props.LanguageChange(this.state.languagebtn);
+         
         }); 
+       
     }
 
 
@@ -67,7 +70,9 @@ class Leftscreen extends Component {
             }
         });
      
-        strings.setLanguage(this.state.languagebtn);   
+       
+            strings.setLanguage(this.state.languagebtn);   
+         
 
         return (
             <div className= "content">
