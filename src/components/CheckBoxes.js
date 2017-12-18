@@ -16,7 +16,7 @@ class CheckBoxes extends Component {
                        Other: [],
                        indicator: [] };
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
-        this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        this.onTimeperiodPressed = this.onTimeperiodPressed.bind(this);
         this.onWoodProduction = this.onWoodProduction.bind(this);
         this.onBiodiversity = this.onBiodiversity.bind(this);
         this.onProductCollections = this.onProductCollections.bind(this);
@@ -39,7 +39,7 @@ class CheckBoxes extends Component {
         
       }
     
-      onRadioBtnClick(selected) {
+      onTimeperiodPressed(selected) {
         console.log(selected, "TimePeriod Pressed")
         this.setState({ timeperiod: selected }, function (){
           console.log(this.state.timeperiod,"TimePeriod Pressed part 2")
@@ -188,7 +188,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.timestamp.map( element => 
-                        <Button  onClick={() => this.onRadioBtnClick(element.id)} id= {element.id} active ={this.state.timeperiod === element.id}>{ element.yearStart } - {element.yearEnd}</Button>)
+                        <Button  onClick={() => this.onTimeperiodPressed(element.id)} id= {element.id} active ={this.state.timeperiod === element.id}>{ element.yearStart } - {element.yearEnd}</Button>)
                 } 
                 </ButtonGroup>
                 <p>Selected: {JSON.stringify(this.state.timeperiod)}</p>
