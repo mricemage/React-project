@@ -138,37 +138,7 @@ regionlevelSelect = (regionalLevels) =>{
             Other:"Muut"
         }
     });
-
-
-    strings.setLanguage(languagebtn);
-
-    // console.log(this.state.languagebtn, "DropdownMenus");
-
-    // function changeLanguage(languagebtn) {
-    //     alert("Hello", languagebtn);
-    //     strings.setLanguage(languagebtn);
-    //     console.log(this.state.languagebtn, "DropdownMenus");
-
-    //     this.props.onRadioBtnClick();
-    //     // this.setState({languagebtn }, function() {
-            
-    //     // });
-        
-    // }
-
-   
-
-
-
-//    strings.setLanguage(this.state.languagebtn);
-
-//    console.log(this.state.languagebtn);
-    
-    
-   
-      
-   
-
+ 
     strings.setLanguage(languagebtn);   
 
 

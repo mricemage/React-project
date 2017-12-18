@@ -5,16 +5,29 @@ import CheckBoxes from './CheckBoxes'
 import { Scrollbars } from 'react-custom-scrollbars';
 import {Row} from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
+import LocalizedStrings from 'react-localization'
 
 class Leftscreen extends Component {
     constructor(props){
         super(props);
         this.state={
-            languagebtn: 'fi' 
+            languagebtn: 'fi',
+            color_blackEn: true,
+            color_blackFi: false
+
         };
+        this.changeColor = this.changeColor.bind(this);
+    }
+    
+
+    changeColor(){
+        this.setState({color_blackEn: !this.state.color_blackEn,
+                        color_blackFi: !this.state.color_blackFi
+                    })
     }
 
-    onRadioBtnClick(rSelected) {
+    onRadioBtnClick(rSelected) {  
+        this.changeColor();
         // alert(rSelected);
         console.log(typeof(rSelected));
         // this.setState({languagebtn: rSelected});
@@ -27,6 +40,9 @@ class Leftscreen extends Component {
 
 
     render () {
+        let btnColorEn = this.state.color_blackEn ? "" : "darkblue";
+        let btnColorFi = this.state.color_blackFi ? "" : "darkblue";
+
         var width2 =Element.offsetWidth; // https://www.w3schools.com/jsref/prop_element_offsetwidth.asp Its getting the width of an element in pixels
 
         const regionalLevels = this.props.regionalLevels;
@@ -41,13 +57,26 @@ class Leftscreen extends Component {
         const carbon = this.props.carbon;
         const others = this.props.others;
 
+        let strings = new LocalizedStrings ({
+            en: {
+                Language:"Language"
+               
+            },
+            fi: {
+                Language:"Kieli"
+            }
+        });
+     
+        strings.setLanguage(this.state.languagebtn);   
 
         return (
             <div className= "content">
+             
              <Row>
-                        <ButtonGroup className="righttop">
-                            <Button color="primary" onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
-                            <Button color="primary" onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
+             {strings.Language}:&nbsp;&nbsp;&nbsp;
+                        <ButtonGroup className="right">
+                            <Button color="primary" style={{backgroundColor: btnColorFi}} onClick={() => this.onRadioBtnClick('fi')} active={this.state.rSelected === 1}>Fi</Button>
+                            <Button color="primary" style={{backgroundColor: btnColorEn}} onClick={() => this.onRadioBtnClick('en')} active={this.state.rSelected === 2}>En</Button>
                          
                         </ButtonGroup>
                 </Row>
