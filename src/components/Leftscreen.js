@@ -35,9 +35,10 @@ class Leftscreen extends Component {
         this.setState({languagebtn: rSelected}, function() {
             console.log(this.state.languagebtn);
             this.props.LanguageChange(this.state.languagebtn);
-         
+            localStorage.setItem('setLanguage', this.state.languagebtn);
+            
         }); 
-       
+        window.location.reload();
     }
 
 
@@ -70,6 +71,16 @@ class Leftscreen extends Component {
             }
         });
      
+        let theSetLanguage = localStorage.getItem('setLanguage');
+        
+        console.log("the set language:", theSetLanguage);
+        if (theSetLanguage === null) {
+            theSetLanguage = 'fi';
+            this.setState({languagebtn: theSetLanguage}, function() {
+                console.log(this.state.languagebtn);
+                this.props.LanguageChange(this.state.languagebtn);
+            }); 
+        }
        
             strings.setLanguage(this.state.languagebtn);   
          
