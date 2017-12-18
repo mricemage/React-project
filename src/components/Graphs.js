@@ -8,6 +8,7 @@ class Graphs extends Component {
     render() {
          let processedGraphData = this.props.graphData;
          let nameofIndicator = this.props.nameofIndicator;
+         let nameofScenario = this.props.nameofScenario;
          console.log(nameofIndicator, "NameOfIndicator , Graphs")
          
          var dataForGraphs = [];
@@ -15,6 +16,7 @@ class Graphs extends Component {
          {
          {
              dataForGraphs.push({
+                 title: nameofScenario,
                  name: nameofIndicator[i],
                  y: processedGraphData[i]
              });
@@ -30,7 +32,7 @@ class Graphs extends Component {
                 type: 'pie'
             },
             title: {
-                text: 'Result'
+                text: ''
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

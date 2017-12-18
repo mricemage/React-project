@@ -24,7 +24,7 @@ class CheckBoxes extends Component {
         
       }
 
-      onCheckboxBtnClick(selected) {
+      onCheckboxBtnClick(selected, name) {
         const index = this.state.cSelected.indexOf(selected);
         if (index < 0) {
           this.state.cSelected.push(selected);
@@ -32,8 +32,9 @@ class CheckBoxes extends Component {
           this.state.cSelected.splice(index, 1);
         }
         if (this.state.cSelected.length <= 5){
-        this.setState({ cSelected: [...this.state.cSelected] });
-        this.props.setscenarioId(this.state.cSelected); // Not "selected"
+          this.setState({ cSelected: [...this.state.cSelected] }, function () {
+            this.props.setscenarioId(this.state.cSelected, name);
+            }) // Not "selected"
         }
         
       }
@@ -180,7 +181,7 @@ class CheckBoxes extends Component {
                 <ButtonGroup vertical>
                 {
                     this.props.scenarios.map( (element, i) => 
-                        <Button  onClick={() => this.onCheckboxBtnClick(element.id)} key={i} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>)
+                        <Button  onClick={() => this.onCheckboxBtnClick(element.id, element.name)} key={i} id= {element.id} active={this.state.cSelected.includes(element.id)}>{ element.name }</Button>)
                     }  
 
                  </ButtonGroup>

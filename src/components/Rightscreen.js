@@ -44,6 +44,7 @@ class Rightscreen extends Component {
     render () {
         const graphData = this.props.graphData;
         const nameofIndicator = this.props.nameofIndicator;
+        const nameofScenario = this.props.nameofScenario;
         console.log(nameofIndicator, "RightScreenName")
 
         let content;
@@ -62,7 +63,8 @@ class Rightscreen extends Component {
         if (this.state.graphnumber === 3) {
             content = (<GraphBar graphData = {graphData}
                 getGraphData = {this.props.getGraphData}
-                nameofIndicator = {nameofIndicator}/>);
+                nameofIndicator = {nameofIndicator}
+                nameofScenario = {nameofScenario}/>);
         }
         if (this.state.graphnumber === 4) {
             content = (<table>
