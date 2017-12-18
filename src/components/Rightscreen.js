@@ -51,27 +51,24 @@ class Rightscreen extends Component {
         if(this.state.graphnumber === 1)
         {
             content = (<Graph graphData = {graphData}
-                getGraphData = {this.props.getGraphData}
-                nameofIndicator = {nameofIndicator}/>);
+                        getGraphData = {this.props.getGraphData}
+                        nameofIndicator = {nameofIndicator}/>);
         } 
         if (this.state.graphnumber === 2) {
             content = (<GraphTwo graphData = {graphData}
-                getGraphData = {this.props.getGraphData}
-                nameofIndicator = {nameofIndicator}/>);
+                        getGraphData = {this.props.getGraphData}
+                        nameofIndicator = {nameofIndicator}/>);
         }
         if (this.state.graphnumber === 3) {
             content = (<GraphBar graphData = {graphData}
-                getGraphData = {this.props.getGraphData}
-                nameofIndicator = {nameofIndicator}/>);
+                        getGraphData = {this.props.getGraphData}
+                        nameofIndicator = {nameofIndicator}/>);
         }
         if (this.state.graphnumber === 4) {
-            content = (<table>
-                        <tr> 
-                            <td><Table graphData={graphData}
-                                    getGraphData = {this.props.getGraphData}/>
-                            </td>
-                        </tr>
-                        </table>);
+            content = (<Table graphData={graphData}
+                        getGraphData = {this.props.getGraphData}
+                        nameofIndicator = {nameofIndicator}/>
+                            );
         }
         // } else {
         //     content = (
