@@ -363,7 +363,8 @@ LanguageChange(language){
             <Col lg={12} lg={8}> <Rightscreen graphData = {this.state.graphData}
                                               getGraphData = {this.getGraphData} 
                                               nameofIndicator = {this.state.nameofIndicator}
-                                              nameofScenario = {this.state.nameofScenario}/></Col>
+                                              nameofScenario = {this.state.nameofScenario}
+                                              /></Col>
             </Row>
           </Grid>
           :"Still Loading"}
